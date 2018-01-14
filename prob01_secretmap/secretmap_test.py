@@ -1,5 +1,5 @@
 import unittest
-from secretmap import *
+from prob01_secretmap.secretmap import *
 
 
 
