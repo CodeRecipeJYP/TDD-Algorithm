@@ -16,3 +16,6 @@ def sameNumber(numbers):
 
 def subSameNumber(numbers: str, sublength):
     return sameNumber(numbers[-sublength:])
+
+def simpleIncrease(numbers):
+    return True
