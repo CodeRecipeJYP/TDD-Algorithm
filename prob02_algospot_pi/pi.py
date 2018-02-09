@@ -14,5 +14,5 @@ def sameNumber(numbers):
 
     return sameFlag
 
-def subSameNumber(numbers, sublength):
-    pass
+def subSameNumber(numbers: str, sublength):
+    return sameNumber(numbers[-sublength:])
