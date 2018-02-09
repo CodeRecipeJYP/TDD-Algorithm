@@ -18,4 +18,25 @@ def subSameNumber(numbers: str, sublength):
     return sameNumber(numbers[-sublength:])
 
 def simpleIncrease(numbers):
-    return True
+    buff = numbers[0]
+    flag = True
+    for each in numbers[1:]:
+        if int(each) != (int(buff) + 1):
+            flag = False
+            break
+
+        buff = each
+
+    return flag
+
+def simpleDecrease(numbers):
+    buff = numbers[0]
+    flag = True
+    for each in numbers[1:]:
+        if int(each) != (int(buff) - 1):
+            flag = False
+            break
+
+        buff = each
+
+    return flag
