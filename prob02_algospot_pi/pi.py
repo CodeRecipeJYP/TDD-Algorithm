@@ -14,8 +14,8 @@ def sameNumber(numbers):
 
     return sameFlag
 
-def subSameNumber(numbers: str, sublength):
-    return sameNumber(numbers[-sublength:])
+def subSameNumber(numbers: str, sublength: int):
+    return subPredicate(numbers, sublength, sameNumber)
 
 def simpleIncrease(numbers):
     buff = numbers[0]
@@ -40,3 +40,9 @@ def simpleDecrease(numbers):
         buff = each
 
     return flag
+
+def subSimpleIncrease(numbers: str, sublength: int):
+    return subPredicate(numbers, sublength, simpleIncrease)
+
+def subPredicate(numbers: str, sublength:int, predicater):
+    return predicater(numbers[-sublength:])
