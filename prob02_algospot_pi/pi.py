@@ -13,3 +13,6 @@ def sameNumber(numbers):
             break
 
     return sameFlag
+
+def subSameNumber(numbers, sublength):
+    pass

@@ -1,6 +1,6 @@
 import unittest
 
-from prob02_algospot_pi.pi import sameNumber
+from prob02_algospot_pi.pi import sameNumber, subSameNumber
 
 
 class SameNumberTestCase(unittest.TestCase):
@@ -24,3 +24,26 @@ class SameNumberTestCase(unittest.TestCase):
 
     def test_sameNumber_7(self):
         self.assertEqual(sameNumber('22221'), False)
+
+
+
+
+class SubSameNumberTestCase(unittest.TestCase):
+    def test_subSameNumber_1(self):
+        self.assertEqual(subSameNumber('222111', 3), True)
+
+    def test_subSameNumber_2(self):
+        self.assertEqual(subSameNumber('222211', 3), False)
+
+    def test_subSameNumber_3(self):
+        self.assertEqual(subSameNumber('221111', 4), True)
+
+    def test_subSameNumber_4(self):
+        self.assertEqual(subSameNumber('222111', 4), False)
+
+    def test_subSameNumber_5(self):
+        self.assertEqual(subSameNumber('221111', 5), False)
+
+    def test_subSameNumber_6(self):
+        self.assertEqual(subSameNumber('211111', 5), True)
+
