@@ -44,5 +44,8 @@ def simpleDecrease(numbers):
 def subSimpleIncrease(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, simpleIncrease)
 
+def subSimpleDecrease(numbers: str, sublength: int):
+    return subPredicate(numbers, sublength, simpleDecrease)
+
 def subPredicate(numbers: str, sublength:int, predicater):
     return predicater(numbers[-sublength:])
