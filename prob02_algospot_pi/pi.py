@@ -41,6 +41,18 @@ def simpleDecrease(numbers):
 
     return flag
 
+def rotate(numbers):
+    buff = numbers[0]
+    flag = True
+    for each in numbers[1:]:
+        if int(each) != (int(buff) - 1):
+            flag = False
+            break
+
+        buff = each
+
+    return flag
+
 def subSimpleIncrease(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, simpleIncrease)
 
@@ -49,3 +61,6 @@ def subSimpleDecrease(numbers: str, sublength: int):
 
 def subPredicate(numbers: str, sublength:int, predicater):
     return predicater(numbers[-sublength:])
+
+def subRotate(numbers: str, sublength: int):
+    return subPredicate(numbers, sublength, rotate)
