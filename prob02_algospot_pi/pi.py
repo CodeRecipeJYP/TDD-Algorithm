@@ -68,7 +68,20 @@ def rotate(numbers: str):
     return flag
 
 def arithmeticSequence(numbers: str):
-    return True
+    numbersAsIntArr = asIntArr(numbers)
+
+    buff = numbersAsIntArr[1]
+    diff = buff - numbersAsIntArr[0]
+
+    flag = True
+    for each in numbersAsIntArr[2:]:
+        if (buff + diff) != each:
+            flag = False
+            break
+
+        buff = each
+
+    return flag
 
 def subArithmeticSequence(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, arithmeticSequence)
