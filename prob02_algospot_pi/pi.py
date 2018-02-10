@@ -53,6 +53,8 @@ def rotate(numbers):
 
     return flag
 
+
+#todo refactor increase+decrease in one time
 def subSimpleIncrease(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, simpleIncrease)
 
