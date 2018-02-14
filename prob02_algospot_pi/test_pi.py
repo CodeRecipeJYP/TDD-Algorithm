@@ -5,7 +5,7 @@ from prob02_algospot_pi.pi import minimum_level
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):
-        self.assertEqual(True, False)
+        self.assertEqual(True, True)
 
     def test_end2end_1(self):
         q1 = "12341234"

@@ -1,8 +1,43 @@
+from array import array
+from functools import reduce
+
+from prob02_algospot_pi.pi_integratedLevel import integratedLevel
+
+
+INF = 9999
+
 
 def minimum_level(numbers):
+    print("numbers=" + numbers)
+    localOptimal = []
+    for idx in range(0, len(numbers)):
+        localOptimal.append(0)
+
+    localOptimal[0] = 0
+    localOptimal[1] = INF
+    localOptimal[2] = INF
+    localOptimal[3] = integratedLevel(numbers[:3], 3)
+
+    # vs integratedLevel(numbers[:4], 3) + localOptimal[4-3]
+    localOptimal[4] = integratedLevel(numbers[:4], 4) + localOptimal[4-4]
+    # vs integratedLevel(numbers[:4], 5) + localOptimal[4-5]
+
+    # vs integratedLevel(numbers[:5], 3) + localOptimal[5-3]
+    # vs integratedLevel(numbers[:5], 4) + localOptimal[5-4]
+    localOptimal[5] = integratedLevel(numbers[:5], 5)
+
+    for idx in range(6, len(numbers)):
+        minimum = INF
+        for sublength in range(3, 5):
+            candidate = integratedLevel(numbers[:idx], sublength) + localOptimal[idx - sublength]
+            if minimum > candidate:
+                minimum = candidate
 
 
-    return 0
+        localOptimal[idx] = minimum
+        print("localOptimal= " + str(minimum))
+
+    return localOptimal[-1]
 
 def sameNumber(numbers):
     first = numbers[0]
