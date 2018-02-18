@@ -7,8 +7,8 @@ from prob02_algospot_pi.pi_integratedLevel import integratedLevel
 INF = 9999
 
 
-def minimum_level(numbers):
-    print("numbers=" + numbers)
+def minimumLevel(numbers):
+    # print("numbers=" + numbers)
     localOptimal = []
     for idx in range(0, len(numbers) + 1):
         localOptimal.append(0)
@@ -35,7 +35,7 @@ def minimum_level(numbers):
 
 
         localOptimal[idx] = minimum
-        print("localOptimal= " + str(minimum))
+        # print("localOptimal= " + str(minimum))
 
     return localOptimal[-1]
 

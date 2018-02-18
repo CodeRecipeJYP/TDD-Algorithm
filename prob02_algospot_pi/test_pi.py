@@ -1,6 +1,6 @@
 import unittest
 
-from prob02_algospot_pi.pi import minimum_level
+from prob02_algospot_pi.pi import minimumLevel
 
 
 class MyTestCase(unittest.TestCase):
@@ -9,23 +9,23 @@ class MyTestCase(unittest.TestCase):
 
     def test_end2end_1(self):
         q1 = "12341234"
-        self.assertEqual(4, minimum_level(q1))
+        self.assertEqual(4, minimumLevel(q1))
 
     def test_end2end_2(self):
         q1 = "11111222"
-        self.assertEqual(2, minimum_level(q1))
+        self.assertEqual(2, minimumLevel(q1))
 
     def test_end2end_3(self):
         q1 = "12122222"
-        self.assertEqual(5, minimum_level(q1))
+        self.assertEqual(5, minimumLevel(q1))
 
     def test_end2end_4(self):
         q1 = "22222222"
-        self.assertEqual(2, minimum_level(q1))
+        self.assertEqual(2, minimumLevel(q1))
 
     def test_end2end_5(self):
         q1 = "12673939"
-        self.assertEqual(14, minimum_level(q1))
+        self.assertEqual(14, minimumLevel(q1))
 
 
 
