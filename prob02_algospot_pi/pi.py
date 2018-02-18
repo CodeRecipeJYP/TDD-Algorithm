@@ -88,8 +88,6 @@ def rotate(numbers: str):
 
     buff = numbersAsIntArr[1]
     diff = buff - numbersAsIntArr[0]
-    if abs(diff) != 1:
-        return False
 
     flag = True
     for each in numbersAsIntArr[2:]:
