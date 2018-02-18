@@ -28,8 +28,7 @@ def minimum_level(numbers):
 
     for idx in range(6, len(numbers)):
         minimum = INF
-        # range(3, 6) : 3,4,5
-        for sublength in range(3, 6):
+        for sublength in [3, 4, 5]:
             candidate = integratedLevel(numbers[:idx], sublength) + localOptimal[idx - sublength]
             if minimum > candidate:
                 minimum = candidate
