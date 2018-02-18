@@ -10,7 +10,7 @@ INF = 9999
 def minimum_level(numbers):
     print("numbers=" + numbers)
     localOptimal = []
-    for idx in range(0, len(numbers)):
+    for idx in range(0, len(numbers) + 1):
         localOptimal.append(0)
 
     localOptimal[0] = 0
@@ -26,7 +26,7 @@ def minimum_level(numbers):
     # vs integratedLevel(numbers[:5], 4) + localOptimal[5-4]
     localOptimal[5] = integratedLevel(numbers[:5], 5)
 
-    for idx in range(6, len(numbers)):
+    for idx in range(6, len(numbers) + 1):
         minimum = INF
         for sublength in [3, 4, 5]:
             candidate = integratedLevel(numbers[:idx], sublength) + localOptimal[idx - sublength]
