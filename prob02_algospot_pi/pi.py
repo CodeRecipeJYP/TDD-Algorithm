@@ -137,7 +137,6 @@ def arithmeticSequence(numbers: str):
 def subArithmeticSequence(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, arithmeticSequence)
 
-#todo refactor increase+decrease in one time
 def subSimpleIncrease(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, simpleIncrease)
 
