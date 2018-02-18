@@ -6,6 +6,24 @@ from prob02_algospot_pi.pi_integratedLevel import integratedLevel
 
 INF = 9999
 
+def main():
+    numofCases = int(input())
+
+    givenCases = [0] * numofCases
+    for caseIdx in range(0, numofCases):
+        givenCases[caseIdx] = input()
+
+    for caseIdx in range(0, numofCases):
+        print(minimumLevel(givenCases[caseIdx]))
+
+"""
+5
+12341234
+11111222
+12122222
+22222222
+12673939
+"""
 
 def minimumLevel(numbers):
     # print("numbers=" + numbers)
@@ -131,3 +149,7 @@ def subPredicate(numbers: str, sublength:int, predicater):
 
 def subRotate(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, rotate)
+
+
+if __name__ == '__main__':
+    main()
