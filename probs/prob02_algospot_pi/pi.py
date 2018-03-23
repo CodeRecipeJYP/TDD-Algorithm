@@ -1,7 +1,4 @@
-from array import array
-from functools import reduce
-
-from prob02_algospot_pi.pi_integratedLevel import integratedLevel
+from probs.prob02_algospot_pi.pi_integratedLevel import integratedLevel
 
 
 INF = 9999

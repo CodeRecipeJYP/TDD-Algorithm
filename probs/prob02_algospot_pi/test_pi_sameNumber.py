@@ -1,6 +1,6 @@
 import unittest
 
-from prob02_algospot_pi.pi import sameNumber, subSameNumber
+from probs.prob02_algospot_pi.pi import sameNumber, subSameNumber
 
 
 class SameNumberTestCase(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 
-from prob02_algospot_pi.pi_integratedLevel import integratedLevel
+from probs.prob02_algospot_pi.pi_integratedLevel import integratedLevel
 
 
 class ArithmeticSequenceTestCase(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 
-from prob02_algospot_pi.pi import arithmeticSequence, subArithmeticSequence
+from probs.prob02_algospot_pi.pi import arithmeticSequence, subArithmeticSequence
 
 
 class ArithmeticSequenceTestCase(unittest.TestCase):

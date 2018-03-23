@@ -1,6 +1,6 @@
 import unittest
 
-from prob02_algospot_pi.pi import minimumLevel
+from probs.prob02_algospot_pi.pi import minimumLevel
 
 
 class MyTestCase(unittest.TestCase):

@@ -1,6 +1,6 @@
 import unittest
 
-from prob02_algospot_pi.pi import rotate, subRotate
+from probs.prob02_algospot_pi.pi import rotate, subRotate
 
 
 class RotateTestCase(unittest.TestCase):

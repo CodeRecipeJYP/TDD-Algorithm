@@ -1,6 +1,6 @@
 import unittest
 
-from prob02_algospot_pi.pi import simpleIncrease, simpleDecrease, subSimpleIncrease, subSimpleDecrease
+from probs.prob02_algospot_pi.pi import simpleIncrease, simpleDecrease
 
 
 class SimpleIncreaseTestCase(unittest.TestCase):
