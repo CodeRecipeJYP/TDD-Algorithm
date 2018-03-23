@@ -8,8 +8,8 @@ def decode_with_encodeds(encoded_arr1, encoded_arr2):
     for idx, eachline in enumerate(encoded_arr1):
         result.append(decode_with_singleline(eachline, encoded_arr2[idx]))
 
-
     return result
+
 
 def decode_with_singleline(line1, line2):
     result = ""
@@ -25,15 +25,15 @@ def decode(n, arr1, arr2):
     return decode_with_encodeds(encoded_arr1, encoded_arr2)
 
 
-def encode_singleline(decimal, n = 5):
+def encode_singleline(decimal, n=5):
     result = ""
     for idx in range(n, 0, -1):
         result += "#" if int((decimal % (2**idx)) / (2**(idx-1))) else " "
 
-
     return result
 
-def encode_all(decimals, n = 5):
+
+def encode_all(decimals, n=5):
 
     result = list()
     for decimal in decimals:

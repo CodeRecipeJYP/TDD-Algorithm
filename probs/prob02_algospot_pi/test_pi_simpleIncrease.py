@@ -28,7 +28,7 @@ class SimpleIncreaseTestCase(unittest.TestCase):
     def test_simpleIncrease_8(self):
         self.assertEqual(simpleIncrease('12341'), False)
 
-
+    # Decrease
     def test_simpleDecrease_1(self):
         self.assertEqual(simpleDecrease('321'), True)
 

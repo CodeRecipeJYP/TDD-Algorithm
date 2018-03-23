@@ -1,7 +1,6 @@
 import unittest
-from probs.prob01_secretmap.secretmap import *
-
-
+from probs.prob01_secretmap.secretmap import plus, decode, encode_singleline,\
+                                        encode_all, decode_with_singleline
 
 
 class TestSecretmap(unittest.TestCase):
@@ -20,18 +19,31 @@ class TestSecretmap(unittest.TestCase):
         result = decode(n, arr1, arr2)
 
         self.assertEqual(
-            result, ["#####","# # #", "### #", "#  ##", "#####"]
+            result, [
+                "#####",
+                "# # #",
+                "### #",
+                "#  ##",
+                "#####"
+            ]
         )
 
     def test_integrated_second(self):
         n = 6
-        arr1 = [46, 33, 33 ,22, 31, 50]
-        arr2 = [27 ,56, 19, 14, 14, 10]
+        arr1 = [46, 33, 33, 22, 31, 50]
+        arr2 = [27, 56, 19, 14, 14, 10]
 
         result = decode(n, arr1, arr2)
 
         self.assertEqual(
-            result, ["######", "###  #", "##  ##", " #### ", " #####", "### # "]
+            result, [
+                "######",
+                "###  #",
+                "##  ##",
+                " #### ",
+                " #####",
+                "### # "
+            ]
         )
 
     def test_encodeSingleline(self):
@@ -55,7 +67,7 @@ class TestSecretmap(unittest.TestCase):
         result = encode_singleline(decimal)
         self.assertEqual(" # ##", result)
 
-        ## -- part2 -- ##
+        # -- part2 -- #
         decimal = 30
         result = encode_singleline(decimal)
         self.assertEqual("#### ", result)
@@ -123,7 +135,6 @@ class TestSecretmap(unittest.TestCase):
                 "#   #",
                 "###  ",
             ], result)
-
 
     def test_decodeWithSingleline(self):
         line1 = " #  #"

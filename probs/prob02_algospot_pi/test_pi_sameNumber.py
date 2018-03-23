@@ -26,8 +26,6 @@ class SameNumberTestCase(unittest.TestCase):
         self.assertEqual(sameNumber('22221'), False)
 
 
-
-
 class SubSameNumberTestCase(unittest.TestCase):
     def test_subSameNumber_1(self):
         self.assertEqual(subSameNumber('222111', 3), True)
@@ -46,4 +44,3 @@ class SubSameNumberTestCase(unittest.TestCase):
 
     def test_subSameNumber_6(self):
         self.assertEqual(subSameNumber('211111', 5), True)
-
