@@ -1,6 +1,7 @@
 import unittest
 
-from prob02_algospot_pi.pi import arithmeticSequence, subArithmeticSequence
+from probs.prob02_algospot_pi.pi import arithmeticSequence,\
+                                    subArithmeticSequence
 
 
 class ArithmeticSequenceTestCase(unittest.TestCase):
@@ -31,7 +32,7 @@ class ArithmeticSequenceTestCase(unittest.TestCase):
     def test_9(self):
         self.assertEqual(arithmeticSequence('13579'), True)
 
-
+    # Sub
     def test_sub_1(self):
         self.assertEqual(subArithmeticSequence('1123', 3), True)
 

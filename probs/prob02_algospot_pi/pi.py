@@ -1,23 +1,7 @@
+from probs.prob02_algospot_pi.pi_integratedLevel import integratedLevel
+
+
 INF = 9999
-
-
-def integratedLevel(numbers: str, sublength: int):
-    if (subSameNumber(numbers, sublength)):
-        return 1
-
-    if (subSimpleIncrease(numbers, sublength)):
-        return 2
-
-    if (subSimpleDecrease(numbers, sublength)):
-        return 2
-
-    if (subRotate(numbers, sublength)):
-        return 4
-
-    if (subArithmeticSequence(numbers, sublength)):
-        return 5
-
-    return 10
 
 
 def main():
@@ -30,6 +14,7 @@ def main():
     for caseIdx in range(0, numofCases):
         print(minimumLevel(givenCases[caseIdx]))
 
+
 """
 5
 12341234
@@ -38,6 +23,7 @@ def main():
 22222222
 12673939
 """
+
 
 def minimumLevel(numbers):
     # print("numbers=" + numbers)
@@ -61,15 +47,16 @@ def minimumLevel(numbers):
     for idx in range(6, len(numbers) + 1):
         minimum = INF
         for sublength in [3, 4, 5]:
-            candidate = integratedLevel(numbers[:idx], sublength) + localOptimal[idx - sublength]
+            candidate = integratedLevel(numbers[:idx], sublength) \
+                        + localOptimal[idx - sublength]
             if minimum > candidate:
                 minimum = candidate
-
 
         localOptimal[idx] = minimum
         # print("localOptimal= " + str(minimum))
 
     return localOptimal[-1]
+
 
 def sameNumber(numbers):
     first = numbers[0]
@@ -81,8 +68,10 @@ def sameNumber(numbers):
 
     return sameFlag
 
+
 def subSameNumber(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, sameNumber)
+
 
 def simpleIncrease(numbers):
     buff = numbers[0]
@@ -96,6 +85,7 @@ def simpleIncrease(numbers):
 
     return flag
 
+
 def simpleDecrease(numbers):
     buff = numbers[0]
     flag = True
@@ -108,12 +98,14 @@ def simpleDecrease(numbers):
 
     return flag
 
+
 def asIntArr(numbers: str):
     numbersAsIntArr = []
     for each in numbers:
         numbersAsIntArr.append(int(each))
 
     return numbersAsIntArr
+
 
 def rotate(numbers: str):
     numbersAsIntArr = asIntArr(numbers)
@@ -132,6 +124,7 @@ def rotate(numbers: str):
 
     return flag
 
+
 def arithmeticSequence(numbers: str):
     numbersAsIntArr = asIntArr(numbers)
 
@@ -148,17 +141,22 @@ def arithmeticSequence(numbers: str):
 
     return flag
 
+
 def subArithmeticSequence(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, arithmeticSequence)
+
 
 def subSimpleIncrease(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, simpleIncrease)
 
+
 def subSimpleDecrease(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, simpleDecrease)
 
-def subPredicate(numbers: str, sublength:int, predicater):
+
+def subPredicate(numbers: str, sublength: int, predicater):
     return predicater(numbers[-sublength:])
+
 
 def subRotate(numbers: str, sublength: int):
     return subPredicate(numbers, sublength, rotate)
