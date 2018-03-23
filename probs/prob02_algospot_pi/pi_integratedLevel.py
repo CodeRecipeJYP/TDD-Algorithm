@@ -1,8 +1,7 @@
-from probs.prob02_algospot_pi.pi import subSameNumber, subSimpleIncrease, \
+def integratedLevel(numbers: str, sublength: int):
+    from probs.prob02_algospot_pi.pi import subSameNumber, subSimpleIncrease, \
         subSimpleDecrease, subRotate, subArithmeticSequence
 
-
-def integratedLevel(numbers: str, sublength: int):
     if subSameNumber(numbers, sublength):
         return 1
 
