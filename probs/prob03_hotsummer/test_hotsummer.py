@@ -1,5 +1,6 @@
 import unittest
 
+from probs.prob03_hotsummer.hotsummer import is_lower_than_or_equal_to_limit
 
 """
 문제
@@ -55,7 +56,7 @@ class HotSummerTestCase(unittest.TestCase):
             10, 10, 10,
             10, 10, 10,
         ]
-        self.assertEqual("YES", isLowerThanLimit(limit, usage))
+        self.assertEqual("YES", is_lower_than_or_equal_to_limit(limit, usage))
 
     def test_end2end_2(self):
         limit = 1000
@@ -64,7 +65,7 @@ class HotSummerTestCase(unittest.TestCase):
             11, 34, 35,
             41, 83, 54,
         ]
-        self.assertEqual("YES", isLowerThanLimit(limit, usage))
+        self.assertEqual("YES", is_lower_than_or_equal_to_limit(limit, usage))
 
     def test_end2end_3(self):
         limit = 50
@@ -73,4 +74,16 @@ class HotSummerTestCase(unittest.TestCase):
             40, 50, 60,
             50, 40, 30,
         ]
-        self.assertEqual("NO", isLowerThanLimit(limit, usage))
+        self.assertEqual("NO", is_lower_than_or_equal_to_limit(limit, usage))
+
+
+class Str2IntArray(unittest.TestCase):
+    def test_str2int_array(self):
+        from probs.prob03_hotsummer.hotsummer import str2int_array
+        string = "10 10 10 10 10 10 10 10 10"
+
+        self.assertEqual([
+            10, 10, 10,
+            10, 10, 10,
+            10, 10, 10,
+        ], str2int_array(string))
