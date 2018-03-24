@@ -99,7 +99,7 @@ def main():
                 graph_table[st][dst] = weight
                 graph_table[dst][st] = weight
 
-        print(lowest_route_noiseratio(graph_table))
+        print("{0:0.10f}".format(lowest_route_noiseratio(graph_table)))
 
 
 if __name__ == '__main__':
