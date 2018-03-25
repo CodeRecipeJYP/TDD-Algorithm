@@ -1,6 +1,6 @@
 import unittest
 
-from prob02_algospot_pi.pi_integratedLevel import integratedLevel
+from probs.prob02_algospot_pi.pi_integratedLevel import integratedLevel
 
 
 class ArithmeticSequenceTestCase(unittest.TestCase):
@@ -19,7 +19,7 @@ class ArithmeticSequenceTestCase(unittest.TestCase):
     def test_5(self):
         self.assertEqual(integratedLevel('139', 3), 10)
 
-
+    # length4
     def test_length4_1(self):
         self.assertEqual(integratedLevel('0000', 4), 1)
 
@@ -35,7 +35,7 @@ class ArithmeticSequenceTestCase(unittest.TestCase):
     def test_length4_5(self):
         self.assertEqual(integratedLevel('1390', 4), 10)
 
-
+    # length5
     def test_length5_1(self):
         self.assertEqual(integratedLevel('00000', 5), 1)
 

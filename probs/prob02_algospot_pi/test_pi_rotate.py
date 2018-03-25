@@ -1,6 +1,6 @@
 import unittest
 
-from prob02_algospot_pi.pi import rotate, subRotate
+from probs.prob02_algospot_pi.pi import rotate, subRotate
 
 
 class RotateTestCase(unittest.TestCase):
@@ -28,10 +28,8 @@ class RotateTestCase(unittest.TestCase):
     def test_8(self):
         self.assertEqual(rotate('432'), False)
 
-
     def test_failedcase_1(self):
         self.assertEqual(rotate('939'), True)
-
 
     def test_sub_1(self):
         self.assertEqual(subRotate('1323', 3), True)
@@ -56,7 +54,6 @@ class RotateTestCase(unittest.TestCase):
 
     def test_sub_8(self):
         self.assertEqual(subRotate('3432', 3), False)
-
 
     def test_sub_failedcase_1(self):
         self.assertEqual(subRotate('12673939', 3), True)
