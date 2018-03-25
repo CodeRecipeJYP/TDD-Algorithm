@@ -215,4 +215,3 @@ class RollGearTestCase(unittest.TestCase):
 
         self.assertEqual(expected_gear_states,
                          roll_gear(gear_states, roll_method))
-
