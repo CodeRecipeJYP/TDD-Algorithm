@@ -21,8 +21,19 @@ def empty_2darr(num_row, num_col):
     return [[0 for _ in range(num_col)] for _ in range(num_row)]
 
 
+def roll_gear(gear_states, roll_method):
+    result_gear_states = []
+
+    return result_gear_states
+
+
 def roll_gears(gear_states, roll_methods):
-    return []
+    result_gear_states = []
+
+    for each_method in roll_methods:
+        result_gear_states = roll_gear(gear_states, each_method)
+
+    return result_gear_states
 
 
 def sum_gear_scores(gear_states):
