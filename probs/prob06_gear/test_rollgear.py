@@ -24,7 +24,7 @@ class RollGearTestCase(unittest.TestCase):
 10101111
 01111101
 10011101
-00000010
+00000001
 """.rstrip()
 
         expected_gear_states = multiline2states(expected_raw_strings)
