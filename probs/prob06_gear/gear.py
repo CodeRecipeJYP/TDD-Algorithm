@@ -1,5 +1,13 @@
 
 
+def str2digit_array(string):
+    int_array = []
+    for each in string:
+        int_array.append(int(each))
+
+    return int_array
+
+
 def str2int_array(string):
     splitted = string.split(" ")
     int_array = []
@@ -21,11 +29,20 @@ def sum_gear_scores(gear_states):
     return 0
 
 
-def main():
-    initial_gear_states = empty_2darr(4, 8)
-    print(initial_gear_states[3][7])
+GEAR_COUNT = 4
 
+
+def main():
+    initial_gear_states = []
+    for _ in range(GEAR_COUNT):
+        initial_gear_states.append(str2digit_array(input()))
+
+    method_count = int(input())
     roll_methods = []
+
+    for _ in range(method_count):
+        roll_methods.append(str2int_array(input()))
+
     final_gear_states = roll_gears(initial_gear_states, roll_methods)
     print(sum_gear_scores(final_gear_states))
 

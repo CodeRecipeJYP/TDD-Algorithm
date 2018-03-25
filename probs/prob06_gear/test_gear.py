@@ -2,7 +2,7 @@ import io
 import unittest
 from unittest.mock import patch
 
-from probs.prob05_routing.routing import main
+from probs.prob06_gear.gear import main
 
 """
 예제 입력 
