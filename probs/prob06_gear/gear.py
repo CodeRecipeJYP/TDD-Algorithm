@@ -86,10 +86,10 @@ def roll_gear(gear_states, roll_method):
 
 
 def roll_gears(gear_states, roll_methods):
-    result_gear_states = []
+    result_gear_states = gear_states.copy()
 
     for each_method in roll_methods:
-        result_gear_states = roll_gear(gear_states, each_method)
+        result_gear_states = roll_gear(result_gear_states, each_method)
 
     return result_gear_states
 
