@@ -1,6 +1,6 @@
 import unittest
 
-from probs.prob03_hotsummer.hotsummer import is_lower_than_or_equal_to_limit
+from probs.prob04_hotsummer.hotsummer import is_lower_than_or_equal_to_limit
 
 """
 문제
@@ -79,7 +79,7 @@ class HotSummerTestCase(unittest.TestCase):
 
 class Str2IntArray(unittest.TestCase):
     def test_str2int_array(self):
-        from probs.prob03_hotsummer.hotsummer import str2int_array
+        from probs.prob04_hotsummer.hotsummer import str2int_array
         string = "10 10 10 10 10 10 10 10 10"
 
         self.assertEqual([
