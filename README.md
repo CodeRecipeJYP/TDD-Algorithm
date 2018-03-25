@@ -12,3 +12,6 @@ https://algospot.com/judge/problem/read/HOTSUMMER
 
 5. Routing<br/>
 https://algospot.com/judge/problem/read/ROUTING
+
+5. Gear<br/>
+https://www.acmicpc.net/problem/14891

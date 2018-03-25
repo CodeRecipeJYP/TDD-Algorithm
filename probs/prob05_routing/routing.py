@@ -50,8 +50,8 @@ def str2int_array(string):
     return int_array
 
 
-def empty_2darr(w, h):
-    return [[0 for x in range(w)] for y in range(h)]
+def empty_2darr(num_row, num_col):
+    return [[0 for _ in range(num_col)] for _ in range(num_row)]
 
 
 def lowest_route_noiseratio(graph_table):
