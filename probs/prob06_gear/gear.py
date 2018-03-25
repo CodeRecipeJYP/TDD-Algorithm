@@ -9,20 +9,22 @@ def str2int_array(string):
     return int_array
 
 
-def empty_2darr(w, h):
-    return [[0 for x in range(w)] for y in range(h)]
+def empty_2darr(num_row, num_col):
+    return [[0 for _ in range(num_col)] for _ in range(num_row)]
 
 
-def roll_gears():
+def roll_gears(gear_states, roll_methods):
     return []
 
 
-def sum_gear_scores():
+def sum_gear_scores(gear_states):
     return 0
 
 
 def main():
-    initial_gear_states = []
+    initial_gear_states = empty_2darr(4, 8)
+    print(initial_gear_states[3][7])
+
     roll_methods = []
     final_gear_states = roll_gears(initial_gear_states, roll_methods)
     print(sum_gear_scores(final_gear_states))
