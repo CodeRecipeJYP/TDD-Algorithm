@@ -82,3 +82,73 @@ class GearTestCase(unittest.TestCase):
             output = output.rstrip()
 
         self.assertEqual("7", output)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_end2end_2(self, captured_output):
+        raw_input = """\
+11111111
+11111111
+11111111
+11111111
+3
+1 1
+2 1
+3 1"""
+        user_input = raw_input.split("\n")
+
+        with patch('builtins.input', side_effect=user_input):
+            main()
+            output = captured_output.getvalue()
+            output = output.rstrip()
+
+        self.assertEqual("15", output)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_end2end_3(self, captured_output):
+        raw_input = """\
+10001011
+10000011
+01011011
+00111101
+5
+1 1
+2 1
+3 1
+4 1
+1 -1
+"""
+        user_input = raw_input.split("\n")
+
+        with patch('builtins.input', side_effect=user_input):
+            main()
+            output = captured_output.getvalue()
+            output = output.rstrip()
+
+        self.assertEqual("6", output)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_end2end_4(self, captured_output):
+        raw_input = """\
+10010011
+01010011
+11100011
+01010101
+8
+1 1
+2 1
+3 1
+4 1
+1 -1
+2 -1
+3 -1
+4 -1
+"""
+        user_input = raw_input.split("\n")
+
+        with patch('builtins.input', side_effect=user_input):
+            main()
+            output = captured_output.getvalue()
+            output = output.rstrip()
+
+        self.assertEqual("5", output)
+

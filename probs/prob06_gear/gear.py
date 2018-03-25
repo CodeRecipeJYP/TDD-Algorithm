@@ -50,10 +50,12 @@ def roll_gear(gear_states, roll_method):
         if right_rolling_idx == GEAR_COUNT:
             break
 
-        origin = gear_states[right_rolling_idx-1][2]
+        origin = gear_states[right_rolling_idx - 1][2]
         dest = gear_states[right_rolling_idx][6]
 
-        if origin != dest:
+        if origin == dest:
+            break
+        else:
             will_be_rolled_stack.append(
                 [right_rolling_idx, curr_roll_direction])
 
@@ -72,7 +74,7 @@ def roll_gear(gear_states, roll_method):
             break
         else:
             will_be_rolled_stack.append(
-                [right_rolling_idx, curr_roll_direction])
+                [left_rolling_idx, curr_roll_direction])
 
     for each_roll in will_be_rolled_stack:
         idx = each_roll[0]
@@ -93,7 +95,11 @@ def roll_gears(gear_states, roll_methods):
 
 
 def sum_gear_scores(gear_states):
-    return 0
+    result = 0
+    for gear_idx in range(GEAR_COUNT):
+        result += gear_states[gear_idx][0] * (2**gear_idx)
+
+    return result
 
 
 GEAR_COUNT = 4
