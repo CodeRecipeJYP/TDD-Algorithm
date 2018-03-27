@@ -60,7 +60,9 @@ def execute_melt(iceberg_map):
                 continue
 
             will_be_melted_stack.append([
-                    get_adjacent_count(map_as_local_variable, row_idx, col_idx),
+                    get_adjacent_count(map_as_local_variable,
+                                       row_idx,
+                                       col_idx),
                     row_idx,
                     col_idx])
 
