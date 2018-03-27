@@ -9,6 +9,14 @@ def str2int_array(string):
     return int_array
 
 
+def sum_2darr(arr):
+    result = 0
+    for each_row in arr:
+        result += sum(each_row)
+
+    return result
+
+
 def empty_2darr(num_row, num_col):
     return [[0 for _ in range(num_col)] for _ in range(num_row)]
 
@@ -19,14 +27,6 @@ def execute_melt(map):
 
 def get_seperated_count(map):
     return 0
-
-
-def sum_2darr(arr):
-    result = 0
-    for each_row in arr:
-        result += sum(each_row)
-
-    return result
 
 
 def get_first_year_separated_into_twopieces(map):
