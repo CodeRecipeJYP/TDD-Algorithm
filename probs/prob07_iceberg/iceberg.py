@@ -13,8 +13,36 @@ def empty_2darr(num_row, num_col):
     return [[0 for _ in range(num_col)] for _ in range(num_row)]
 
 
-def get_first_year_separated_into_twopieces(map):
+def execute_melt(map):
+    return []
+
+
+def get_seperated_count(map):
     return 0
+
+
+def sum_2darr(arr):
+    result = 0
+    for each_row in arr:
+        result += sum(each_row)
+
+    return result
+
+
+def get_first_year_separated_into_twopieces(map):
+    map_as_local_variable = map.copy()
+    passed_year = 0
+    while True:
+        if get_seperated_count(map_as_local_variable) >= 2:
+            break
+
+        if sum_2darr(map_as_local_variable) == 0:
+            return 0
+
+        map_as_local_variable = execute_melt(map_as_local_variable)
+        passed_year += 1
+
+    return passed_year
 
 
 def main():
