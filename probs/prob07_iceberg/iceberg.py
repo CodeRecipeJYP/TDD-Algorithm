@@ -89,6 +89,8 @@ def get_separated_count(iceberg_map):
                 break
 
             check_row_idx, check_col_idx = same_piece_stack.pop()
+            map_as_local_variable[check_row_idx][check_col_idx] = 0
+
             check_lists = []
             if check_row_idx > 0:
                 check_lists.append([check_row_idx - 1, check_col_idx])
