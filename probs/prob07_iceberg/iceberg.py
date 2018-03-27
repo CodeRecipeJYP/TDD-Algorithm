@@ -21,6 +21,14 @@ def empty_2darr(num_row, num_col):
     return [[0 for _ in range(num_col)] for _ in range(num_row)]
 
 
+def copy_2darr(arr):
+    copy = []
+    for each in arr:
+        copy.append(each.copy())
+
+    return copy
+
+
 def get_adjacent_count(iceberg_map, row_idx, col_idx):
     count = 0
     if row_idx > 0 and iceberg_map[row_idx - 1][col_idx] == 0:
@@ -41,7 +49,7 @@ def get_adjacent_count(iceberg_map, row_idx, col_idx):
 
 
 def execute_melt(iceberg_map):
-    map_as_local_variable = iceberg_map.copy()
+    map_as_local_variable = copy_2darr(iceberg_map)
     row_count = len(iceberg_map)
     col_count = len(iceberg_map[0])
     will_be_melted_stack = []
@@ -73,7 +81,7 @@ def get_first_iceberg(iceberg_map):
 
 
 def get_separated_count(iceberg_map):
-    map_as_local_variable = iceberg_map.copy()
+    map_as_local_variable = copy_2darr(iceberg_map)
     row_count = len(map_as_local_variable)
     col_count = len(map_as_local_variable[0])
 
@@ -113,7 +121,7 @@ def get_separated_count(iceberg_map):
 
 
 def get_first_year_separated_into_twopieces(iceberg_map):
-    map_as_local_variable = iceberg_map.copy()
+    map_as_local_variable = copy_2darr(iceberg_map)
     passed_year = 0
     while True:
         if get_separated_count(map_as_local_variable) >= 2:
