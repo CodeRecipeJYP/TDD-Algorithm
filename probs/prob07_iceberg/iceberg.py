@@ -21,16 +21,16 @@ def empty_2darr(num_row, num_col):
     return [[0 for _ in range(num_col)] for _ in range(num_row)]
 
 
-def execute_melt(map):
+def execute_melt(iceberg_map):
     return []
 
 
-def get_seperated_count(map):
+def get_seperated_count(iceberg_map):
     return 0
 
 
-def get_first_year_separated_into_twopieces(map):
-    map_as_local_variable = map.copy()
+def get_first_year_separated_into_twopieces(iceberg_map):
+    map_as_local_variable = iceberg_map.copy()
     passed_year = 0
     while True:
         if get_seperated_count(map_as_local_variable) >= 2:
