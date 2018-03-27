@@ -1,7 +1,7 @@
 
 
 def str2int_array(string):
-    splitted = string.split(" ")
+    splitted = string.split()
     int_array = []
     for each_splitted in splitted:
         int_array.append(int(each_splitted))
@@ -137,7 +137,7 @@ def get_first_year_separated_into_twopieces(iceberg_map):
 
 
 def main():
-    [row_count, _] = str2int_array(input())
+    row_count, _ = str2int_array(input())
     iceberg_map = empty_2darr(row_count, 1)
 
     for row_idx in range(row_count):

@@ -42,6 +42,29 @@ class IcebergTestCase(unittest.TestCase):
 
         self.assertEqual("2", output)
 
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_end2end_2(self, captured_output):
+        raw_input = """\
+9 7
+0 0 0 0 0 0 0
+0 2 4 5 3 0 0
+0 3 4 2 5 2 0
+0 7 6 2 4 0 0
+0 7 6 2 4 0 0
+0 7 6 2 4 0 0
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0
+0 0 0 0 0 0 0
+"""
+        user_input = raw_input.split("\n")
+
+        with patch('builtins.input', side_effect=user_input):
+            main()
+            output = captured_output.getvalue()
+            output = output.rstrip()
+
+        self.assertEqual("0", output)
+
 
 def convert_raw_iceberg_map_into_array(raw_iceberg_map):
     iceberg_map = []
