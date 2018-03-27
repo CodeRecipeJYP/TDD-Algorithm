@@ -63,15 +63,58 @@ def execute_melt(iceberg_map):
     return map_as_local_variable
 
 
-def get_seperated_count(iceberg_map):
-    return 0
+def get_first_iceberg(iceberg_map):
+    for row_idx, each_row in enumerate(iceberg_map):
+        for col_idx, each in enumerate(each_row):
+            if each != 0:
+                return [row_idx, col_idx]
+
+    assert False, "Do not call this function, when sum_2darr(iceberg_map) == 0"
+
+
+def get_separated_count(iceberg_map):
+    map_as_local_variable = iceberg_map.copy()
+    row_count = len(map_as_local_variable)
+    col_count = len(map_as_local_variable[0])
+
+    separated_count = 0
+    while True:
+        if sum_2darr(map_as_local_variable) == 0:
+            break
+
+        separated_count += 1
+        same_piece_stack = [get_first_iceberg(map_as_local_variable)]
+        while True:
+            if len(same_piece_stack) == 0:
+                break
+
+            check_row_idx, check_col_idx = same_piece_stack.pop()
+            check_lists = []
+            if check_row_idx > 0:
+                check_lists.append([check_row_idx - 1, check_col_idx])
+
+            if check_col_idx < (col_count - 1):
+                check_lists.append([check_row_idx, check_col_idx + 1])
+
+            if check_row_idx < (row_count - 1):
+                check_lists.append([check_row_idx + 1, check_col_idx])
+
+            if check_col_idx > 0:
+                check_lists.append([check_row_idx, check_col_idx - 1])
+
+            for row_idx, col_idx in check_lists:
+                if map_as_local_variable[row_idx][col_idx] != 0:
+                    same_piece_stack.append([row_idx, col_idx])
+                    map_as_local_variable[row_idx][col_idx] = 0
+
+    return separated_count
 
 
 def get_first_year_separated_into_twopieces(iceberg_map):
     map_as_local_variable = iceberg_map.copy()
     passed_year = 0
     while True:
-        if get_seperated_count(map_as_local_variable) >= 2:
+        if get_separated_count(map_as_local_variable) >= 2:
             break
 
         if sum_2darr(map_as_local_variable) == 0:
