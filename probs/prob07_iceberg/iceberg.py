@@ -21,8 +21,46 @@ def empty_2darr(num_row, num_col):
     return [[0 for _ in range(num_col)] for _ in range(num_row)]
 
 
+def get_adjacent_count(iceberg_map, row_idx, col_idx):
+    count = 0
+    if row_idx > 0 and iceberg_map[row_idx - 1][col_idx] == 0:
+        count += 1
+
+    if col_idx < (len(iceberg_map[0]) - 1)\
+            and iceberg_map[row_idx][col_idx + 1] == 0:
+        count += 1
+
+    if row_idx < (len(iceberg_map) - 1)\
+            and iceberg_map[row_idx + 1][col_idx] == 0:
+        count += 1
+
+    if col_idx > 0 and iceberg_map[row_idx][col_idx - 1] == 0:
+        count += 1
+
+    return count
+
+
 def execute_melt(iceberg_map):
-    return []
+    map_as_local_variable = iceberg_map.copy()
+    row_count = len(iceberg_map)
+    col_count = len(iceberg_map[0])
+    will_be_melted_stack = []
+
+    for row_idx in range(row_count):
+        for col_idx in range(col_count):
+            if map_as_local_variable[row_idx][col_idx] == 0:
+                continue
+
+            will_be_melted_stack.append([
+                    get_adjacent_count(map_as_local_variable, row_idx, col_idx),
+                    row_idx,
+                    col_idx])
+
+    for count, row_idx, col_idx in will_be_melted_stack:
+        map_as_local_variable[row_idx][col_idx] =\
+            max(0, map_as_local_variable[row_idx][col_idx] - count)
+
+    return map_as_local_variable
 
 
 def get_seperated_count(iceberg_map):

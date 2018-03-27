@@ -2,7 +2,8 @@ import io
 import unittest
 from unittest.mock import patch
 
-from probs.prob07_iceberg.iceberg import main, str2int_array, execute_melt
+from probs.prob07_iceberg.iceberg import main, str2int_array, execute_melt, \
+    get_adjacent_count
 
 """
 5 7
@@ -85,7 +86,7 @@ class IcebergUnitTestCase(unittest.TestCase):
 
         expected_raw_iceberg_map = """\
 0 0 0 0 0 0 0
-0 0 0 2 0 0 0
+0 0 0 3 0 0 0
 0 0 0 0 4 0 0
 0 3 2 0 0 0 0
 0 0 0 0 0 0 0
@@ -97,3 +98,21 @@ class IcebergUnitTestCase(unittest.TestCase):
         iceberg_map = convert_raw_iceberg_map_into_array(raw_iceberg_map)
 
         self.assertEqual(expected_iceberg_map, execute_melt(iceberg_map))
+
+    def test_get_adjacent_count(self):
+        raw_iceberg_map = """\
+0 0 0 0 0 0 0
+0 0 2 4 1 0 0
+0 1 0 1 5 0 0
+0 5 4 1 2 0 0
+0 0 0 0 0 0 0
+        """
+        iceberg_map = convert_raw_iceberg_map_into_array(raw_iceberg_map)
+
+        self.assertEqual(3, get_adjacent_count(iceberg_map, 1, 2))
+        self.assertEqual(1, get_adjacent_count(iceberg_map, 1, 3))
+        self.assertEqual(2, get_adjacent_count(iceberg_map, 1, 4))
+
+        self.assertEqual(3, get_adjacent_count(iceberg_map, 2, 1))
+        self.assertEqual(1, get_adjacent_count(iceberg_map, 2, 3))
+        self.assertEqual(1, get_adjacent_count(iceberg_map, 2, 4))
