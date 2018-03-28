@@ -1,15 +1,14 @@
 package prob09_divisor;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class DivisorTest{
-
+public class DivisorTest {
     @Test
-    void getDivisors_1() {
+    public void getDivisors_1() {
         int number = 1;
         List<Integer> expected = List.of(
                 1
@@ -20,7 +19,7 @@ class DivisorTest{
     }
 
     @Test
-    void getDivisors_2() {
+    public void getDivisors_2() {
         int number = 2;
         List<Integer> expected = List.of(
                 1, 2
@@ -31,7 +30,7 @@ class DivisorTest{
     }
 
     @Test
-    void getDivisors_3() {
+    public void getDivisors_3() {
         int number = 3;
         List<Integer> expected = List.of(
                 1, 3
@@ -42,7 +41,7 @@ class DivisorTest{
     }
 
     @Test
-    void getDivisors_4() {
+    public void getDivisors_4() {
         int number = 15;
         List<Integer> expected = List.of(
                 1, 3, 5, 15

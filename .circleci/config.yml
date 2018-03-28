@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  python-test:
     docker:
       - image: circleci/python:3.6.1
 
@@ -31,3 +31,33 @@ jobs:
           command: |
             . venv/bin/activate
             flake8 --exclude venv
+
+  java-test:
+    docker:
+      - image: circleci/openjdk:9-node-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run:
+          name: install junit
+          command: |
+            sudo apt-get install junit4 -y
+
+      - run:
+          name: compile
+          command: |
+            sudo javac -cp java/src java/src/**/*.java
+            sudo javac -cp /usr/share/java/junit4.jar:java/src java/test/**/*.java
+
+      - run:
+          name: run tests
+          command: |
+            sudo java -cp .:/usr/share/java/junit4.jar:java/test:java/src org.junit.runner.JUnitCore prob09_divisor.DivisorTest
+
+  workflow:
+    tests:
+      jobs:
+        - java-test
+        - python-test
