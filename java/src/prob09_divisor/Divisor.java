@@ -46,7 +46,7 @@ public class Divisor {
                 .forEach(System.out::print);
     }
 
-    private static List<Integer> getDivisors(int number) {
+    public static List<Integer> getDivisors(int number) {
         ArrayList<Integer> result = new ArrayList<>();
         double sqrt = Math.sqrt(number);
         for (int divisorCandidate = 1; divisorCandidate <= sqrt; divisorCandidate++) {

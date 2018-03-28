@@ -1,0 +1,54 @@
+package prob09_divisor;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class DivisorTest{
+
+    @Test
+    void getDivisors_1() {
+        int number = 1;
+        List<Integer> expected = List.of(
+                1
+        );
+
+        assertEquals(expected,
+                Divisor.getDivisors(number));
+    }
+
+    @Test
+    void getDivisors_2() {
+        int number = 2;
+        List<Integer> expected = List.of(
+                1, 2
+        );
+
+        assertEquals(expected,
+                Divisor.getDivisors(number));
+    }
+
+    @Test
+    void getDivisors_3() {
+        int number = 3;
+        List<Integer> expected = List.of(
+                1, 3
+        );
+
+        assertEquals(expected,
+                Divisor.getDivisors(number));
+    }
+
+    @Test
+    void getDivisors_4() {
+        int number = 15;
+        List<Integer> expected = List.of(
+                1, 3, 5, 15
+        );
+
+        assertEquals(expected,
+                Divisor.getDivisors(number));
+    }
+}
