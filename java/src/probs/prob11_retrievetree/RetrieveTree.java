@@ -1,6 +1,7 @@
 package probs.prob11_retrievetree;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -50,9 +51,6 @@ public class RetrieveTree {
 
                     Tree rightTree = estimateTree(rightChildrenInOrders,
                             rightChildrenPostOrders);
-                    System.out.println("rightChildrenPostOrders=" + rightChildrenPostOrders.toString());
-                    System.out.println("rightChildrenInOrders=" + rightChildrenInOrders.toString());
-                    System.out.println("rightTree=" + rightTree.toString());
 
                     firstNode.setRightTree(rightTree);
                 }
@@ -63,13 +61,9 @@ public class RetrieveTree {
 
                     Tree parentNode = estimateTree(parentInOrders, parentPostOrders);
 
-                    System.out.println("parentPostOrders=" + parentPostOrders.toString());
-                    System.out.println("parentInOrders=" + parentInOrders.toString());
                     firstNode.setRightParent(
                             parentNode
                     );
-                    System.out.println("parentNode=" + parentNode.toString());
-                    System.out.println("firstNode=" + firstNode.toString());
                 }
 
                 break;
@@ -82,7 +76,7 @@ public class RetrieveTree {
     private static void printListOnSingleLine(List<Integer> list) {
         list.stream()
                 .map(it -> it + " ")
-                .forEach(System.out::println);
+                .forEach(System.out::print);
     }
 
     static class Tree {
@@ -90,7 +84,7 @@ public class RetrieveTree {
         private Tree mLeft = null;
         private Tree mRight = null;
         private Tree mParent = null;
-        private Integer mVal = null;
+        private Integer mVal;
 
         public Tree(int val) {
             this.mVal = val;
@@ -163,29 +157,8 @@ public class RetrieveTree {
             if (node != null) {
                 return node.retrievePreOrder();
             } else {
-                return List.of();
+                return Collections.emptyList();
             }
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Tree{");
-            sb.append(" mVal=" + mVal);
-            if (mLeft != null) {
-                sb.append(" mLeft=" + mLeft);
-            }
-
-            if (mRight != null) {
-                sb.append(" mRight=" + mRight);
-            }
-
-            if (mParent != null) {
-                sb.append(" mParentVal=" + mParent.getVal());
-            }
-            sb.append("}");
-
-            return sb.toString();
         }
 
         public void setRightTree(Tree rightTree) {

@@ -29,11 +29,6 @@ public class RetrieveTreeTest {
                 67
         );
 
-
-
-        RetrieveTree.Tree.sTrees
-                .forEach(System.out::println);
-
         assertEquals(expectedOrders, preOrders);
     }
 
