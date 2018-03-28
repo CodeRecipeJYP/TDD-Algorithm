@@ -27,3 +27,6 @@ https://www.acmicpc.net/problem/1693
 
 9. Goorm Test divisor<br/>
 http://codingtest.goorm.io/
+
+10. Bubble sort<br/>
+https://www.acmicpc.net/problem/2750
