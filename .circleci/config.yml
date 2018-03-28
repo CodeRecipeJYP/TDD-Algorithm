@@ -36,7 +36,7 @@ jobs:
     docker:
       - image: circleci/openjdk:9-node-browsers
 
-    working_directory: ~/repo
+    working_directory: ~/repo/java
 
     steps:
       - checkout
@@ -46,18 +46,27 @@ jobs:
             sudo apt-get install junit4 -y
 
       - run:
+          name: download cpsuite
+          command: |
+            sudo mkdir lib
+            sudo wget -O lib/cpsuite-1.2.6.jar https://www.dropbox.com/s/fvi9v0t287vgsnq/cpsuite-1.2.6.jar\?dl\=1
+
+      - run:
           name: compile
           command: |
-            sudo javac -cp java/src java/src/**/*.java
-            sudo javac -cp /usr/share/java/junit4.jar:java/src java/test/**/*.java
+            sudo javac -cp src src/probs/**/*.java
+            sudo javac -cp .:/usr/share/java/junit4.jar:lib/cpsuite-1.2.6.jar:src test/probs/**/*.java
+            sudo javac -cp .:/usr/share/java/junit4.jar:lib/cpsuite-1.2.6.jar:src test/probs/*.java
 
       - run:
           name: run tests
           command: |
             sudo java -cp .:/usr/share/java/junit4.jar:java/test:java/src org.junit.runner.JUnitCore prob09_divisor.DivisorTest
+            sudo java -cp .:/usr/share/java/junit4.jar:lib/cpsuite-1.2.6.jar:test:src probs.RunAllSuite
 
-  workflow:
-    tests:
-      jobs:
-        - java-test
-        - python-test
+workflows:
+  version: 2
+  tests:
+    jobs:
+      - java-test
+      - python-test

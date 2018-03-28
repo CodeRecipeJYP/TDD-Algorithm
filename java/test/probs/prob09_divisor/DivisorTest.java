@@ -1,4 +1,4 @@
-package prob09_divisor;
+package probs.prob09_divisor;
 
 import org.junit.Test;
 
