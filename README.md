@@ -24,3 +24,6 @@ https://www.acmicpc.net/problem/2573
 
 8. ColoringTree<b>(Unsolved yet)</b><br/>
 https://www.acmicpc.net/problem/1693
+
+9. Goorm Test divisor<br/>
+http://codingtest.goorm.io/
