@@ -64,8 +64,8 @@ jobs:
           name: run tests
           command: |
             cd java
-            sudo java -cp .:/usr/share/java/junit4.jar:java/test:java/src org.junit.runner.JUnitCore prob09_divisor.DivisorTest
             sudo java -cp .:/usr/share/java/junit4.jar:lib/cpsuite-1.2.6.jar:test:src probs.RunAllSuite
+            sudo java -cp .:/usr/share/java/junit4.jar:java/test:java/src org.junit.runner.JUnitCore probs.prob09_divisor.DivisorTest
 
 workflows:
   version: 2
