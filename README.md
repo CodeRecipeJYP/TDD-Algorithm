@@ -7,7 +7,7 @@ http://tech.kakao.com/2017/09/27/kakao-blind-recruitment-round-1/
 2. Pi<br/>
 https://algospot.com/judge/problem/read/PI
 
-3. Brave Duck(Unsolved yet)<br/>
+3. Brave Duck<b>(Unsolved yet)</b><br/>
 https://algospot.com/judge/problem/read/BRAVEDUCK
 
 4. Hot summer<br/>
@@ -21,3 +21,6 @@ https://www.acmicpc.net/problem/14891
 
 7. Iceberg<br/>
 https://www.acmicpc.net/problem/2573
+
+8. ColoringTree<b>(Unsolved yet)</b><br/>
+https://www.acmicpc.net/problem/1693
