@@ -28,8 +28,31 @@ public class BubbleSort {
     }
 
     public static List<Integer> bubbleSort(List<Integer> numbers) {
+        int numberCount = numbers.size();
+        List<Integer> numbersAsLocalVar = numbers;
 
-        return List.of();
+        for (int formerIdx = 0; formerIdx < numberCount - 1; formerIdx++) {
+            for (int latterIdx = formerIdx + 1; latterIdx < numberCount; latterIdx++) {
+                int former = numbersAsLocalVar.get(formerIdx);
+                int latter = numbersAsLocalVar.get(latterIdx);
+                if (former > latter) {
+                    numbersAsLocalVar = swap(numbersAsLocalVar, formerIdx, latterIdx);
+                }
+            }
+        }
+
+        return numbersAsLocalVar;
+    }
+
+    private static List<Integer> swap(List<Integer> numbers, int formerIdx, int latterIdx) {
+        ArrayList<Integer> copy = new ArrayList<>(numbers);
+
+        int former = copy.get(formerIdx);
+
+        copy.set(formerIdx, copy.get(latterIdx));
+        copy.set(latterIdx, former);
+
+        return copy;
     }
 
     private static void printList(List<Integer> list) {
