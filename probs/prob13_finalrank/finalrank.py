@@ -15,10 +15,27 @@ def empty_2darr(num_row, num_col):
 
 
 RESULT_IMPOSSIBLE = ["IMPOSSIBLE"]
+DIRECTED_EDGE = 1
 
 
 def make_graph_table(prev_ranks):
-    return []
+    team_count = len(prev_ranks)
+
+    table = empty_2darr(team_count, team_count)
+    ordered_by_rank = empty_2darr(team_count, 1)
+
+    for team_idx, rank in enumerate(prev_ranks):
+        ordered_by_rank[rank - 1] = team_idx
+
+    lower_ranked_teams = []
+
+    for team_idx in reversed(ordered_by_rank):
+        for lower_team_idx in lower_ranked_teams:
+            table[team_idx][lower_team_idx] = DIRECTED_EDGE
+
+        lower_ranked_teams.append(team_idx)
+
+    return table
 
 
 def update_diffs(graph_table, diffs):

@@ -7,8 +7,18 @@ from unittest import TestCase
 #         converted_map.append(str2int_array(each_raw_map))
 #
 #     return converted_map
+from probs.prob13_finalrank.finalrank import make_graph_table
 
 
 class UnitTestCase(TestCase):
-    def test_get_will_be_ripen_tomatos(self):
-        self.assertEqual(True, True)
+    def test_make_graph_table(self):
+        expected = [
+            [0, 0, 0, 0, 0],
+            [1, 0, 0, 1, 0],
+            [1, 1, 0, 1, 0],
+            [1, 0, 0, 0, 0],
+            [1, 1, 1, 1, 0]
+        ]
+        self.assertEqual(expected, make_graph_table([
+            5, 3, 2, 4, 1
+        ]))
