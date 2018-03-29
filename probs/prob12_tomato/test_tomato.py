@@ -64,6 +64,7 @@ class End2EndTestCase(unittest.TestCase):
 0 0 0 0 0 0
 0 0 0 0 0 0
 0 0 0 0 0 0
+0 0 0 0 0 1
 """
         user_input = raw_input.split("\n")
 
