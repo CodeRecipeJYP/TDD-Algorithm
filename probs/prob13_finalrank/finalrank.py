@@ -16,6 +16,7 @@ def empty_2darr(num_row, num_col):
 
 RESULT_IMPOSSIBLE = ["IMPOSSIBLE"]
 DIRECTED_EDGE = 1
+EDGE_NOT_EXISTS = 0
 
 
 def make_graph_table(prev_ranks):
@@ -39,7 +40,17 @@ def make_graph_table(prev_ranks):
 
 
 def update_diffs(graph_table, diffs):
-    return []
+    for diff in diffs:
+        team1, team2 = diff
+        team1_idx, team2_idx = team1 - 1, team2 - 1
+        if graph_table[team1_idx][team2_idx] == DIRECTED_EDGE:
+            graph_table[team1_idx][team2_idx] = EDGE_NOT_EXISTS
+            graph_table[team2_idx][team1_idx] = DIRECTED_EDGE
+        else:
+            graph_table[team1_idx][team2_idx] = DIRECTED_EDGE
+            graph_table[team2_idx][team1_idx] = EDGE_NOT_EXISTS
+
+    return graph_table
 
 
 def get_curr_ranks(team_count, prev_ranks, diffs):
@@ -48,7 +59,8 @@ def get_curr_ranks(team_count, prev_ranks, diffs):
 
     curr_ranks = []
     for each_row in curr_graph_table:
-        curr_rank = (team_count - 1) - sum(each_row)
+        curr_rank_idx = (team_count - 1) - sum(each_row)
+        curr_rank = curr_rank_idx + 1
         if curr_rank not in curr_ranks:
             curr_ranks.append(curr_rank)
         else:

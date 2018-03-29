@@ -64,5 +64,4 @@ class End2EndTestCase(unittest.TestCase):
         self.assertEqual("""\
 5 3 2 4 1
 2 3 1
-IMPOSSIBLE
-""", output)
+IMPOSSIBLE""", output)
