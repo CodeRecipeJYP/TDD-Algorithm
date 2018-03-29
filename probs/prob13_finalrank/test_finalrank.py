@@ -84,3 +84,22 @@ IMPOSSIBLE""", output)
 
         self.assertEqual("""\
 IMPOSSIBLE""", output)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_end2end_3(self, captured_output):
+        raw_input = """\
+1
+3
+3 1 2
+1
+1 2
+"""
+        user_input = raw_input.split("\n")
+
+        with patch('builtins.input', side_effect=user_input):
+            main()
+            output = captured_output.getvalue()
+            output = output.rstrip()
+
+        self.assertEqual("""\
+3 2 1""", output)
