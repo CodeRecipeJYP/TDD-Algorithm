@@ -30,6 +30,9 @@ def copy_2darr(arr):
 
 
 RESULT_IMPOSSIBLE = -1
+STATE_UNRIPE = 0
+STATE_RIPEN = 1
+STATE_RIPEN_CANNOT_AFFECT_OTHERS = 2
 
 
 def get_days_everytomato_gonnabe_ripen(tomato_map):
@@ -59,11 +62,45 @@ def is_everytomato_ripen(tomato_map):
 
 
 def get_will_be_ripen_tomatos(tomato_map):
-    return []
+    will_be_ripen_tomatos = []
+    row_count = len(tomato_map)
+    col_count = len(tomato_map[0])
+
+    for row_idx in range(row_count):
+        for col_idx in range(col_count):
+            if tomato_map[row_idx][col_idx] == STATE_RIPEN:
+                around_tomatos_will_be_ripen =\
+                    get_around_tomatos_will_be_ripen(tomato_map,
+                                                     [row_idx, col_idx])
+
+                if len(around_tomatos_will_be_ripen) == 0:
+                    tomato_map[row_idx][col_idx] =\
+                        STATE_RIPEN_CANNOT_AFFECT_OTHERS
+                else:
+                    will_be_ripen_tomatos += around_tomatos_will_be_ripen
+
+    return will_be_ripen_tomatos
 
 
-def get_around_tomatos_will_be_ripen(tomato_map, tomato):
-    return []
+def get_around_tomatos_will_be_ripen(given_map, tomato):
+    results = []
+    row_idx, col_idx = tomato
+
+    if row_idx > 0 and given_map[row_idx - 1][col_idx] == STATE_UNRIPE:
+        results.append([row_idx - 1, col_idx])
+
+    if col_idx < (len(given_map[0]) - 1) \
+            and given_map[row_idx][col_idx + 1] == STATE_UNRIPE:
+        results.append([row_idx, col_idx + 1])
+
+    if row_idx < (len(given_map) - 1) \
+            and given_map[row_idx + 1][col_idx] == STATE_UNRIPE:
+        results.append([row_idx + 1, col_idx])
+
+    if col_idx > 0 and given_map[row_idx][col_idx - 1] == STATE_UNRIPE:
+        results.append([row_idx, col_idx - 1])
+
+    return results
 
 
 def main():
