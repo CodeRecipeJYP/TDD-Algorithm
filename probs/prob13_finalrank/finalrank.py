@@ -70,8 +70,10 @@ def get_curr_ranks(team_count, prev_ranks, diffs):
 
 
 def print_list_on_single_line(lists):
-    last = lists.pop(-1)
-    for each in lists:
+    copy = lists.copy()
+
+    last = copy.pop(-1)
+    for each in copy:
         print(each, end=" ")
 
     print(last)

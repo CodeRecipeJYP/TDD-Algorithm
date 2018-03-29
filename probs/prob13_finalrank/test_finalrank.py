@@ -65,3 +65,22 @@ class End2EndTestCase(unittest.TestCase):
 5 3 2 4 1
 2 3 1
 IMPOSSIBLE""", output)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_end2end_2(self, captured_output):
+        raw_input = """\
+1
+4
+3 4 2 1
+1
+1 4
+"""
+        user_input = raw_input.split("\n")
+
+        with patch('builtins.input', side_effect=user_input):
+            main()
+            output = captured_output.getvalue()
+            output = output.rstrip()
+
+        self.assertEqual("""\
+IMPOSSIBLE""", output)
