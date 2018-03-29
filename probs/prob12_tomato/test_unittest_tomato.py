@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from probs.prob12_tomato.tomato import get_will_be_ripen_tomatos, str2int_array, \
-    get_around_tomatos_will_be_ripen
+from probs.prob12_tomato.tomato import get_will_be_ripen_tomatos,\
+    str2int_array, get_around_tomatos_will_be_ripen
 
 
 def convert_raw_iceberg_map_into_array(raw_map):
