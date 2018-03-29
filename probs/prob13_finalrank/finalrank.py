@@ -23,14 +23,11 @@ def make_graph_table(prev_ranks):
     team_count = len(prev_ranks)
 
     table = empty_2darr(team_count, team_count)
-    ordered_by_rank = empty_2darr(team_count, 1)
-
-    for team_idx, rank in enumerate(prev_ranks):
-        ordered_by_rank[rank - 1] = team_idx
 
     lower_ranked_teams = []
 
-    for team_idx in reversed(ordered_by_rank):
+    for team_number in reversed(prev_ranks):
+        team_idx = team_number - 1
         for lower_team_idx in lower_ranked_teams:
             table[team_idx][lower_team_idx] = DIRECTED_EDGE
 
@@ -57,14 +54,14 @@ def get_curr_ranks(team_count, prev_ranks, diffs):
     graph_table = make_graph_table(prev_ranks)
     curr_graph_table = update_diffs(graph_table, diffs)
 
-    curr_ranks = []
-    for each_row in curr_graph_table:
+    curr_ranks = [0] * team_count
+    for team_idx, each_row in enumerate(curr_graph_table):
+        team_number = team_idx + 1
         curr_rank_idx = (team_count - 1) - sum(each_row)
-        curr_rank = curr_rank_idx + 1
-        if curr_rank not in curr_ranks:
-            curr_ranks.append(curr_rank)
-        else:
+        if curr_ranks[curr_rank_idx] != 0:
             return RESULT_IMPOSSIBLE
+        else:
+            curr_ranks[curr_rank_idx] = team_number
 
     return curr_ranks
 
