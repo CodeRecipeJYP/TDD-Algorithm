@@ -88,7 +88,8 @@ def main():
         for _ in range(diff_count):
             diffs.append(str2int_array(input()))
 
-        print_list_on_single_line(get_curr_ranks(team_count, prev_ranks, diffs))
+        print_list_on_single_line(
+            get_curr_ranks(team_count, prev_ranks, diffs))
 
 
 if __name__ == '__main__':
