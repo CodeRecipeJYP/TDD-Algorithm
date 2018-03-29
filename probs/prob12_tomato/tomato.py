@@ -55,8 +55,8 @@ def get_days_everytomato_gonnabe_ripen(tomato_map):
 
     prev_will_be_ripen_tomatos = find_ripen_tomatos(tomato_map)
     while True:
-        will_be_ripen_tomatos = get_will_be_ripen_tomatos(tomato_map,
-                                                          prev_will_be_ripen_tomatos)
+        will_be_ripen_tomatos =\
+            get_will_be_ripen_tomatos(tomato_map, prev_will_be_ripen_tomatos)
 
         if len(will_be_ripen_tomatos) == 0:
             if is_everytomato_ripen(tomato_map):
@@ -89,14 +89,15 @@ def is_everytomato_ripen(tomato_map):
 
 
 def get_will_be_ripen_tomatos(tomato_map, tomatos_become_ripen_just_before):
-    will_be_ripen_tomatos = []
+    will_be_ripen_tomatos = set()
 
     for row_idx, col_idx in tomatos_become_ripen_just_before:
         around_tomatos_will_be_ripen =\
                     get_around_tomatos_will_be_ripen(tomato_map,
                                                      [row_idx, col_idx])
 
-        will_be_ripen_tomatos += around_tomatos_will_be_ripen
+        will_be_ripen_tomatos =\
+            will_be_ripen_tomatos.union(around_tomatos_will_be_ripen)
         tomato_map[row_idx][col_idx] =\
             STATE_RIPEN_CANNOT_AFFECT_OTHERS
 
@@ -108,18 +109,18 @@ def get_around_tomatos_will_be_ripen(given_map, tomato):
     row_idx, col_idx = tomato
 
     if row_idx > 0 and given_map[row_idx - 1][col_idx] == STATE_UNRIPEN:
-        results.append([row_idx - 1, col_idx])
+        results.append((row_idx - 1, col_idx))
 
     if col_idx < (len(given_map[0]) - 1) \
             and given_map[row_idx][col_idx + 1] == STATE_UNRIPEN:
-        results.append([row_idx, col_idx + 1])
+        results.append((row_idx, col_idx + 1))
 
     if row_idx < (len(given_map) - 1) \
             and given_map[row_idx + 1][col_idx] == STATE_UNRIPEN:
-        results.append([row_idx + 1, col_idx])
+        results.append((row_idx + 1, col_idx))
 
     if col_idx > 0 and given_map[row_idx][col_idx - 1] == STATE_UNRIPEN:
-        results.append([row_idx, col_idx - 1])
+        results.append((row_idx, col_idx - 1))
 
     return results
 

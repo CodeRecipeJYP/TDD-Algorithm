@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from probs.prob12_tomato.tomato import get_will_be_ripen_tomatos,\
+from probs.prob12_tomato.tomato import get_will_be_ripen_tomatos, \
     str2int_array, get_around_tomatos_will_be_ripen
 
 
@@ -22,13 +22,13 @@ class UnitTestCase(TestCase):
 """
         given_map = convert_raw_map_into_array(raw_map)
 
-        expected = [
-            [2, 5],
-            [3, 4]
-        ]
+        expected = {
+            (2, 5),
+            (3, 4)
+        }
 
         self.assertEqual(expected, get_will_be_ripen_tomatos(given_map,
-                                                             [[3, 5]]))
+                                                             {(3, 5)}))
 
     def test_get_will_be_ripen_tomatos_2(self):
         raw_map = """\
@@ -39,16 +39,17 @@ class UnitTestCase(TestCase):
 """
         given_map = convert_raw_map_into_array(raw_map)
 
-        expected = [
-            [2, 5],
-            [3, 4],
-            [0, 1],
-            [1, 0]
-        ]
+        expected = {
+            (2, 5),
+            (3, 4),
+            (0, 1),
+            (1, 0)
+        }
 
-        self.assertEqual(expected.sort(),
+        self.assertEqual(expected,
                          get_will_be_ripen_tomatos(given_map,
-                                                   [[3,5], [0, 0]]).sort())
+                                                   {(3, 5),
+                                                    (0, 0)}))
 
     def test_get_around_tomatos_will_be_ripen(self):
         raw_map = """\
@@ -58,11 +59,11 @@ class UnitTestCase(TestCase):
         0 0 0 0 0 1
         """
         given_map = convert_raw_map_into_array(raw_map)
-        given_tomato = [3, 5]
+        given_tomato = (3, 5)
 
         expected = [
-            [2, 5],
-            [3, 4]
+            (2, 5),
+            (3, 4)
         ]
 
         self.assertEqual(expected,
