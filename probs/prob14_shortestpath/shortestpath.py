@@ -14,21 +14,6 @@ def empty_2darr(num_row, num_col):
     return [[0 for _ in range(num_col)] for _ in range(num_row)]
 
 
-def make_directed_graph_table(siz, weighted_edges):
-    graph_table = empty_2darr(siz, siz)
-
-    for each_edge in weighted_edges:
-        ((st, dst), weight) = each_edge
-        st_idx, dst_idx = st - 1, dst - 1
-        if graph_table[st_idx][dst_idx] != 0 \
-                and graph_table[st_idx][dst_idx] <= weight:
-            continue
-        else:
-            graph_table[st_idx][dst_idx] = weight
-
-    return graph_table
-
-
 INF = 9999
 INF_TEXT = "INF"
 
@@ -51,11 +36,7 @@ def shortest_path_weight(start_vertex_number, graph_table):
                 minimum = d[q]
                 minimum_q = q
 
-        for dst, weight in enumerate(
-                graph_table[minimum_q]):
-            if weight == 0:
-                continue
-
+        for dst, weight in graph_table[minimum_q].items():
             found_weight = d[minimum_q] + weight
             if d[dst] > found_weight:
                 d[dst] = found_weight
@@ -74,9 +55,7 @@ def fix_inf_to_textinf(lst):
     return lst
 
 
-def get_solution(start_vertex_number, vertex_count, edges):
-    graph_table = make_directed_graph_table(vertex_count, edges)
-
+def get_solution(start_vertex_number, graph_table):
     results = shortest_path_weight(start_vertex_number, graph_table)
     results = fix_inf_to_textinf(results)
 
@@ -91,16 +70,21 @@ def print_list_on_multi_line(lst):
 def main():
     vertex_count, edge_count = str2int_array(input())
     start_vertex_number = int(input())
-    edges = []
+
+    graph_table = [{} for _ in range(vertex_count)]
 
     for _ in range(edge_count):
         st, dst, weight = str2int_array(input())
-        edges.append((
-            (st, dst), weight
-        ))
+
+        st_idx, dst_idx_key = st - 1, dst - 1
+        if dst_idx_key in graph_table[st_idx] \
+                and graph_table[st_idx][dst_idx_key] <= weight:
+            continue
+        else:
+            graph_table[st_idx][dst_idx_key] = weight
 
     print_list_on_multi_line(
-        get_solution(start_vertex_number, vertex_count, edges))
+        get_solution(start_vertex_number, graph_table))
 
 
 if __name__ == '__main__':

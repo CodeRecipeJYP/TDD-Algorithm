@@ -53,3 +53,38 @@ class End2EndTestCase(unittest.TestCase):
 3
 7
 INF""", output)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_end2end_2(self, captured_output):
+        raw_input = """\
+2 0
+1
+"""
+        user_input = raw_input.split("\n")
+
+        with patch('builtins.input', side_effect=user_input):
+            main()
+            output = captured_output.getvalue()
+            output = output.rstrip()
+
+        self.assertEqual("""\
+0
+INF""", output)
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_end2end_3(self, captured_output):
+        raw_input = """\
+3 0
+1
+"""
+        user_input = raw_input.split("\n")
+
+        with patch('builtins.input', side_effect=user_input):
+            main()
+            output = captured_output.getvalue()
+            output = output.rstrip()
+
+        self.assertEqual("""\
+0
+INF
+INF""", output)
