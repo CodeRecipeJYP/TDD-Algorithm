@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
 
 
+def first_capitalize(last_name):
+    result = last_name[0].upper() + last_name[1:].lower()
+    return result
+
+
 def get_formatted_name(first_name, last_name):
-    formatted_name = ''
+    last_name = first_capitalize(last_name)
+    first_name = first_capitalize(first_name)
+
+    formatted_name = "{} {}".format(first_name, last_name)
 
     return formatted_name
 
