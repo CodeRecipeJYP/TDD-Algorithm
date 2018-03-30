@@ -50,24 +50,18 @@ def shortest_path_weight(start_vertex_number, graph_table):
     return d
 
 
-def fix_inf_to_textinf(lst):
-    for idx, each in enumerate(lst):
-        if each == INF:
-            lst[idx] = INF_TEXT
-
-    return lst
-
-
 def get_solution(start_vertex_number, graph_table):
     results = shortest_path_weight(start_vertex_number, graph_table)
-    results = fix_inf_to_textinf(results)
 
     return results
 
 
 def print_list_on_multi_line(lst):
     for each_row in lst:
-        print(each_row)
+        if each_row == INF:
+            print(INF_TEXT)
+        else:
+            print(each_row)
 
 
 def main():
