@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import heapq
+from queue import PriorityQueue
 
 
 def str2int_array(string):
@@ -28,12 +28,11 @@ def shortest_path_weight(start_vertex_number, edges):
     d = [INF] * vertex_count
     d[start_vertex_idx] = 0
 
-    pq = [(d[start_vertex_idx], start_vertex_idx, NONE_PREVIOUS_VERTEX)]
+    pq = PriorityQueue()
+    pq.put((d[start_vertex_idx], start_vertex_idx, NONE_PREVIOUS_VERTEX))
 
-    heapq.heapify(pq)
-
-    while len(pq) != 0:
-        distance, vertex_idx, prev_vertex_idx = heapq.heappop(pq)
+    while not pq.empty():
+        distance, vertex_idx, prev_vertex_idx = pq.get()
         if distance > d[vertex_idx]:
             continue
 
@@ -41,7 +40,7 @@ def shortest_path_weight(start_vertex_number, edges):
             found_weight = d[vertex_idx] + weight
             if d[dst] > found_weight:
                 pq_item = (found_weight, dst, vertex_idx)
-                heapq.heappush(pq, pq_item)
+                pq.put(pq_item)
                 d[dst] = found_weight
 
     return d
