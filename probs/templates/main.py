@@ -14,10 +14,6 @@ def empty_2darr(num_row, num_col):
     return [[0 for _ in range(num_col)] for _ in range(num_row)]
 
 
-def shortest_path_weight(start_vertex_number, edges):
-    return [0]
-
-
 def print_list_on_multi_line(lst):
     for each_row in lst:
         print(each_row)
@@ -34,8 +30,8 @@ def main():
             (st, dst), weight
         ))
 
-    print_list_on_multi_line(
-        shortest_path_weight(start_vertex_number, edges))
+    result = []
+    print_list_on_multi_line(result)
 
 
 if __name__ == '__main__':
