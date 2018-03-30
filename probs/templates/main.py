@@ -21,7 +21,6 @@ def print_list_on_multi_line(lst):
 
 def main():
     vertex_count, edge_count = str2int_array(input())
-    start_vertex_number = int(input())
     edges = []
 
     for _ in range(edge_count):
