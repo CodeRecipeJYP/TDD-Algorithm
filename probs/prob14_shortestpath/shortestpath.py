@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import heapq
 
 
 def str2int_array(string):
@@ -16,6 +17,7 @@ def empty_2darr(num_row, num_col):
 
 INF = 9999
 INF_TEXT = "INF"
+NONE_PREVIOUS_VERTEX = -1
 
 
 def shortest_path_weight(start_vertex_number, graph_table):
@@ -23,26 +25,27 @@ def shortest_path_weight(start_vertex_number, graph_table):
 
     start_vertex_idx = start_vertex_number - 1
 
-    visited_s = [start_vertex_idx]
     d = [INF] * vertex_count
     d[start_vertex_idx] = 0
-    notvisited_q = [vertex_idx for vertex_idx in range(0, vertex_count)]
 
-    while len(notvisited_q) != 0:
-        minimum = INF + 1
-        minimum_q = -1
-        for q in notvisited_q:
-            if minimum > d[q]:
-                minimum = d[q]
-                minimum_q = q
+    pq = []
+    for vertex_idx in range(0, vertex_count):
+        pq_item = (d[vertex_idx], vertex_idx, NONE_PREVIOUS_VERTEX)
+        pq.append(pq_item)
 
-        for dst, weight in graph_table[minimum_q].items():
-            found_weight = d[minimum_q] + weight
+    heapq.heapify(pq)
+
+    while len(pq) != 0:
+        distance, vertex_idx, prev_vertex_idx = heapq.heappop(pq)
+        if distance > d[vertex_idx]:
+            continue
+
+        for dst, weight in graph_table[vertex_idx].items():
+            found_weight = d[vertex_idx] + weight
             if d[dst] > found_weight:
+                pq_item = (found_weight, dst, vertex_idx)
+                heapq.heappush(pq, pq_item)
                 d[dst] = found_weight
-
-        visited_s.append(minimum_q)
-        notvisited_q.remove(minimum_q)
 
     return d
 
