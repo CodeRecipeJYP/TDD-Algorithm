@@ -2,6 +2,8 @@ import io
 import unittest
 from unittest.mock import patch
 
+from probs.templates.main import main
+
 
 class End2EndTestCase(unittest.TestCase):
     def test_something(self):
@@ -27,8 +29,4 @@ class End2EndTestCase(unittest.TestCase):
             output = output.rstrip()
 
         self.assertEqual("""\
-0
-2
-3
-7
-INF""", output)
+0""", output)

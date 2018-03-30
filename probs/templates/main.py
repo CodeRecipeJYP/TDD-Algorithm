@@ -30,7 +30,7 @@ def main():
             (st, dst), weight
         ))
 
-    result = []
+    result = [0]
     print_list_on_multi_line(result)
 
 
