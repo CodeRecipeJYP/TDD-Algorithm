@@ -28,10 +28,7 @@ def shortest_path_weight(start_vertex_number, edges):
     d = [INF] * vertex_count
     d[start_vertex_idx] = 0
 
-    pq = []
-    for vertex_idx in range(0, vertex_count):
-        pq_item = (d[vertex_idx], vertex_idx, NONE_PREVIOUS_VERTEX)
-        pq.append(pq_item)
+    pq = [(d[start_vertex_idx], start_vertex_idx, NONE_PREVIOUS_VERTEX)]
 
     heapq.heapify(pq)
 
