@@ -155,18 +155,18 @@ public class Samsung01 {
     public static State getState(char[][] map) {
         State result = new State();
 
-        for (int row_idx = 1; row_idx < map.length - 1; row_idx++) {
-            for (int col_idx = 1; col_idx < map[0].length - 1; col_idx++) {
-                if (map[row_idx][col_idx] == 'R') {
-                    result.redY = row_idx;
-                    result.redX = col_idx;
+        for (int rowIdx = 1; rowIdx < map.length - 1; rowIdx++) {
+            for (int colIdx = 1; colIdx < map[0].length - 1; colIdx++) {
+                if (map[rowIdx][colIdx] == 'R') {
+                    result.redY = rowIdx;
+                    result.redX = colIdx;
 
                     if (result.isEnough()) {
                         return result;
                     }
-                } else if (map[row_idx][col_idx] == 'B') {
-                    result.blueY = row_idx;
-                    result.blueX = col_idx;
+                } else if (map[rowIdx][colIdx] == 'B') {
+                    result.blueY = rowIdx;
+                    result.blueX = colIdx;
 
                     if (result.isEnough()) {
                         return result;
