@@ -6,10 +6,10 @@ public class Samsung01 {
     public static final int X = 1;
     public static final int Y = 0;
     public static final int[][] DIRECTIONS = new int[][]{
-            {0, -1},
-            {0, 1},
             {-1, 0},
-            {1, 0}
+            {1, 0},
+            {0, -1},
+            {0, 1}
     };
 
     public static final int UP = 0;
@@ -115,11 +115,11 @@ public class Samsung01 {
                                                           TwoValue<Integer, Integer> ballLocation,
                                                           TwoValue<Integer, Integer> anotherBallLocation,
                                                           int[] direction) {
-        int currX = ballLocation.val1;
-        int currY = ballLocation.val2;
+        int currY = ballLocation.val1;
+        int currX = ballLocation.val2;
 
-        int anotherX = anotherBallLocation.val1;
-        int anotherY = anotherBallLocation.val2;
+        int anotherY = anotherBallLocation.val1;
+        int anotherX = anotherBallLocation.val2;
 
         while (true) {
             int nextX = currX + direction[X];
@@ -128,7 +128,12 @@ public class Samsung01 {
             if (nextX == anotherX && nextY == anotherY) {
                 break;
             }
-            else if (cleanMap[nextX][nextY] == '#' || cleanMap[nextX][nextY] == '0') {
+            else if (cleanMap[nextY][nextX] == '#') {
+                break;
+            }
+            else if (cleanMap[nextY][nextX] == 'O') {
+                currX = nextX;
+                currY = nextY;
                 break;
             }
 
