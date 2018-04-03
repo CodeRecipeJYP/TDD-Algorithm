@@ -36,7 +36,7 @@ public class Samsung01Test {
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
         int minimumNumOfTrials
-                = Samsung01.getMinimumNumOfTrials(5, 5, givenMap);
+                = Samsung01.getMinimumNumOfTrials(givenMap);
 
         assertEquals(1, minimumNumOfTrials);
     }

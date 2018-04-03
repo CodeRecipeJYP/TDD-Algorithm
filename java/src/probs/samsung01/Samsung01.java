@@ -19,20 +19,20 @@ public class Samsung01 {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int row_count = scanner.nextInt();
-        int col_count = scanner.nextInt();
+        int rowCount = scanner.nextInt();
+        int colCount = scanner.nextInt();
         scanner.nextLine();
-        char[][] map = new char[row_count][col_count];
-        for (int row_idx = 0; row_idx < row_count; row_idx++) {
+        char[][] map = new char[rowCount][colCount];
+        for (int rowIdx = 0; rowIdx < rowCount; rowIdx++) {
             String line = scanner.nextLine();
-            line.getChars(0, line.length(), map[row_idx], 0);
+            line.getChars(0, line.length(), map[rowIdx], 0);
         }
 
-        System.out.println(getMinimumNumOfTrials(row_count, col_count, map));
+        System.out.println(getMinimumNumOfTrials(map));
 //        printMap(map);
     }
 
-    public static int getMinimumNumOfTrials(int row_count, int col_count, char[][] map) {
+    public static int getMinimumNumOfTrials(char[][] map) {
         // 현상태 구하기 + 기록(횟수0)
         // {현상태 + 상} @+하, @+좌, @+우 큐에 넣음
         // 상 빼낸후 시행후
