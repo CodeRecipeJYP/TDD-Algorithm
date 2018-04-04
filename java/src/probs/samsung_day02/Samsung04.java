@@ -59,7 +59,7 @@ public class Samsung04 {
                 if (!prevMaps.contains(resultBoard)) {
                     prevMaps.add(resultBoard);
                     if (currTrials + 1 == trials) {
-                        scoreBoard.add(getScore(currBoard));
+                        scoreBoard.add(getScore(resultBoard));
                     } else {
                         queue.add(new Pair(resultBoard, currTrials + 1));
                     }
@@ -82,11 +82,11 @@ public class Samsung04 {
         return max;
     }
 
-    public static int getScore(int[][] currBoard) {
+    public static int getScore(int[][] board) {
         int max = 0;
 
         for (int[] eachRow :
-                currBoard) {
+                board) {
             for (int score:
                     eachRow) {
                 if (max < score) {
@@ -102,7 +102,7 @@ public class Samsung04 {
         int rowCount = board.length;
         int colCount = board[0].length;
 
-        int[][] tiltedBoard = board.clone();
+        int[][] tiltedBoard = clone2darr(board);
 
         if (direction[COL] != 0) {
             List<List<Integer>> tiltedRows = new ArrayList<>();
@@ -134,22 +134,30 @@ public class Samsung04 {
                 tiltedRows.add(resultEachRow);
             }
 
-            int colStart;
-            if (direction[COL] == -1) {
-                colStart = 0;
-            } else {
-                colStart = colCount - 1;
-            }
+            int startBlanks;
+            int endBlanks;
 
             for (int rowIdx = 0; rowIdx < rowCount; rowIdx++) {
                 List<Integer> tiltedRow = tiltedRows.get(rowIdx);
-                int colIdx = 0;
+
+                if (direction[COL] == -1) {
+                    startBlanks = 0;
+                    endBlanks = colCount - tiltedRow.size();
+                } else {
+                    startBlanks = colCount - tiltedRow.size();
+                    endBlanks = colCount;
+                }
+
                 for (int tiltedIdx = 0; tiltedIdx < tiltedRow.size(); tiltedIdx++) {
-                    colIdx = colStart + tiltedIdx * -direction[COL];
+                    int colIdx = startBlanks + tiltedIdx;
                     tiltedBoard[rowIdx][colIdx] = tiltedRow.get(tiltedIdx);
                 }
 
-                for (colIdx = colIdx + 1; colIdx < colCount; colIdx++) {
+                for (int colIdx = 0; colIdx < startBlanks; colIdx++) {
+                    tiltedBoard[rowIdx][colIdx] = EMPTY;
+                }
+
+                for (int colIdx = endBlanks; colIdx < colCount; colIdx++) {
                     tiltedBoard[rowIdx][colIdx] = EMPTY;
                 }
             }
@@ -185,22 +193,50 @@ public class Samsung04 {
                 tiltedCols.add(resultEachCol);
             }
 
-            int rowStart;
-            if (direction[ROW] == -1) {
-                rowStart = 0;
-            } else {
-                rowStart = rowCount - 1;
-            }
+            int startBlanks;
+            int endBlanks;
 
             for (int colIdx = 0; colIdx < colCount; colIdx++) {
                 List<Integer> tiltedCol = tiltedCols.get(colIdx);
+
+                if (direction[ROW] == -1) {
+                    startBlanks = 0;
+                    endBlanks = rowCount - tiltedCol.size();
+                } else {
+                    startBlanks = rowCount - tiltedCol.size();
+                    endBlanks = rowCount;
+                }
+
                 for (int tiltedIdx = 0; tiltedIdx < tiltedCol.size(); tiltedIdx++) {
-                    int rowIdx = rowStart + tiltedIdx * -direction[ROW];
+                    int rowIdx = startBlanks + tiltedIdx;
                     tiltedBoard[rowIdx][colIdx] = tiltedCol.get(tiltedIdx);
+                }
+
+                for (int rowIdx = 0; rowIdx < startBlanks; rowIdx++) {
+                    tiltedBoard[rowIdx][colIdx] = EMPTY;
+                }
+
+                for (int rowIdx = endBlanks; rowIdx < rowCount; rowIdx++) {
+                    tiltedBoard[rowIdx][colIdx] = EMPTY;
                 }
             }
         }
 
         return tiltedBoard;
+    }
+
+    private static int[][] clone2darr(int[][] board) {
+        int rowCount = board.length;
+        int colCount = board[0].length;
+
+        int[][] clone = new int[rowCount][colCount];
+
+        for (int rowIdx = 0; rowIdx < rowCount; rowIdx++) {
+            for (int colIdx = 0; colIdx < colCount; colIdx++) {
+                clone[colIdx][rowIdx] = board[colIdx][rowIdx];
+            }
+        }
+
+        return clone;
     }
 }
