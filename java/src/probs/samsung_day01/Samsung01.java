@@ -1,4 +1,4 @@
-package probs.samsung01;
+package probs.samsung_day01;
 
 import java.util.*;
 

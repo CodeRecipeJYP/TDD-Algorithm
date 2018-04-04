@@ -1,4 +1,4 @@
-package probs.samsung01;
+package probs.samsung_day01;
 
 import org.junit.Test;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static probs.samsung01.Samsung01.*;
+import static probs.samsung_day01.Samsung01.*;
 
 public class Samsung01Test {
 
