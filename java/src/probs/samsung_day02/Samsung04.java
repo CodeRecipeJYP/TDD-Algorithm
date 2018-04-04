@@ -23,7 +23,12 @@ public class Samsung04 {
     public static final int EMPTY = 0;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        int[][] board = getInput(new Scanner(System.in));
+
+        System.out.println(getMaximumScoreIn(board, 5));
+    }
+
+    public static int[][] getInput(Scanner scanner) {
         int memberCount = scanner.nextInt();
 
         scanner.nextLine();
@@ -34,7 +39,7 @@ public class Samsung04 {
             }
         }
 
-        System.out.println(getMaximumScoreIn(board, 5));
+        return board;
     }
 
     public static int getMaximumScoreIn(int[][] board, int trials) {
@@ -104,125 +109,109 @@ public class Samsung04 {
 
         int[][] tiltedBoard = clone2darr(board);
 
+        List<int[]> eachLines;
+        boolean isReversedDirection;
         if (direction[COL] != 0) {
-            List<List<Integer>> tiltedRows = new ArrayList<>();
-            for (int rowIdx = 0; rowIdx < rowCount; rowIdx++) {
-                List<Integer> resultEachRow = new ArrayList<>();
-                int prev = EMPTY;
+            eachLines = getEachRows(tiltedBoard);
+            isReversedDirection = (direction[COL] == -1);
+        } else {
+            eachLines = getEachCols(tiltedBoard);
+            isReversedDirection = (direction[ROW] == -1);
+        }
 
-                for (int colIdx = 0; colIdx < colCount; colIdx++) {
-                    int each = board[rowIdx][colIdx];
-                    if (each == EMPTY) {
-                        continue;
-                    }
-
-                    if (each == prev) {
-                        resultEachRow.add(each * 2);
-                        prev = EMPTY;
-                    } else {
-                        if (prev != EMPTY) {
-                            resultEachRow.add(prev);
-                        }
-                        prev = each;
-                    }
+        List<int[]> eachTiltedLines = new ArrayList<>();
+        for (int lineIdx = 0; lineIdx < rowCount; lineIdx++) {
+            int[] eachLine = eachLines.get(lineIdx);
+            List<Integer> tiltedPiece = tiltEachLine(eachLine);
+            int[] tiltedLine = new int[eachLine.length];
+            if (isReversedDirection) {
+                for (int idx = 0; idx < tiltedPiece.size(); idx++) {
+                    tiltedLine[idx] = tiltedPiece.get(idx);
                 }
-
-                if (prev != EMPTY) {
-                    resultEachRow.add(prev);
-                }
-
-                tiltedRows.add(resultEachRow);
-            }
-
-            int startBlanks;
-            int endBlanks;
-
-            for (int rowIdx = 0; rowIdx < rowCount; rowIdx++) {
-                List<Integer> tiltedRow = tiltedRows.get(rowIdx);
-
-                if (direction[COL] == -1) {
-                    startBlanks = 0;
-                    endBlanks = colCount - tiltedRow.size();
-                } else {
-                    startBlanks = colCount - tiltedRow.size();
-                    endBlanks = colCount;
-                }
-
-                for (int tiltedIdx = 0; tiltedIdx < tiltedRow.size(); tiltedIdx++) {
-                    int colIdx = startBlanks + tiltedIdx;
-                    tiltedBoard[rowIdx][colIdx] = tiltedRow.get(tiltedIdx);
-                }
-
-                for (int colIdx = 0; colIdx < startBlanks; colIdx++) {
-                    tiltedBoard[rowIdx][colIdx] = EMPTY;
-                }
-
-                for (int colIdx = endBlanks; colIdx < colCount; colIdx++) {
-                    tiltedBoard[rowIdx][colIdx] = EMPTY;
+            } else {
+                for (int idx = 0; idx < tiltedPiece.size(); idx++) {
+                    tiltedLine[eachLine.length - tiltedPiece.size() + idx] = tiltedPiece.get(idx);
                 }
             }
 
-            //
-        } else if (direction[ROW] != 0) {
-            List<List<Integer>> tiltedCols = new ArrayList<>();
-            for (int colIdx = 0; colIdx < colCount; colIdx++) {
-                List<Integer> resultEachCol = new ArrayList<>();
-                int prev = EMPTY;
+            eachTiltedLines.add(tiltedLine);
+        }
 
-                for (int rowIdx = 0; rowIdx  < rowCount; rowIdx++) {
-                    int each = board[rowIdx][colIdx];
-                    if (each == EMPTY) {
-                        continue;
-                    }
-
-                    if (each == prev) {
-                        resultEachCol.add(each * 2);
-                        prev = EMPTY;
-                    } else {
-                        if (prev != EMPTY) {
-                            resultEachCol.add(prev);
-                        }
-                        prev = each;
-                    }
+        if (direction[COL] != 0) {
+            for (int rowIdx = 0; rowIdx < eachTiltedLines.size(); rowIdx++) {
+                int[] eachRow = eachTiltedLines.get(rowIdx);
+                for (int colIdx = 0; colIdx < eachRow.length; colIdx++) {
+                    tiltedBoard[rowIdx][colIdx] = eachRow[colIdx];
                 }
-
-                if (prev != EMPTY) {
-                    resultEachCol.add(prev);
-                }
-
-                tiltedCols.add(resultEachCol);
             }
-
-            int startBlanks;
-            int endBlanks;
-
-            for (int colIdx = 0; colIdx < colCount; colIdx++) {
-                List<Integer> tiltedCol = tiltedCols.get(colIdx);
-
-                if (direction[ROW] == -1) {
-                    startBlanks = 0;
-                    endBlanks = rowCount - tiltedCol.size();
-                } else {
-                    startBlanks = rowCount - tiltedCol.size();
-                    endBlanks = rowCount;
-                }
-
-                for (int tiltedIdx = 0; tiltedIdx < tiltedCol.size(); tiltedIdx++) {
-                    int rowIdx = startBlanks + tiltedIdx;
-                    tiltedBoard[rowIdx][colIdx] = tiltedCol.get(tiltedIdx);
-                }
-
-                for (int rowIdx = 0; rowIdx < startBlanks; rowIdx++) {
-                    tiltedBoard[rowIdx][colIdx] = EMPTY;
-                }
-
-                for (int rowIdx = endBlanks; rowIdx < rowCount; rowIdx++) {
-                    tiltedBoard[rowIdx][colIdx] = EMPTY;
+        } else {
+            for (int colIdx = 0; colIdx < eachTiltedLines.size(); colIdx++) {
+                int[] eachCol = eachTiltedLines.get(colIdx);
+                for (int rowIdx = 0; rowIdx < eachCol.length; rowIdx++) {
+                    tiltedBoard[rowIdx][colIdx] = eachCol[rowIdx];
                 }
             }
         }
 
         return tiltedBoard;
+    }
+
+    public static List<Integer> tiltEachLine(int[] line) {
+        List<Integer> tilted = new ArrayList<>();
+        int len = line.length;
+        int prev = EMPTY;
+
+        for (int idx = 0; idx < len; idx++) {
+            int each = line[idx];
+            if (each == EMPTY) {
+                continue;
+            }
+
+            if (each == prev) {
+                tilted.add(each * 2);
+                prev = EMPTY;
+            } else {
+                if (prev != EMPTY) {
+                    tilted.add(prev);
+                }
+                prev = each;
+            }
+        }
+
+        if (prev != EMPTY) {
+            tilted.add(prev);
+        }
+
+        return tilted;
+    }
+
+    public static List<int[]> getEachCols(int[][] board) {
+        List<int[]> result = new ArrayList<>();
+
+        int rowCount = board.length;
+        int colCount = board[0].length;
+
+        for (int colIdx = 0; colIdx < colCount; colIdx++) {
+            int[] eachCol = new int[rowCount];
+            for (int rowIdx = 0; rowIdx < rowCount; rowIdx++) {
+                eachCol[rowIdx] = board[rowIdx][colIdx];
+            }
+
+            result.add(eachCol);
+        }
+
+        return result;
+    }
+
+    public static List<int[]> getEachRows(int[][] board) {
+        List<int[]> result = new ArrayList<>();
+
+        for (int[] eachRow :
+                board) {
+            result.add(eachRow);
+        }
+
+        return result;
     }
 
     private static int[][] clone2darr(int[][] board) {

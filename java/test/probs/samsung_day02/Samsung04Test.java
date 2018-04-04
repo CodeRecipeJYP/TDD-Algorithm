@@ -2,6 +2,9 @@ package probs.samsung_day02;
 
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -104,42 +107,70 @@ public class Samsung04Test {
     }
 
     @Test
-    public void getMaximumScoreIn_2_1() {
-        ArrayList<String> rawInput = new ArrayList<>();
-        rawInput.add("1 1 4 16 16 16 32 16 8 1 1 1 1 32 2 1 8 4 4 4");
-        rawInput.add("16 8 8 8 1 4 2 2 16 1 4 4 32 32 8 8 2 2 16 8");
-        rawInput.add("16 1 32 1 1 2 16 16 8 1 32 1 32 4 4 32 1 1 2 8");
-        rawInput.add("8 16 4 16 8 2 16 4 16 32 16 1 16 2 2 2 16 1 8 16");
-        rawInput.add("16 8 2 16 1 32 8 1 4 8 16 1 8 16 16 8 4 2 8 2");
-        rawInput.add("1 16 32 8 16 8 4 4 32 4 2 16 4 2 8 32 1 32 2 16");
-        rawInput.add("8 2 16 2 4 8 1 1 1 2 1 8 1 1 16 4 4 8 8 2");
-        rawInput.add("2 16 4 8 32 4 4 2 4 1 2 1 4 8 1 4 16 1 2 8");
-        rawInput.add("16 32 2 32 32 32 1 2 32 1 2 2 32 8 1 32 4 16 16 4");
-        rawInput.add("8 16 1 32 8 4 8 2 8 4 1 32 32 4 2 16 2 1 32 8");
-        rawInput.add("4 32 2 16 16 1 16 1 16 2 4 32 8 8 1 4 1 32 32 2");
-        rawInput.add("32 32 8 1 1 4 32 4 1 2 4 1 32 2 4 2 32 2 2 4");
-        rawInput.add("32 32 8 8 8 2 32 8 8 32 2 32 8 2 2 4 4 16 16 1");
-        rawInput.add("2 8 32 1 8 8 16 32 1 16 2 1 1 1 1 16 32 32 4 16");
-        rawInput.add("2 2 4 16 8 2 8 16 2 16 16 2 1 32 8 8 2 2 4 32");
-        rawInput.add("4 16 4 32 32 2 8 4 4 4 16 4 8 32 2 16 2 2 1 4");
-        rawInput.add("32 1 16 2 1 32 8 1 1 1 4 16 32 32 4 8 16 1 4 8");
-        rawInput.add("32 16 8 32 32 1 16 4 16 32 4 8 32 2 16 16 16 2 32 2");
-        rawInput.add("32 1 32 32 8 4 4 2 2 1 4 32 2 1 2 1 4 1 4 32");
-        rawInput.add("16 1 1 1 16 32 2 32 2 32 1 16 16 32 16 1 8 16 16 32");
+    public void getMaximumScoreIn_3_1() {
+        String inPath = "src/probs/samsung_day02/01.in";
+        String outPath = "src/probs/samsung_day02/01.out";
 
-        int n = 20;
-
-        int[][] board = new int[n][n];
-
-        for (int rowIdx = 0; rowIdx < rawInput.size(); rowIdx++) {
-            String eachline = rawInput.get(rowIdx);
-            Scanner scanner = new Scanner(eachline);
-            for (int colIdx = 0; colIdx < n; colIdx++) {
-                board[rowIdx][colIdx] = scanner.nextInt();
-            }
+        int expected = 0;
+        Scanner scanner = null;
+        int[][] board = null;
+        try {
+            scanner = new Scanner(new File(inPath));
+            board = getInput(scanner);
+            scanner = new Scanner(new File(outPath));
+            expected = scanner.nextInt();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
-        assertEquals(128,
+
+        assertEquals(expected,
+                Samsung04.getMaximumScoreIn(board, 5));
+    }
+
+    @Test
+    public void getMaximumScoreIn_3_2() {
+        String pathPrefix = "src/probs/samsung_day02/01_case02";
+        String inPath = pathPrefix + ".in";
+        String outPath = pathPrefix + ".out";
+
+        int expected = 0;
+        Scanner scanner = null;
+        int[][] board = null;
+        try {
+            scanner = new Scanner(new File(inPath));
+            board = getInput(scanner);
+            scanner = new Scanner(new File(outPath));
+            expected = scanner.nextInt();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        assertEquals(expected,
+                Samsung04.getMaximumScoreIn(board, 5));
+    }
+
+    @Test
+    public void getMaximumScoreIn_3_3() {
+        String pathPrefix = "src/probs/samsung_day02/01_case03";
+        String inPath = pathPrefix + ".in";
+        String outPath = pathPrefix + ".out";
+
+        int expected = 0;
+        Scanner scanner = null;
+        int[][] board = null;
+        try {
+            scanner = new Scanner(new File(inPath));
+            board = getInput(scanner);
+            scanner = new Scanner(new File(outPath));
+            expected = scanner.nextInt();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        assertEquals(expected,
                 Samsung04.getMaximumScoreIn(board, 5));
     }
 
@@ -331,6 +362,104 @@ public class Samsung04Test {
         assertArrayEquals(
                 expected,
                 Samsung04.executeTilt(board, direction)
+        );
+    }
+
+    @Test
+    public void executeTilt_2_3() {
+        int[][] board = new int[][] {
+                {1, 2, 3, 0},
+                {0, 0, 0, 0},
+                {0, 1, 0, 0},
+                {0, 4, 0, 0}
+        };
+
+        int[] direction = DIRECTIONS[DOWN];
+
+        int[][] expected = new int[][] {
+                {0, 0, 0, 0},
+                {0, 2, 0, 0},
+                {0, 1, 0, 0},
+                {1, 4, 3, 0}
+        };
+
+        assertArrayEquals(
+                expected,
+                Samsung04.executeTilt(board, direction)
+        );
+    }
+
+    @Test
+    public void executeTilt_2_4() {
+        int[][] board = new int[][] {
+                {0, 2, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {1, 4, 3, 0}
+        };
+
+        int[] direction = DIRECTIONS[UP];
+
+        int[][] expected = new int[][] {
+                {1, 2, 3, 0},
+                {0, 4, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
+        };
+
+        assertArrayEquals(
+                expected,
+                Samsung04.executeTilt(board, direction)
+        );
+    }
+
+    @Test
+    public void executeTilt_2_5() {
+        int[][] board = new int[][] {
+                {0, 2, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {1, 4, 3, 0}
+        };
+
+        int[] direction = DIRECTIONS[RIGHT];
+
+        int[][] expected = new int[][] {
+                {0, 0, 0, 2},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 1, 4, 3}
+        };
+
+        assertArrayEquals(
+                expected,
+                Samsung04.executeTilt(board, direction)
+        );
+    }
+
+    @Test
+    public void originDoesntChange_afterExecuteTilt() {
+        int[][] board = new int[][] {
+                {0, 2, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {1, 4, 3, 0}
+        };
+
+        int[] direction = DIRECTIONS[RIGHT];
+
+        int[][] expected = new int[][] {
+                {0, 2, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {1, 4, 3, 0}
+        };
+
+        Samsung04.executeTilt(board, direction);
+
+        assertArrayEquals(
+                expected,
+                board
         );
     }
 
