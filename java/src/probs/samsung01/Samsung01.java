@@ -17,6 +17,11 @@ public class Samsung01 {
     public static final int LEFT = 2;
     public static final int RIGHT = 3;
 
+    public static final int GAME_NOT_ENDED = 0;
+    public static final int GAME_CLEAR = 1;
+    public static final int GAME_OVER = 2;
+
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int rowCount = scanner.nextInt();
@@ -64,11 +69,10 @@ public class Samsung01 {
                     DIRECTIONS) {
                 State resultState = executeTilt(cleanMap, currState, direction);
 
-                if (resultState.isGameClear()) {
+                int gameResult = resultState.checkGameResult(map);
+                if (gameResult == GAME_CLEAR) {
                     return currTrials + 1;
-                }
-
-                if (resultState.isGameOver()) {
+                } else if (gameResult == GAME_OVER) {
                     continue;
                 }
 
@@ -178,6 +182,20 @@ public class Samsung01 {
         return result;
     }
 
+    public static TwoValue<Integer, Integer> findHole(char[][] map) {
+        for (int rowIdx = 1; rowIdx < map.length - 1; rowIdx++) {
+            for (int colIdx = 1; colIdx < map[0].length - 1; colIdx++) {
+                if (map[rowIdx][colIdx] == 'O') {
+                    return new TwoValue<>(rowIdx, colIdx);
+                }
+            }
+        }
+
+        assert(false);
+
+        return null;
+    }
+
     private static void printMap(char[][] map) {
         Arrays.stream(map).forEach(System.out::println);
     }
@@ -209,12 +227,19 @@ public class Samsung01 {
             return Objects.hash(redX, redY, blueX, blueY);
         }
 
-        public boolean isGameClear() {
-            return false;
-        }
+        public int checkGameResult(char[][] map) {
+            TwoValue<Integer, Integer> hole = findHole(map);
+            int holeY = hole.val1;
+            int holeX = hole.val2;
 
-        public boolean isGameOver() {
-            return false;
+            if (redY == holeY && redX == holeX) {
+                if (blueY == holeY && blueX == holeX) {
+                    return GAME_OVER;
+                }
+                return GAME_CLEAR;
+            }
+
+            return GAME_NOT_ENDED;
         }
     }
 
