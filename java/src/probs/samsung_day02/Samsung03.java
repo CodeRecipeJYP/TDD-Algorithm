@@ -56,7 +56,7 @@ public class Samsung03 {
         return sum;
     }
 
-    private static List<Integer> getEnemyTeam(List<Integer> team) {
+    public static List<Integer> getEnemyTeam(List<Integer> team) {
         List<Integer> enemy = new ArrayList<>();
 
         int teamCount = team.size() * 2;
@@ -66,7 +66,11 @@ public class Samsung03 {
         for (int teamMember = 0; teamMember < teamCount; teamMember++) {
             if (member == teamMember) {
                 teamIdx += 1;
-                member = team.get(teamIdx);
+                if (teamIdx < team.size()) {
+                    member = team.get(teamIdx);
+                } else {
+                    member = -1;
+                }
             } else {
                 enemy.add(teamMember);
             }
@@ -95,7 +99,9 @@ public class Samsung03 {
 
         if (count == 1) {
             for (int item = start; item <= end; item++) {
-                combinationList.add(List.of(item));
+                List list = new ArrayList();
+                list.add(item);
+                combinationList.add(list);
             }
         } else {
             int itemMaximum = end - (count - 1);
