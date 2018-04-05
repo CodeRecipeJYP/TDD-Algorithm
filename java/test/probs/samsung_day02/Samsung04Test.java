@@ -69,11 +69,11 @@ public class Samsung04Test {
                 {2, 0, 0, 2}
         };
 
-        assertEquals(8,
-                Samsung04.getMaximumScoreIn(board, 1));
+//        assertEquals(8,
+//                Samsung04.getMaximumScoreIn(board, 1));
 
-        assertEquals(16,
-                Samsung04.getMaximumScoreIn(board, 2));
+//        assertEquals(16,
+//                Samsung04.getMaximumScoreIn(board, 2));
 
         assertEquals(16,
                 Samsung04.getMaximumScoreIn(board, 5));
@@ -233,346 +233,443 @@ public class Samsung04Test {
     }
 
     @Test
-    public void executeTilt() {
+    public void executeTilt_5_1() {
         int[][] board = new int[][] {
-                {2, 2, 2},
-                {4, 4, 4},
-                {8, 8, 8}
+                {4, 8, 8, 4},
+                {4, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
         };
-
-        int[] direction = DIRECTIONS[UP];
+        Board instance = new Board(board, 0, UP);
+        instance.executeTilt();
 
         int[][] expected = new int[][] {
-                {2, 2, 2},
-                {4, 4, 4},
-                {8, 8, 8}
-        };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
-    }
-
-    @Test
-    public void executeTilt_2() {
-        int[][] board = new int[][] {
-                {2, 2, 2},
-                {4, 4, 4},
-                {8, 8, 8}
-        };
-
-        int[] direction = DIRECTIONS[LEFT];
-
-        int[][] expected = new int[][] {
-                {4, 2, 0},
-                {8, 4, 0},
-                {16, 8, 0}
-        };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
-    }
-
-    @Test
-    public void executeTilt_3() {
-        int[][] board = new int[][] {
-                {0, 2, 0},
-                {2, 0, 0},
-                {0, 0, 0}
-        };
-
-        int[] direction = DIRECTIONS[LEFT];
-
-        int[][] expected = new int[][] {
-                {2, 0, 0},
-                {2, 0, 0},
-                {0, 0, 0}
-        };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
-    }
-
-    @Test
-    public void executeTilt_4() {
-        int[][] board = new int[][] {
-                {0, 2, 0},
-                {2, 0, 0},
-                {0, 0, 0}
-        };
-
-        int[] direction = DIRECTIONS[LEFT];
-
-        int[][] expected = new int[][] {
-                {2, 0, 0},
-                {2, 0, 0},
-                {0, 0, 0}
-        };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
-    }
-
-    @Test
-    public void executeTilt_2_1() {
-        int[][] board = new int[][] {
-                {1, 2, 3},
-                {0, 0, 0},
-                {0, 0, 0}
-        };
-
-        int[] direction = DIRECTIONS[RIGHT];
-
-        int[][] expected = new int[][] {
-                {1, 2, 3},
-                {0, 0, 0},
-                {0, 0, 0}
-        };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
-    }
-
-    @Test
-    public void executeTilt_2_2() {
-        int[][] board = new int[][] {
-                {1, 2, 3, 0},
+                {8, 8, 8, 4},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0}
         };
+        assertArrayEquals(expected, instance.board);
+    }
 
-        int[] direction = DIRECTIONS[RIGHT];
+    @Test
+    public void executeTilt_twice_1() {
+        int[][] board = new int[][] {
+                {2, 8, 8, 4},
+                {2, 0, 0, 0},
+                {2, 0, 0, 0},
+                {2, 0, 0, 0}
+        };
+        Board instance = new Board(board, 0, UP);
+        instance.executeTilt();
+        instance.executeTilt();
 
         int[][] expected = new int[][] {
-                {0, 1, 2, 3},
+                {8, 8, 8, 4},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0}
         };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
+        assertArrayEquals(expected, instance.board);
     }
 
     @Test
-    public void executeTilt_2_3() {
+    public void executeTilt_priority_1() {
         int[][] board = new int[][] {
-                {1, 2, 3, 0},
-                {0, 0, 0, 0},
-                {0, 1, 0, 0},
-                {0, 4, 0, 0}
+                {2, 8, 8, 4},
+                {2, 0, 0, 0},
+                {2, 0, 0, 0},
+                {0, 0, 0, 0}
         };
-
-        int[] direction = DIRECTIONS[DOWN];
+        Board instance = new Board(board, 0, UP);
+        instance.executeTilt();
 
         int[][] expected = new int[][] {
-                {0, 0, 0, 0},
-                {0, 2, 0, 0},
-                {0, 1, 0, 0},
-                {1, 4, 3, 0}
-        };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
-    }
-
-    @Test
-    public void executeTilt_2_4() {
-        int[][] board = new int[][] {
-                {0, 2, 0, 0},
-                {0, 0, 0, 0},
-                {0, 0, 0, 0},
-                {1, 4, 3, 0}
-        };
-
-        int[] direction = DIRECTIONS[UP];
-
-        int[][] expected = new int[][] {
-                {1, 2, 3, 0},
-                {0, 4, 0, 0},
+                {4, 8, 8, 4},
+                {2, 0, 0, 0},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0}
         };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
+        assertArrayEquals(expected, instance.board);
     }
 
     @Test
-    public void executeTilt_2_5() {
+    public void executeTilt_priority_2() {
         int[][] board = new int[][] {
-                {0, 2, 0, 0},
-                {0, 0, 0, 0},
-                {0, 0, 0, 0},
-                {1, 4, 3, 0}
+                {2, 8, 8, 4},
+                {2, 0, 0, 0},
+                {2, 0, 0, 0},
+                {0, 0, 0, 0}
         };
-
-        int[] direction = DIRECTIONS[RIGHT];
+        Board instance = new Board(board, 0, DOWN);
+        instance.executeTilt();
 
         int[][] expected = new int[][] {
-                {0, 0, 0, 2},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0},
-                {0, 1, 4, 3}
+                {2, 0, 0, 0},
+                {4, 8, 8, 4}
         };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
+        assertArrayEquals(expected, instance.board);
     }
 
     @Test
-    public void originDoesntChange_afterExecuteTilt() {
+    public void executeTilt_priority_left() {
         int[][] board = new int[][] {
-                {0, 2, 0, 0},
+                {2, 2, 2, 0},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0},
-                {1, 4, 3, 0}
+                {0, 0, 0, 0}
         };
-
-        int[] direction = DIRECTIONS[RIGHT];
+        Board instance = new Board(board, 0, LEFT);
+        instance.executeTilt();
 
         int[][] expected = new int[][] {
-                {0, 2, 0, 0},
+                {4, 2, 0, 0},
                 {0, 0, 0, 0},
                 {0, 0, 0, 0},
-                {1, 4, 3, 0}
+                {0, 0, 0, 0}
         };
-
-        Samsung04.executeTilt(board, direction);
-
-        assertArrayEquals(
-                expected,
-                board
-        );
+        assertArrayEquals(expected, instance.board);
     }
 
     @Test
-    public void executeTilt_5() {
+    public void executeTilt_priority_right() {
         int[][] board = new int[][] {
-                {0, 2, 0},
-                {2, 0, 0},
-                {0, 0, 0}
+                {2, 2, 2, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
         };
-
-        int[] direction = DIRECTIONS[LEFT];
+        Board instance = new Board(board, 0, RIGHT);
+        instance.executeTilt();
 
         int[][] expected = new int[][] {
-                {2, 0, 0},
-                {2, 0, 0},
-                {0, 0, 0}
+                {0, 0, 2, 4},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0},
+                {0, 0, 0, 0}
         };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
+        assertArrayEquals(expected, instance.board);
     }
-
-    @Test
-    public void executeTilt_6() {
-        int[][] board = new int[][] {
-                {0, 2, 0},
-                {2, 0, 0},
-                {0, 0, 0}
-        };
-
-        int[] direction = DIRECTIONS[UP];
-
-        int[][] expected = new int[][] {
-                {2, 2, 0},
-                {0, 0, 0},
-                {0, 0, 0}
-        };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
-    }
-
-    @Test
-    public void executeTilt_7() {
-        int[][] board = new int[][] {
-                {0, 2, 0},
-                {2, 0, 0},
-                {0, 0, 0}
-        };
-
-        int[] direction = DIRECTIONS[DOWN];
-
-        int[][] expected = new int[][] {
-                {0, 0, 0},
-                {0, 0, 0},
-                {2, 2, 0}
-        };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
-    }
-
-    @Test
-    public void executeTilt_8() {
-        int[][] board = new int[][] {
-                {0, 2, 0},
-                {2, 0, 0},
-                {0, 0, 0}
-        };
-
-        int[] direction = DIRECTIONS[RIGHT];
-
-        int[][] expected = new int[][] {
-                {0, 0, 2},
-                {0, 0, 2},
-                {0, 0, 0}
-        };
-
-        assertArrayEquals(
-                expected,
-                Samsung04.executeTilt(board, direction)
-        );
-    }
-
-    @Test
-    public void equals() {
-        String inPath = "src/probs/samsung_day02/01.in";
-
-        Scanner scanner = null;
-        int[][] board = null;
-        try {
-            scanner = new Scanner(new File(inPath));
-            board = getInput(scanner);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        Board boardInstance1 = new Board(board);
-        Board boardInstance2 = new Board(clone2darr(board));
-
-        Set set = new HashSet();
-        set.add(boardInstance1);
-        assertEquals(true, set.contains(boardInstance2));
-
-        set.add(boardInstance2);
-        assertEquals(1, set.size());
-    }
+//
+//    @Test
+//    public void executeTilt() {
+//        int[][] board = new int[][] {
+//                {2, 2, 2},
+//                {4, 4, 4},
+//                {8, 8, 8}
+//        };
+//
+//        int[] direction = DIRECTIONS[UP];
+//
+//        int[][] expected = new int[][] {
+//                {2, 2, 2},
+//                {4, 4, 4},
+//                {8, 8, 8}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_2() {
+//        int[][] board = new int[][] {
+//                {2, 2, 2},
+//                {4, 4, 4},
+//                {8, 8, 8}
+//        };
+//
+//        int[] direction = DIRECTIONS[LEFT];
+//
+//        int[][] expected = new int[][] {
+//                {4, 2, 0},
+//                {8, 4, 0},
+//                {16, 8, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_3() {
+//        int[][] board = new int[][] {
+//                {0, 2, 0},
+//                {2, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[LEFT];
+//
+//        int[][] expected = new int[][] {
+//                {2, 0, 0},
+//                {2, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_4() {
+//        int[][] board = new int[][] {
+//                {0, 2, 0},
+//                {2, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[LEFT];
+//
+//        int[][] expected = new int[][] {
+//                {2, 0, 0},
+//                {2, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_2_1() {
+//        int[][] board = new int[][] {
+//                {1, 2, 3},
+//                {0, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[RIGHT];
+//
+//        int[][] expected = new int[][] {
+//                {1, 2, 3},
+//                {0, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_2_2() {
+//        int[][] board = new int[][] {
+//                {1, 2, 3, 0},
+//                {0, 0, 0, 0},
+//                {0, 0, 0, 0},
+//                {0, 0, 0, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[RIGHT];
+//
+//        int[][] expected = new int[][] {
+//                {0, 1, 2, 3},
+//                {0, 0, 0, 0},
+//                {0, 0, 0, 0},
+//                {0, 0, 0, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_2_3() {
+//        int[][] board = new int[][] {
+//                {1, 2, 3, 0},
+//                {0, 0, 0, 0},
+//                {0, 1, 0, 0},
+//                {0, 4, 0, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[DOWN];
+//
+//        int[][] expected = new int[][] {
+//                {0, 0, 0, 0},
+//                {0, 2, 0, 0},
+//                {0, 1, 0, 0},
+//                {1, 4, 3, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_2_4() {
+//        int[][] board = new int[][] {
+//                {0, 2, 0, 0},
+//                {0, 0, 0, 0},
+//                {0, 0, 0, 0},
+//                {1, 4, 3, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[UP];
+//
+//        int[][] expected = new int[][] {
+//                {1, 2, 3, 0},
+//                {0, 4, 0, 0},
+//                {0, 0, 0, 0},
+//                {0, 0, 0, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_2_5() {
+//        int[][] board = new int[][] {
+//                {0, 2, 0, 0},
+//                {0, 0, 0, 0},
+//                {0, 0, 0, 0},
+//                {1, 4, 3, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[RIGHT];
+//
+//        int[][] expected = new int[][] {
+//                {0, 0, 0, 2},
+//                {0, 0, 0, 0},
+//                {0, 0, 0, 0},
+//                {0, 1, 4, 3}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void originDoesntChange_afterExecuteTilt() {
+//        int[][] board = new int[][] {
+//                {0, 2, 0, 0},
+//                {0, 0, 0, 0},
+//                {0, 0, 0, 0},
+//                {1, 4, 3, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[RIGHT];
+//
+//        int[][] expected = new int[][] {
+//                {0, 2, 0, 0},
+//                {0, 0, 0, 0},
+//                {0, 0, 0, 0},
+//                {1, 4, 3, 0}
+//        };
+//
+//        Samsung04.executeTilt(board, direction);
+//
+//        assertArrayEquals(
+//                expected,
+//                board
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_5() {
+//        int[][] board = new int[][] {
+//                {0, 2, 0},
+//                {2, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[LEFT];
+//
+//        int[][] expected = new int[][] {
+//                {2, 0, 0},
+//                {2, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_6() {
+//        int[][] board = new int[][] {
+//                {0, 2, 0},
+//                {2, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[UP];
+//
+//        int[][] expected = new int[][] {
+//                {2, 2, 0},
+//                {0, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_7() {
+//        int[][] board = new int[][] {
+//                {0, 2, 0},
+//                {2, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[DOWN];
+//
+//        int[][] expected = new int[][] {
+//                {0, 0, 0},
+//                {0, 0, 0},
+//                {2, 2, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
+//
+//    @Test
+//    public void executeTilt_8() {
+//        int[][] board = new int[][] {
+//                {0, 2, 0},
+//                {2, 0, 0},
+//                {0, 0, 0}
+//        };
+//
+//        int[] direction = DIRECTIONS[RIGHT];
+//
+//        int[][] expected = new int[][] {
+//                {0, 0, 2},
+//                {0, 0, 2},
+//                {0, 0, 0}
+//        };
+//
+//        assertArrayEquals(
+//                expected,
+//                Samsung04.executeTilt(board, direction)
+//        );
+//    }
 }

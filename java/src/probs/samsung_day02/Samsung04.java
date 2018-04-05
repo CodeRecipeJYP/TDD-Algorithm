@@ -41,36 +41,42 @@ public class Samsung04 {
     }
 
     public static int getMaximumScoreIn(int[][] board, int trials) {
-        Queue<int[][]> prevBoardStates = new LinkedList<>();
-        int currTrials = 0;
-        prevBoardStates.add(board);
+        Stack<Board> stack = new Stack();
 
-        while (currTrials < trials) {
-            currTrials++;
-
-            Queue<int[][]> nextBoardStates = new LinkedList<>();
-
-            while (!prevBoardStates.isEmpty()) {
-                int[][] currBoard = prevBoardStates.poll();
-
-                for (int[] direction :
-                        DIRECTIONS) {
-                    int[][] resultBoard = executeTilt(currBoard, direction);
-
-                    nextBoardStates.add(resultBoard);
-                }
-            }
-
-            prevBoardStates = nextBoardStates;
-        }
+        stack.push(new Board(board, 0, UP));
 
         List<Integer> scoreBoard = new ArrayList<>();
-        for (int[][] eachBoard:
-            prevBoardStates) {
-            scoreBoard.add(getScore(eachBoard));
+
+        while (!stack.isEmpty()) {
+            Board currBoard = stack.pop();
+            System.out.println(currBoard);
+
+            if (currBoard.isDirectionIncrementable()) {
+                Board copy = currBoard.copy();
+                copy.incrementDirection();
+                stack.push(copy);
+            }
+
+            currBoard.executeTilt();
+
+            if (currBoard.depth != trials) {
+                stack.push(currBoard);
+            } else {
+                scoreBoard.add(getScore(currBoard.board));
+            }
         }
 
         return getMaximum(scoreBoard);
+    }
+
+    private static void printBoard(String message, int[][] board) {
+        System.out.println(message);
+        for (int[] eachRow:
+        board){
+            Arrays.stream(eachRow)
+                    .forEach(it -> System.out.print(it + " "));
+            System.out.println();
+        }
     }
 
     private static int getMaximum(List<Integer> scoreBoard) {
@@ -99,59 +105,6 @@ public class Samsung04 {
         }
 
         return max;
-    }
-
-    public static int[][] executeTilt(int[][] board, int[] direction) {
-        int rowCount = board.length;
-        int colCount = board[0].length;
-
-        int[][] tiltedBoard = clone2darr(board);
-
-        List<int[]> eachLines;
-        boolean isReversedDirection;
-        if (direction[COL] != 0) {
-            eachLines = getEachRows(tiltedBoard);
-            isReversedDirection = (direction[COL] == -1);
-        } else {
-            eachLines = getEachCols(tiltedBoard);
-            isReversedDirection = (direction[ROW] == -1);
-        }
-
-        List<int[]> eachTiltedLines = new ArrayList<>();
-        for (int lineIdx = 0; lineIdx < rowCount; lineIdx++) {
-            int[] eachLine = eachLines.get(lineIdx);
-            List<Integer> tiltedPiece = tiltEachLine(eachLine);
-            int[] tiltedLine = new int[eachLine.length];
-            if (isReversedDirection) {
-                for (int idx = 0; idx < tiltedPiece.size(); idx++) {
-                    tiltedLine[idx] = tiltedPiece.get(idx);
-                }
-            } else {
-                for (int idx = 0; idx < tiltedPiece.size(); idx++) {
-                    tiltedLine[eachLine.length - tiltedPiece.size() + idx] = tiltedPiece.get(idx);
-                }
-            }
-
-            eachTiltedLines.add(tiltedLine);
-        }
-
-        if (direction[COL] != 0) {
-            for (int rowIdx = 0; rowIdx < eachTiltedLines.size(); rowIdx++) {
-                int[] eachRow = eachTiltedLines.get(rowIdx);
-                for (int colIdx = 0; colIdx < eachRow.length; colIdx++) {
-                    tiltedBoard[rowIdx][colIdx] = eachRow[colIdx];
-                }
-            }
-        } else {
-            for (int colIdx = 0; colIdx < eachTiltedLines.size(); colIdx++) {
-                int[] eachCol = eachTiltedLines.get(colIdx);
-                for (int rowIdx = 0; rowIdx < eachCol.length; rowIdx++) {
-                    tiltedBoard[rowIdx][colIdx] = eachCol[rowIdx];
-                }
-            }
-        }
-
-        return tiltedBoard;
     }
 
     public static List<Integer> tiltEachLine(int[] line) {
@@ -229,22 +182,145 @@ public class Samsung04 {
 
     static class Board {
         public int[][] board;
+        public int depth;
+        public int directionIdx;
+        public List<Integer> prevDirections = new ArrayList<>();
 
-        public Board(int[][] board) {
+        public Board(int[][] board, int depth, int direction) {
             this.board = board;
+            this.depth = depth;
+            this.directionIdx = direction;
+        }
+
+        public void incrementDepth(int[][] tilted) {
+            board = tilted;
+            depth += 1;
+            prevDirections.add(directionIdx);
+            directionIdx = UP;
+        }
+
+        public boolean incrementDirection() {
+            if (directionIdx == RIGHT) {
+                return false;
+            } else {
+                directionIdx += 1;
+                return true;
+            }
+        }
+
+        public boolean isDirectionIncrementable() {
+            return !(directionIdx == RIGHT);
+        }
+
+        public Board copy() {
+            Board copy = new Board(board, depth, directionIdx);
+            copy.prevDirections = new ArrayList(prevDirections);
+            return copy;
+        }
+
+        public void executeTilt() {
+            int[] direction = DIRECTIONS[directionIdx];
+
+            int rowCount = board.length;
+            int colCount = board[0].length;
+
+            int[][] tiltedBoard = clone2darr(board);
+
+            List<int[]> eachLines;
+            boolean isReversedDirection;
+            if (direction[COL] != 0) {
+                eachLines = getEachRows(tiltedBoard);
+                isReversedDirection = (direction[COL] == -1);
+            } else {
+                eachLines = getEachCols(tiltedBoard);
+                isReversedDirection = (direction[ROW] == -1);
+            }
+
+            List<int[]> eachTiltedLines = new ArrayList<>();
+            for (int lineIdx = 0; lineIdx < rowCount; lineIdx++) {
+                int[] eachLine = eachLines.get(lineIdx);
+                List<Integer> tiltedPiece = tiltEachLine(eachLine);
+                int[] tiltedLine = new int[eachLine.length];
+                if (isReversedDirection) {
+                    for (int idx = 0; idx < tiltedPiece.size(); idx++) {
+                        tiltedLine[idx] = tiltedPiece.get(idx);
+                    }
+                } else {
+                    for (int idx = 0; idx < tiltedPiece.size(); idx++) {
+                        tiltedLine[eachLine.length - tiltedPiece.size() + idx] = tiltedPiece.get(idx);
+                    }
+                }
+
+                eachTiltedLines.add(tiltedLine);
+            }
+
+            if (direction[COL] != 0) {
+                for (int rowIdx = 0; rowIdx < eachTiltedLines.size(); rowIdx++) {
+                    int[] eachRow = eachTiltedLines.get(rowIdx);
+                    for (int colIdx = 0; colIdx < eachRow.length; colIdx++) {
+                        tiltedBoard[rowIdx][colIdx] = eachRow[colIdx];
+                    }
+                }
+            } else {
+                for (int colIdx = 0; colIdx < eachTiltedLines.size(); colIdx++) {
+                    int[] eachCol = eachTiltedLines.get(colIdx);
+                    for (int rowIdx = 0; rowIdx < eachCol.length; rowIdx++) {
+                        tiltedBoard[rowIdx][colIdx] = eachCol[rowIdx];
+                    }
+                }
+            }
+
+            incrementDepth(tiltedBoard);
         }
 
         @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof Board)) return false;
-            Board board = (Board) o;
-            return hashCode() == board.hashCode();
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+
+            sb.append("Board{");
+            sb.append("board= ");
+            sb.append(toString2darr(board));
+            sb.append(", depth=" + depth);
+
+            for (int direction:
+            prevDirections) {
+                switch (direction) {
+                    case UP:
+                        sb.append("UP");
+                        break;
+                    case DOWN:
+                        sb.append("DOWN");
+                        break;
+                    case RIGHT:
+                        sb.append("RIGHT");
+                        break;
+                    case LEFT:
+                        sb.append("LEFT");
+                        break;
+                }
+                sb.append(" ");
+            }
+
+            sb.append('}');
+
+            return sb.toString();
         }
 
-        @Override
-        public int hashCode() {
-            return java.util.Arrays.deepHashCode(board);
+        private String toString2darr(int[][] board) {
+            StringBuilder sb = new StringBuilder();
+            sb.append("\n");
+
+            for (int[] eachRow:
+            board){
+                for (int each:
+                eachRow) {
+                    sb.append(String.format("%4d ", each));
+                }
+
+                sb.append("\n");
+            }
+
+            return sb.toString();
         }
     }
 }
