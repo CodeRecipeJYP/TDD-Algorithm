@@ -49,7 +49,6 @@ public class Samsung04 {
 
         while (!stack.isEmpty()) {
             Board currBoard = stack.pop();
-            System.out.println(currBoard);
 
             if (currBoard.isDirectionIncrementable()) {
                 Board copy = currBoard.copy();
@@ -107,12 +106,16 @@ public class Samsung04 {
         return max;
     }
 
-    public static List<Integer> tiltEachLine(int[] line) {
+    public static List<Integer> tiltEachLine(int[] line, boolean reversed) {
         List<Integer> tilted = new ArrayList<>();
         int len = line.length;
         int prev = EMPTY;
 
-        for (int idx = 0; idx < len; idx++) {
+        if (!reversed) {
+            line = reverseArray(line);
+        }
+
+        for (int idx = 0; idx < len; idx ++) {
             int each = line[idx];
             if (each == EMPTY) {
                 continue;
@@ -133,7 +136,28 @@ public class Samsung04 {
             tilted.add(prev);
         }
 
+        if (!reversed) {
+            tilted = reverseList(tilted);
+        }
+
         return tilted;
+    }
+
+    private static List<Integer> reverseList(List<Integer> list) {
+        List<Integer> reversed = new ArrayList<>();
+        for (int idx = list.size() - 1; idx >= 0; idx--) {
+            reversed.add(list.get(idx));
+        }
+
+        return reversed;
+    }
+
+    private static int[] reverseArray(int[] arr) {
+        int[] reversed = new int[arr.length];
+        for (int idx = 0; idx < arr.length; idx++) {
+            reversed[arr.length - 1 - idx] = arr[idx];
+        }
+        return reversed;
     }
 
     public static List<int[]> getEachCols(int[][] board) {
@@ -239,7 +263,7 @@ public class Samsung04 {
             List<int[]> eachTiltedLines = new ArrayList<>();
             for (int lineIdx = 0; lineIdx < rowCount; lineIdx++) {
                 int[] eachLine = eachLines.get(lineIdx);
-                List<Integer> tiltedPiece = tiltEachLine(eachLine);
+                List<Integer> tiltedPiece = tiltEachLine(eachLine, isReversedDirection);
                 int[] tiltedLine = new int[eachLine.length];
                 if (isReversedDirection) {
                     for (int idx = 0; idx < tiltedPiece.size(); idx++) {
