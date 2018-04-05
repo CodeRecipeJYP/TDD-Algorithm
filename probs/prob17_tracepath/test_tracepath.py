@@ -2,7 +2,7 @@ import io
 import unittest
 from unittest.mock import patch
 
-from probs.prob17_.tracepath import main
+from probs.prob17_tracepath.tracepath import main
 
 
 class End2EndTestCase(unittest.TestCase):

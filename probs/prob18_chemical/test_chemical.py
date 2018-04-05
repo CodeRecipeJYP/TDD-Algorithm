@@ -2,7 +2,7 @@ import io
 import unittest
 from unittest.mock import patch
 
-from probs.prob18_.chemical import main
+from probs.prob18_chemical.chemical import main
 
 
 class End2EndTestCase(unittest.TestCase):
