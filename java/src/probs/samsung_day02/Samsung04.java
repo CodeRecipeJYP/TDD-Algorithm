@@ -1,7 +1,5 @@
 package probs.samsung_day02;
 
-import javafx.util.Pair;
-
 import java.util.*;
 
 public class Samsung04 {
@@ -43,33 +41,33 @@ public class Samsung04 {
     }
 
     public static int getMaximumScoreIn(int[][] board, int trials) {
-        Set<int[][]> prevMaps = new HashSet<>();
-        prevMaps.add(board);
+        Queue<int[][]> prevBoardStates = new LinkedList<>();
+        int currTrials = 0;
+        prevBoardStates.add(board);
 
-        Queue<Pair<int[][], Integer>> queue = new LinkedList<>();
-        queue.add(new Pair<int[][], Integer>(board, 0));
+        while (currTrials < trials) {
+            currTrials++;
 
-        List<Integer> scoreBoard = new ArrayList<>();
+            Queue<int[][]> nextBoardStates = new LinkedList<>();
 
-        while (!queue.isEmpty()) {
-            Pair<int[][], Integer> poll = queue.poll();
+            while (!prevBoardStates.isEmpty()) {
+                int[][] currBoard = prevBoardStates.poll();
 
-            int[][] currBoard = poll.getKey();
-            int currTrials = poll.getValue();
+                for (int[] direction :
+                        DIRECTIONS) {
+                    int[][] resultBoard = executeTilt(currBoard, direction);
 
-            for (int[] direction :
-                    DIRECTIONS) {
-                int[][] resultBoard = executeTilt(currBoard, direction);
-
-                if (!prevMaps.contains(resultBoard)) {
-                    prevMaps.add(resultBoard);
-                    if (currTrials + 1 == trials) {
-                        scoreBoard.add(getScore(resultBoard));
-                    } else {
-                        queue.add(new Pair(resultBoard, currTrials + 1));
-                    }
+                    nextBoardStates.add(resultBoard);
                 }
             }
+
+            prevBoardStates = nextBoardStates;
+        }
+
+        List<Integer> scoreBoard = new ArrayList<>();
+        for (int[][] eachBoard:
+            prevBoardStates) {
+            scoreBoard.add(getScore(eachBoard));
         }
 
         return getMaximum(scoreBoard);
@@ -214,7 +212,7 @@ public class Samsung04 {
         return result;
     }
 
-    private static int[][] clone2darr(int[][] board) {
+    public static int[][] clone2darr(int[][] board) {
         int rowCount = board.length;
         int colCount = board[0].length;
 
@@ -227,5 +225,26 @@ public class Samsung04 {
         }
 
         return clone;
+    }
+
+    static class Board {
+        public int[][] board;
+
+        public Board(int[][] board) {
+            this.board = board;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Board)) return false;
+            Board board = (Board) o;
+            return hashCode() == board.hashCode();
+        }
+
+        @Override
+        public int hashCode() {
+            return java.util.Arrays.deepHashCode(board);
+        }
     }
 }

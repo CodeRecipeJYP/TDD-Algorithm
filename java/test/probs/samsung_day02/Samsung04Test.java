@@ -3,10 +3,11 @@ package probs.samsung_day02;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 import static probs.samsung_day02.Samsung04.*;
@@ -549,5 +550,29 @@ public class Samsung04Test {
                 expected,
                 Samsung04.executeTilt(board, direction)
         );
+    }
+
+    @Test
+    public void equals() {
+        String inPath = "src/probs/samsung_day02/01.in";
+
+        Scanner scanner = null;
+        int[][] board = null;
+        try {
+            scanner = new Scanner(new File(inPath));
+            board = getInput(scanner);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        Board boardInstance1 = new Board(board);
+        Board boardInstance2 = new Board(clone2darr(board));
+
+        Set set = new HashSet();
+        set.add(boardInstance1);
+        assertEquals(true, set.contains(boardInstance2));
+
+        set.add(boardInstance2);
+        assertEquals(1, set.size());
     }
 }
