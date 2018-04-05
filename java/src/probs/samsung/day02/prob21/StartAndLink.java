@@ -1,8 +1,8 @@
-package probs.samsung_day02;
+package probs.samsung.day02.prob21;
 
 import java.util.*;
 
-public class Samsung03 {
+public class StartAndLink {
     private static final int INF = Integer.MAX_VALUE;
 
     public static void main(String[] args) {

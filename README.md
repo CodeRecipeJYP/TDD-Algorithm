@@ -42,3 +42,21 @@ https://www.acmicpc.net/problem/3665
 
 14. Shortest path<br/>
 https://www.acmicpc.net/problem/1753
+
+15. Regex 2017년 하반기 1, 2차 모의 코딩 테스트(Goorm edu)<br/>
+https://edu.goorm.io/<br/>
+16. RegionCross(Goorm)
+17. Tracepath(Goorm)
+18. Chemical materials(Goorm)
+
+19. Zzaero escape 2<br/>
+https://www.acmicpc.net/problem/13460
+
+20. Runway<br/>
+https://www.acmicpc.net/problem/14890
+
+21. Start And Link<br/>
+https://www.acmicpc.net/problem/14889
+
+22. 2048(Easy) <br/>
+https://www.acmicpc.net/problem/12100

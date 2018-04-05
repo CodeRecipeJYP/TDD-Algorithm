@@ -1,4 +1,4 @@
-package probs.samsung_day01;
+package probs.samsung.day01.prob19;
 
 import org.junit.Test;
 
@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static probs.samsung_day01.Samsung01.*;
+import static probs.samsung.day01.prob19.Zzaero.*;
 
-public class Samsung01Test {
+public class ZzaeroTest {
 
     private char[][] stringArray2Char2dArray(List<String> strArray) {
         int rowCount = strArray.size();
@@ -26,19 +26,19 @@ public class Samsung01Test {
 
     @Test
     public void getMinimumNumOfTrials() {
-        List<String> givenRawmap = new ArrayList<>();
-        givenRawmap.add("#####");
-        givenRawmap.add("#..B#");
-        givenRawmap.add("#.#.#");
-        givenRawmap.add("#RO.#");
-        givenRawmap.add("#####");
-
-        char[][] givenMap = stringArray2Char2dArray(givenRawmap);
-
-        int minimumNumOfTrials
-                = Samsung01.getMinimumNumOfTrials(givenMap);
-
-        assertEquals(1, minimumNumOfTrials);
+//        List<String> givenRawmap = new ArrayList<>();
+//        givenRawmap.add("#####");
+//        givenRawmap.add("#..B#");
+//        givenRawmap.add("#.#.#");
+//        givenRawmap.add("#RO.#");
+//        givenRawmap.add("#####");
+//
+//        char[][] givenMap = stringArray2Char2dArray(givenRawmap);
+//
+//        int minimumNumOfTrials
+//                = Zzaero.getMinimumNumOfTrials(givenMap);
+//
+//        assertEquals(1, minimumNumOfTrials);
     }
 
     @Test
@@ -53,14 +53,14 @@ public class Samsung01Test {
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
         int[] direction = DIRECTIONS[UP];
 
-        Samsung01.TwoValue<Integer, Integer> anotherBallLocation
-                = new Samsung01.TwoValue<>(1, 3);
+        Zzaero.TwoValue<Integer, Integer> anotherBallLocation
+                = new Zzaero.TwoValue<>(1, 3);
 
-        Samsung01.TwoValue<Integer, Integer> ballLocation
-                = new Samsung01.TwoValue<>(3, 1);
+        Zzaero.TwoValue<Integer, Integer> ballLocation
+                = new Zzaero.TwoValue<>(3, 1);
 
-        Samsung01.TwoValue<Integer, Integer> tilted
-                = Samsung01.executeTilt(givenMap, ballLocation, anotherBallLocation, direction);
+        Zzaero.TwoValue<Integer, Integer> tilted
+                = Zzaero.executeTilt(givenMap, ballLocation, anotherBallLocation, direction);
 
         int tiltedX = tilted.val1;
         int tiltedY = tilted.val2;
@@ -80,14 +80,14 @@ public class Samsung01Test {
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
         int[] direction = DIRECTIONS[RIGHT];
 
-        Samsung01.TwoValue<Integer, Integer> anotherBallLocation
-                = new Samsung01.TwoValue<>(1, 3);
+        Zzaero.TwoValue<Integer, Integer> anotherBallLocation
+                = new Zzaero.TwoValue<>(1, 3);
 
-        Samsung01.TwoValue<Integer, Integer> ballLocation
-                = new Samsung01.TwoValue<>(3, 1);
+        Zzaero.TwoValue<Integer, Integer> ballLocation
+                = new Zzaero.TwoValue<>(3, 1);
 
-        Samsung01.TwoValue<Integer, Integer> tilted
-                = Samsung01.executeTilt(givenMap, ballLocation, anotherBallLocation, direction);
+        Zzaero.TwoValue<Integer, Integer> tilted
+                = Zzaero.executeTilt(givenMap, ballLocation, anotherBallLocation, direction);
 
         int tiltedX = tilted.val1;
         int tiltedY = tilted.val2;

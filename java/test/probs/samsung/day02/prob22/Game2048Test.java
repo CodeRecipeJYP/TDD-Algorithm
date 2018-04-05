@@ -1,18 +1,16 @@
-package probs.samsung_day02;
+package probs.samsung.day02.prob22;
 
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 import static org.junit.Assert.*;
-import static probs.samsung_day02.Samsung04.*;
+import static probs.samsung.day02.prob22.Game2048.*;
 
-public class Samsung04Test {
+public class Game2048Test {
 
     @Test
     public void getMaximumScoreIn() {
@@ -23,7 +21,7 @@ public class Samsung04Test {
         };
 
         assertEquals(16,
-                Samsung04.getMaximumScoreIn(board, 1));
+                Game2048.getMaximumScoreIn(board, 1));
     }
 
     @Test
@@ -35,10 +33,10 @@ public class Samsung04Test {
         };
 
         assertEquals(2,
-                Samsung04.getMaximumScoreIn(board, 1));
+                Game2048.getMaximumScoreIn(board, 1));
 
         assertEquals(4,
-                Samsung04.getMaximumScoreIn(board, 2));
+                Game2048.getMaximumScoreIn(board, 2));
     }
 
     @Test
@@ -51,13 +49,13 @@ public class Samsung04Test {
         };
 
         assertEquals(8,
-                Samsung04.getMaximumScoreIn(board, 1));
+                Game2048.getMaximumScoreIn(board, 1));
 
         assertEquals(16,
-                Samsung04.getMaximumScoreIn(board, 2));
+                Game2048.getMaximumScoreIn(board, 2));
 
         assertEquals(16,
-                Samsung04.getMaximumScoreIn(board, 5));
+                Game2048.getMaximumScoreIn(board, 5));
     }
 
     @Test
@@ -70,13 +68,13 @@ public class Samsung04Test {
         };
 
 //        assertEquals(8,
-//                Samsung04.getMaximumScoreIn(board, 1));
+//                Game2048.getMaximumScoreIn(board, 1));
 
 //        assertEquals(16,
-//                Samsung04.getMaximumScoreIn(board, 2));
+//                Game2048.getMaximumScoreIn(board, 2));
 
         assertEquals(16,
-                Samsung04.getMaximumScoreIn(board, 5));
+                Game2048.getMaximumScoreIn(board, 5));
     }
 
     @Test
@@ -90,7 +88,7 @@ public class Samsung04Test {
         };
 
         assertEquals(128,
-                Samsung04.getMaximumScoreIn(board, 5));
+                Game2048.getMaximumScoreIn(board, 5));
     }
 
     @Test
@@ -104,13 +102,14 @@ public class Samsung04Test {
         };
 
         assertEquals(1,
-                Samsung04.getMaximumScoreIn(board, 5));
+                Game2048.getMaximumScoreIn(board, 5));
     }
 
     @Test
     public void getMaximumScoreIn_3_1() {
-        String inPath = "src/probs/samsung_day02/01.in";
-        String outPath = "src/probs/samsung_day02/01.out";
+        String pathPrefix = "test/probs/samsung/day02/prob22/01";
+        String inPath = pathPrefix + ".in";
+        String outPath = pathPrefix + ".out";
 
         int expected = 0;
         Scanner scanner = null;
@@ -126,12 +125,12 @@ public class Samsung04Test {
 
 
         assertEquals(expected,
-                Samsung04.getMaximumScoreIn(board, 5));
+                Game2048.getMaximumScoreIn(board, 5));
     }
 
     @Test
     public void getMaximumScoreIn_3_2() {
-        String pathPrefix = "src/probs/samsung_day02/01_case02";
+        String pathPrefix = "test/probs/samsung/day02/prob22/01_case02";
         String inPath = pathPrefix + ".in";
         String outPath = pathPrefix + ".out";
 
@@ -149,12 +148,12 @@ public class Samsung04Test {
 
 
         assertEquals(expected,
-                Samsung04.getMaximumScoreIn(board, 5));
+                Game2048.getMaximumScoreIn(board, 5));
     }
 
     @Test
     public void getMaximumScoreIn_3_3() {
-        String pathPrefix = "src/probs/samsung_day02/01_case03";
+        String pathPrefix = "test/probs/samsung/day02/prob22/01_case03";
         String inPath = pathPrefix + ".in";
         String outPath = pathPrefix + ".out";
 
@@ -172,7 +171,7 @@ public class Samsung04Test {
 
 
         assertEquals(expected,
-                Samsung04.getMaximumScoreIn(board, 5));
+                Game2048.getMaximumScoreIn(board, 5));
     }
 
     @Test
@@ -194,7 +193,7 @@ public class Samsung04Test {
         }
 
         assertEquals(16,
-                Samsung04.getMaximumScoreIn(board, 5));
+                Game2048.getMaximumScoreIn(board, 5));
     }
 
     @Test
@@ -224,7 +223,7 @@ public class Samsung04Test {
         }
 
         assertEquals(128,
-                Samsung04.getMaximumScoreIn(board, 5));
+                Game2048.getMaximumScoreIn(board, 5));
     }
 
 
@@ -371,7 +370,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -393,7 +392,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -415,7 +414,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -437,7 +436,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -459,7 +458,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -483,7 +482,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -507,7 +506,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -531,7 +530,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -555,7 +554,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -577,7 +576,7 @@ public class Samsung04Test {
 //                {1, 4, 3, 0}
 //        };
 //
-//        Samsung04.executeTilt(board, direction);
+//        Game2048.executeTilt(board, direction);
 //
 //        assertArrayEquals(
 //                expected,
@@ -603,7 +602,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -625,7 +624,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -647,7 +646,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 //
@@ -669,7 +668,7 @@ public class Samsung04Test {
 //
 //        assertArrayEquals(
 //                expected,
-//                Samsung04.executeTilt(board, direction)
+//                Game2048.executeTilt(board, direction)
 //        );
 //    }
 }

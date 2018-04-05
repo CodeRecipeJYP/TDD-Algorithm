@@ -1,4 +1,4 @@
-package probs.samsung_day02;
+package probs;
 
 import java.util.Random;
 

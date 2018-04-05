@@ -1,8 +1,8 @@
-package probs.samsung_day01;
+package probs.samsung.day01.prob19;
 
 import java.util.*;
 
-public class Samsung01 {
+public class Zzaero {
     public static final int X = 1;
     public static final int Y = 0;
     public static final int[][] DIRECTIONS = new int[][]{

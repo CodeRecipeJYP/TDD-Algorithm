@@ -1,8 +1,8 @@
-package probs.samsung_day02;
+package probs.samsung.day02.prob22;
 
 import java.util.*;
 
-public class Samsung04 {
+public class Game2048 {
     public static final int[][] DIRECTIONS = new int[][]{
             {-1, 0},
             {1, 0},

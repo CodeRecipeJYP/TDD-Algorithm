@@ -1,11 +1,11 @@
-package probs.samsung_day01;
+package probs.samsung.day01.prob20;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Samsung02 {
+public class Runway {
     private static char CANNOT_INSTALL_RUNWAY = 'A';
 
     public static void main(String[] args) {

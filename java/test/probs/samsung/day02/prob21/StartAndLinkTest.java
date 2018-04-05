@@ -1,4 +1,4 @@
-package probs.samsung_day02;
+package probs.samsung.day02.prob21;
 
 import org.junit.Test;
 
@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class Samsung03Test {
+public class StartAndLinkTest {
 
     @Test
     public void getMinimumAbilityDiff() {
@@ -22,12 +22,12 @@ public class Samsung03Test {
         };
 
         assertEquals(1,
-                Samsung03.getMinimumAbilityDiff(table));
+                StartAndLink.getMinimumAbilityDiff(table));
     }
 
     @Test
     public void getEveryCombination() {
-        List<List<Integer>> actual = Samsung03.getEveryCombination(4);
+        List<List<Integer>> actual = StartAndLink.getEveryCombination(4);
 
         List<List<Integer>> expected = List.of(
                 List.of(0, 1),
@@ -40,7 +40,7 @@ public class Samsung03Test {
 
     @Test
     public void getEveryCombination_2() {
-        List<List<Integer>> actual = Samsung03.getEveryCombination(6);
+        List<List<Integer>> actual = StartAndLink.getEveryCombination(6);
 
         List<List<Integer>> expected = List.of(
                 List.of(0, 1, 2),
@@ -60,7 +60,7 @@ public class Samsung03Test {
 
     @Test
     public void getEveryCombination_3() {
-        List<List<Integer>> actual = Samsung03.getEveryCombination(8);
+        List<List<Integer>> actual = StartAndLink.getEveryCombination(8);
 
         List<List<Integer>> expected = List.of(
                 List.of(0, 1, 2, 3),
@@ -109,7 +109,7 @@ public class Samsung03Test {
 
     @Test
     public void getEnemyTeam() {
-        List<Integer> enemyTeam = Samsung03.getEnemyTeam(List.of(0, 1, 3, 4));
+        List<Integer> enemyTeam = StartAndLink.getEnemyTeam(List.of(0, 1, 3, 4));
 
         assertEquals(enemyTeam, List.of(2, 5, 6, 7));
     }

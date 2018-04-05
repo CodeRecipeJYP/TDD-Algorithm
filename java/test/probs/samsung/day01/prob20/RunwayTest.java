@@ -1,4 +1,4 @@
-package probs.samsung_day01;
+package probs.samsung.day01.prob20;
 
 import org.junit.Test;
 
@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class Samsung02Test {
+public class RunwayTest {
     private char[][] stringArray2Char2dArray(List<String> strArray) {
         int rowCount = strArray.size();
         int colCount = strArray.get(0).length();
@@ -35,7 +35,7 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(3, Samsung02.getPassableWayCount(givenMap, 2));
+        assertEquals(3, Runway.getPassableWayCount(givenMap, 2));
 
     }
 
@@ -52,7 +52,7 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(7, Samsung02.getPassableWayCount(givenMap, 2));
+        assertEquals(7, Runway.getPassableWayCount(givenMap, 2));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(3, Samsung02.getPassableWayCount(givenMap, 3));
+        assertEquals(3, Runway.getPassableWayCount(givenMap, 3));
     }
 
     @Test
@@ -84,7 +84,7 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(11, Samsung02.getPassableWayCount(givenMap, 1));
+        assertEquals(11, Runway.getPassableWayCount(givenMap, 1));
     }
 
     @Test
@@ -99,12 +99,12 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(true, Samsung02.isPassable(givenMap[0], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[1], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[2], 2));
-        assertEquals(true, Samsung02.isPassable(givenMap[3], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[4], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[5], 2));
+        assertEquals(true, Runway.isPassable(givenMap[0], 2));
+        assertEquals(false, Runway.isPassable(givenMap[1], 2));
+        assertEquals(false, Runway.isPassable(givenMap[2], 2));
+        assertEquals(true, Runway.isPassable(givenMap[3], 2));
+        assertEquals(false, Runway.isPassable(givenMap[4], 2));
+        assertEquals(false, Runway.isPassable(givenMap[5], 2));
     }
 
     @Test
@@ -119,12 +119,12 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(true, Samsung02.isPassable(givenMap[0], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[1], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[2], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[3], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[4], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[5], 2));
+        assertEquals(true, Runway.isPassable(givenMap[0], 2));
+        assertEquals(false, Runway.isPassable(givenMap[1], 2));
+        assertEquals(false, Runway.isPassable(givenMap[2], 2));
+        assertEquals(false, Runway.isPassable(givenMap[3], 2));
+        assertEquals(false, Runway.isPassable(givenMap[4], 2));
+        assertEquals(false, Runway.isPassable(givenMap[5], 2));
     }
 
     @Test
@@ -139,12 +139,12 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(true, Samsung02.isPassable(givenMap[0], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[1], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[2], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[3], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[4], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[5], 2));
+        assertEquals(true, Runway.isPassable(givenMap[0], 2));
+        assertEquals(false, Runway.isPassable(givenMap[1], 2));
+        assertEquals(false, Runway.isPassable(givenMap[2], 2));
+        assertEquals(false, Runway.isPassable(givenMap[3], 2));
+        assertEquals(false, Runway.isPassable(givenMap[4], 2));
+        assertEquals(false, Runway.isPassable(givenMap[5], 2));
     }
 
 
@@ -160,12 +160,12 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(false, Samsung02.isPassable(givenMap[0], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[1], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[2], 2));
-        assertEquals(true, Samsung02.isPassable(givenMap[3], 2));
-        assertEquals(true, Samsung02.isPassable(givenMap[4], 2));
-        assertEquals(true, Samsung02.isPassable(givenMap[5], 2));
+        assertEquals(false, Runway.isPassable(givenMap[0], 2));
+        assertEquals(false, Runway.isPassable(givenMap[1], 2));
+        assertEquals(false, Runway.isPassable(givenMap[2], 2));
+        assertEquals(true, Runway.isPassable(givenMap[3], 2));
+        assertEquals(true, Runway.isPassable(givenMap[4], 2));
+        assertEquals(true, Runway.isPassable(givenMap[5], 2));
     }
 
     @Test
@@ -180,12 +180,12 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(true, Samsung02.isPassable(givenMap[0], 2));
-        assertEquals(true, Samsung02.isPassable(givenMap[1], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[2], 2));
-        assertEquals(false, Samsung02.isPassable(givenMap[3], 2));
-        assertEquals(true, Samsung02.isPassable(givenMap[4], 2));
-        assertEquals(true, Samsung02.isPassable(givenMap[5], 2));
+        assertEquals(true, Runway.isPassable(givenMap[0], 2));
+        assertEquals(true, Runway.isPassable(givenMap[1], 2));
+        assertEquals(false, Runway.isPassable(givenMap[2], 2));
+        assertEquals(false, Runway.isPassable(givenMap[3], 2));
+        assertEquals(true, Runway.isPassable(givenMap[4], 2));
+        assertEquals(true, Runway.isPassable(givenMap[5], 2));
     }
 
     @Test
@@ -201,12 +201,12 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(true, Samsung02.isPassable(givenMap[0], 1));
-        assertEquals(false, Samsung02.isPassable(givenMap[1], 1));
-        assertEquals(true, Samsung02.isPassable(givenMap[2], 1));
-        assertEquals(true, Samsung02.isPassable(givenMap[3], 1));
-        assertEquals(true, Samsung02.isPassable(givenMap[4], 1));
-        assertEquals(true, Samsung02.isPassable(givenMap[5], 1));
+        assertEquals(true, Runway.isPassable(givenMap[0], 1));
+        assertEquals(false, Runway.isPassable(givenMap[1], 1));
+        assertEquals(true, Runway.isPassable(givenMap[2], 1));
+        assertEquals(true, Runway.isPassable(givenMap[3], 1));
+        assertEquals(true, Runway.isPassable(givenMap[4], 1));
+        assertEquals(true, Runway.isPassable(givenMap[5], 1));
     }
 
     @Test
@@ -222,12 +222,12 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        assertEquals(true, Samsung02.isPassable(givenMap[0], 1));
-        assertEquals(true, Samsung02.isPassable(givenMap[1], 1));
-        assertEquals(true, Samsung02.isPassable(givenMap[2], 1));
-        assertEquals(true, Samsung02.isPassable(givenMap[3], 1));
-        assertEquals(true, Samsung02.isPassable(givenMap[4], 1));
-        assertEquals(true, Samsung02.isPassable(givenMap[5], 1));
+        assertEquals(true, Runway.isPassable(givenMap[0], 1));
+        assertEquals(true, Runway.isPassable(givenMap[1], 1));
+        assertEquals(true, Runway.isPassable(givenMap[2], 1));
+        assertEquals(true, Runway.isPassable(givenMap[3], 1));
+        assertEquals(true, Runway.isPassable(givenMap[4], 1));
+        assertEquals(true, Runway.isPassable(givenMap[5], 1));
     }
 
     @Test
@@ -243,7 +243,7 @@ public class Samsung02Test {
 
         char[][] givenMap = stringArray2Char2dArray(givenRawmap);
 
-        List<char[]> everyCandidates = Samsung02.getEveryCandidates(givenMap);
+        List<char[]> everyCandidates = Runway.getEveryCandidates(givenMap);
         everyCandidates = null;
     }
 }
