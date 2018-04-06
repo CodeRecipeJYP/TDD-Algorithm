@@ -16,7 +16,7 @@ public class Zzaero2Test {
 
     @Test
     public void getMinimumTrials() throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day03/prob19/case01";
+        String prefix = "test/probs/samsung/day03/prob19/case01.in";
         String path = prefix + ".in";
         char[][] input = Zzaero2.getInput(new Scanner(new File(path)));
 
