@@ -207,7 +207,7 @@ public class Zzaero2 {
         return copy;
     }
 
-    public static char[][] getInput(Scanner scanner) {
+    static char[][] getInput(Scanner scanner) {
         int rowCount = scanner.nextInt();
         int colCount = scanner.nextInt();
 
