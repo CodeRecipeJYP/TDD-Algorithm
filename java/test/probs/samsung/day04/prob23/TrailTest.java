@@ -51,6 +51,25 @@ public class TrailTest {
                         caze.input.kSize));
     }
 
+    @Test
+    public void getLongestTrail_case05() throws FileNotFoundException {
+        Case caze = getCase("case05");
+
+        assertEquals(caze.output,
+                Trail.getLongestTrail(caze.input.map,
+                        caze.input.kSize));
+    }
+
+    @Test
+    public void getLongestTrail_case06() throws FileNotFoundException {
+        Case caze = getCase("case06");
+
+        assertEquals(caze.output,
+                Trail.getLongestTrail(caze.input.map,
+                        caze.input.kSize));
+    }
+
+
     private Case getCase(String filename) throws FileNotFoundException {
         String prefix = "test/probs/samsung/day04/prob23/" + filename;
         String inputPath = prefix + ".in";
