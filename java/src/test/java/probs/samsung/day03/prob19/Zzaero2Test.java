@@ -8,15 +8,17 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import static org.junit.Assert.*;
+import static probs.RunAllSuite.TEST_PROJECT_ROOT;
 import static probs.samsung.day03.prob19.Zzaero2.DIRECTIONS;
 import static probs.samsung.day03.prob19.Zzaero2.LEFT;
 import static probs.samsung.day03.prob19.Zzaero2.getCleanMap;
 
 public class Zzaero2Test {
+    private static final String CLASS_ROOT = TEST_PROJECT_ROOT + "/samsung/day03/prob19";
 
     @Test
     public void getMinimumTrials() throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day03/prob19/case01.in";
+        String prefix = CLASS_ROOT+ "/case01";
         String path = prefix + ".in";
         char[][] input = Zzaero2.getInput(new Scanner(new File(path)));
 
@@ -25,7 +27,7 @@ public class Zzaero2Test {
 
     @Test
     public void getMinimumTrials_2() throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day03/prob19/case02";
+        String prefix = CLASS_ROOT+ "/case02";
         String path = prefix + ".in";
         char[][] input = Zzaero2.getInput(new Scanner(new File(path)));
 
@@ -34,7 +36,7 @@ public class Zzaero2Test {
 
     @Test
     public void getMinimumTrials_3() throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day03/prob19/case03";
+        String prefix = CLASS_ROOT+ "/case03";
         String path = prefix + ".in";
         char[][] input = Zzaero2.getInput(new Scanner(new File(path)));
 
@@ -43,7 +45,7 @@ public class Zzaero2Test {
 
     @Test
     public void getMinimumTrials_4() throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day03/prob19/case04";
+        String prefix = CLASS_ROOT+ "/case04";
         String path = prefix + ".in";
         char[][] input = Zzaero2.getInput(new Scanner(new File(path)));
 
@@ -52,7 +54,7 @@ public class Zzaero2Test {
 
     @Test
     public void getMinimumTrials_5() throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day03/prob19/case05";
+        String prefix = CLASS_ROOT+ "/case05";
         String path = prefix + ".in";
         char[][] input = Zzaero2.getInput(new Scanner(new File(path)));
 
@@ -61,7 +63,7 @@ public class Zzaero2Test {
 
     @Test
     public void getMinimumTrials_6() throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day03/prob19/case06";
+        String prefix = CLASS_ROOT+ "/case06";
         String path = prefix + ".in";
         char[][] input = Zzaero2.getInput(new Scanner(new File(path)));
 
@@ -70,7 +72,7 @@ public class Zzaero2Test {
 
     @Test
     public void getMinimumTrials_7() throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day03/prob19/case07";
+        String prefix = CLASS_ROOT+ "/case07";
         String path = prefix + ".in";
         char[][] input = Zzaero2.getInput(new Scanner(new File(path)));
 
@@ -79,7 +81,7 @@ public class Zzaero2Test {
 
     @Test
     public void executeTilt_left_withnocollision() throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day03/prob19/executetilt01";
+        String prefix = CLASS_ROOT+ "/executetilt01";
         String inputPath = prefix + ".in";
         String outputPath = prefix + "_left.out";
         char[][] map = Zzaero2.getInput(new Scanner(new File(inputPath)));
@@ -91,7 +93,7 @@ public class Zzaero2Test {
 
     @Test
     public void executeTilt_left_withcollision() throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day03/prob19/executetilt02";
+        String prefix = CLASS_ROOT+ "/executetilt02";
         String inputPath = prefix + ".in";
         String outputPath = prefix + "_left.out";
         char[][] map = Zzaero2.getInput(new Scanner(new File(inputPath)));

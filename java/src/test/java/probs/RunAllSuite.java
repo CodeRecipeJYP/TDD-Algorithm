@@ -11,6 +11,7 @@ import static org.junit.extensions.cpsuite.SuiteType.TEST_CLASSES;
 @RunWith(ClasspathSuite.class)
 @ClasspathSuite.SuiteTypes({ JUNIT38_TEST_CLASSES, TEST_CLASSES })
 public class RunAllSuite {
+    public static String TEST_PROJECT_ROOT = "src/test/java/probs";
     public static void main(String args[]) {
         JUnitCore junit = new JUnitCore();
         junit.addListener(new TextListener(System.out));

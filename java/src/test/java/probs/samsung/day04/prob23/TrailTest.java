@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import static org.junit.Assert.*;
+import static probs.RunAllSuite.TEST_PROJECT_ROOT;
 
 public class TrailTest {
+    private static final String CLASS_ROOT = TEST_PROJECT_ROOT + "/samsung/day04/prob23";
 
     @Test
     public void getLongestTrail_case01() throws FileNotFoundException {
@@ -71,7 +73,7 @@ public class TrailTest {
 
 
     private Case getCase(String filename) throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day04/prob23/" + filename;
+        String prefix = CLASS_ROOT+ "/" + filename;
         String inputPath = prefix + ".in";
         String outputPath = prefix + ".out";
         Trail.Input input = Trail.getInput(new Scanner(new File(inputPath)));
@@ -81,7 +83,7 @@ public class TrailTest {
     }
 
     private List<Case> getCases(String filename) throws FileNotFoundException {
-        String prefix = "test/probs/samsung/day04/prob23/" + filename;
+        String prefix = CLASS_ROOT+ "/" + filename;
         String inputPath = prefix + ".in";
         String outputPath = prefix + ".out";
         List<Trail.Input> inputs = Trail.getInputs(new Scanner(new File(inputPath)));

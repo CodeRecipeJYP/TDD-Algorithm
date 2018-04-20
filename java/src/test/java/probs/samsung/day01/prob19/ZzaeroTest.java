@@ -7,6 +7,9 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static probs.samsung.day01.prob19.Zzaero.*;
+import static probs.samsung.day01.prob19.Zzaero.DIRECTIONS;
+import static probs.samsung.day01.prob19.Zzaero.RIGHT;
+import static probs.samsung.day01.prob19.Zzaero.UP;
 
 public class ZzaeroTest {
 

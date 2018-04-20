@@ -5,12 +5,20 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import static org.junit.Assert.*;
+import static probs.RunAllSuite.TEST_PROJECT_ROOT;
 import static probs.samsung.day02.prob22.Game2048.*;
+import static probs.samsung.day02.prob22.Game2048.DOWN;
+import static probs.samsung.day02.prob22.Game2048.LEFT;
+import static probs.samsung.day02.prob22.Game2048.RIGHT;
+import static probs.samsung.day02.prob22.Game2048.UP;
+import static probs.samsung.day02.prob22.Game2048.getInput;
 
 public class Game2048Test {
+    private static final String CLASS_ROOT = TEST_PROJECT_ROOT + "/samsung/day02/prob22";
 
     @Test
     public void getMaximumScoreIn() {
@@ -107,7 +115,7 @@ public class Game2048Test {
 
     @Test
     public void getMaximumScoreIn_3_1() {
-        String pathPrefix = "test/probs/samsung/day02/prob22/01";
+        String pathPrefix = CLASS_ROOT + "/01";
         String inPath = pathPrefix + ".in";
         String outPath = pathPrefix + ".out";
 
@@ -130,7 +138,7 @@ public class Game2048Test {
 
     @Test
     public void getMaximumScoreIn_3_2() {
-        String pathPrefix = "test/probs/samsung/day02/prob22/01_case02";
+        String pathPrefix = CLASS_ROOT + "/01_case02";
         String inPath = pathPrefix + ".in";
         String outPath = pathPrefix + ".out";
 
@@ -153,7 +161,7 @@ public class Game2048Test {
 
     @Test
     public void getMaximumScoreIn_3_3() {
-        String pathPrefix = "test/probs/samsung/day02/prob22/01_case03";
+        String pathPrefix = CLASS_ROOT + "/01_case03";
         String inPath = pathPrefix + ".in";
         String outPath = pathPrefix + ".out";
 
