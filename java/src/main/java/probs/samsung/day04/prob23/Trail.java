@@ -210,7 +210,7 @@ public class Trail {
         return inputs;
     }
 
-    public static Input getInput(Scanner sc) {
+    static Input getInput(Scanner sc) {
         int mapSize = sc.nextInt();
         int kSize = sc.nextInt();
         sc.nextLine();

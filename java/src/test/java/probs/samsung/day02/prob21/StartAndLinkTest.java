@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static probs.utils.ListUtils.listOf;
 
 public class StartAndLinkTest {
 
@@ -29,10 +30,10 @@ public class StartAndLinkTest {
     public void getEveryCombination() {
         List<List<Integer>> actual = StartAndLink.getEveryCombination(4);
 
-        List<List<Integer>> expected = List.of(
-                List.of(0, 1),
-                List.of(0, 2),
-                List.of(0, 3)
+        List<List<Integer>> expected = listOf(
+                listOf(0, 1),
+                listOf(0, 2),
+                listOf(0, 3)
         );
 
         assertEquals(expected, actual);
@@ -42,17 +43,17 @@ public class StartAndLinkTest {
     public void getEveryCombination_2() {
         List<List<Integer>> actual = StartAndLink.getEveryCombination(6);
 
-        List<List<Integer>> expected = List.of(
-                List.of(0, 1, 2),
-                List.of(0, 1, 3),
-                List.of(0, 1, 4),
-                List.of(0, 1, 5),
-                List.of(0, 2, 3),
-                List.of(0, 2, 4),
-                List.of(0, 2, 5),
-                List.of(0, 3, 4),
-                List.of(0, 3, 5),
-                List.of(0, 4, 5)
+        List<List<Integer>> expected = listOf(
+                listOf(0, 1, 2),
+                listOf(0, 1, 3),
+                listOf(0, 1, 4),
+                listOf(0, 1, 5),
+                listOf(0, 2, 3),
+                listOf(0, 2, 4),
+                listOf(0, 2, 5),
+                listOf(0, 3, 4),
+                listOf(0, 3, 5),
+                listOf(0, 4, 5)
         );
 
         assertEquals(expected, actual);
@@ -62,42 +63,42 @@ public class StartAndLinkTest {
     public void getEveryCombination_3() {
         List<List<Integer>> actual = StartAndLink.getEveryCombination(8);
 
-        List<List<Integer>> expected = List.of(
-                List.of(0, 1, 2, 3),
-                List.of(0, 1, 2, 4),
-                List.of(0, 1, 2, 5),
-                List.of(0, 1, 2, 6),
-                List.of(0, 1, 2, 7),
-                List.of(0, 1, 3, 4),
-                List.of(0, 1, 3, 5),
-                List.of(0, 1, 3, 6),
-                List.of(0, 1, 3, 7),
-                List.of(0, 1, 4, 5),
-                List.of(0, 1, 4, 6),
-                List.of(0, 1, 4, 7),
-                List.of(0, 1, 5, 6),
-                List.of(0, 1, 5, 7),
-                List.of(0, 1, 6, 7),
-                List.of(0, 2, 3, 4),
-                List.of(0, 2, 3, 5),
-                List.of(0, 2, 3, 6),
-                List.of(0, 2, 3, 7),
-                List.of(0, 2, 4, 5),
-                List.of(0, 2, 4, 6),
-                List.of(0, 2, 4, 7),
-                List.of(0, 2, 5, 6),
-                List.of(0, 2, 5, 7),
-                List.of(0, 2, 6, 7),
-                List.of(0, 3, 4, 5),
-                List.of(0, 3, 4, 6),
-                List.of(0, 3, 4, 7),
-                List.of(0, 3, 5, 6),
-                List.of(0, 3, 5, 7),
-                List.of(0, 3, 6, 7),
-                List.of(0, 4, 5, 6),
-                List.of(0, 4, 5, 7),
-                List.of(0, 4, 6, 7),
-                List.of(0, 5, 6, 7)
+        List<List<Integer>> expected = listOf(
+                listOf(0, 1, 2, 3),
+                listOf(0, 1, 2, 4),
+                listOf(0, 1, 2, 5),
+                listOf(0, 1, 2, 6),
+                listOf(0, 1, 2, 7),
+                listOf(0, 1, 3, 4),
+                listOf(0, 1, 3, 5),
+                listOf(0, 1, 3, 6),
+                listOf(0, 1, 3, 7),
+                listOf(0, 1, 4, 5),
+                listOf(0, 1, 4, 6),
+                listOf(0, 1, 4, 7),
+                listOf(0, 1, 5, 6),
+                listOf(0, 1, 5, 7),
+                listOf(0, 1, 6, 7),
+                listOf(0, 2, 3, 4),
+                listOf(0, 2, 3, 5),
+                listOf(0, 2, 3, 6),
+                listOf(0, 2, 3, 7),
+                listOf(0, 2, 4, 5),
+                listOf(0, 2, 4, 6),
+                listOf(0, 2, 4, 7),
+                listOf(0, 2, 5, 6),
+                listOf(0, 2, 5, 7),
+                listOf(0, 2, 6, 7),
+                listOf(0, 3, 4, 5),
+                listOf(0, 3, 4, 6),
+                listOf(0, 3, 4, 7),
+                listOf(0, 3, 5, 6),
+                listOf(0, 3, 5, 7),
+                listOf(0, 3, 6, 7),
+                listOf(0, 4, 5, 6),
+                listOf(0, 4, 5, 7),
+                listOf(0, 4, 6, 7),
+                listOf(0, 5, 6, 7)
         );
 
         assertEquals(expected, actual);
@@ -109,8 +110,8 @@ public class StartAndLinkTest {
 
     @Test
     public void getEnemyTeam() {
-        List<Integer> enemyTeam = StartAndLink.getEnemyTeam(List.of(0, 1, 3, 4));
+        List<Integer> enemyTeam = StartAndLink.getEnemyTeam(listOf(0, 1, 3, 4));
 
-        assertEquals(enemyTeam, List.of(2, 5, 6, 7));
+        assertEquals(enemyTeam, listOf(2, 5, 6, 7));
     }
 }

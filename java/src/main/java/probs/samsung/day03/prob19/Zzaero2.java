@@ -1,6 +1,5 @@
 package probs.samsung.day03.prob19;
 
-import javafx.util.Pair;
 
 import java.util.*;
 
@@ -207,7 +206,7 @@ public class Zzaero2 {
         return copy;
     }
 
-    public static char[][] getInput(Scanner scanner) {
+    static char[][] getInput(Scanner scanner) {
         int rowCount = scanner.nextInt();
         int colCount = scanner.nextInt();
 
@@ -265,6 +264,35 @@ public class Zzaero2 {
                                 Math.pow(base, 3) * blueCol);
 
             return hash;
+        }
+    }
+
+    static class Pair<T, U> {
+        T key;
+        U value;
+
+        public Pair() {
+        }
+
+        public Pair(T key, U value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public T getKey() {
+            return key;
+        }
+
+        public void setKey(T key) {
+            this.key = key;
+        }
+
+        public U getValue() {
+            return value;
+        }
+
+        public void setValue(U value) {
+            this.value = value;
         }
     }
 }

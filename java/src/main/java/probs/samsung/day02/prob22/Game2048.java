@@ -26,7 +26,7 @@ public class Game2048 {
         System.out.println(getMaximumScoreIn(board, 5));
     }
 
-    public static int[][] getInput(Scanner scanner) {
+    static int[][] getInput(Scanner scanner) {
         int memberCount = scanner.nextInt();
 
         scanner.nextLine();
