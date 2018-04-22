@@ -39,51 +39,23 @@ public class MaximizeDiffMain {
             return;
         }
 
-
-        int currSelectedIdx = -1;
-
-        if (selected.size() % 2 == 0) {
-            for (int unselectedIdx = 0; unselectedIdx < length; unselectedIdx++) {
-                if (checked[unselectedIdx]) {
-                    continue;
-                }
-
-                currSelectedIdx = unselectedIdx;
-                break;
+        for (int unselectedIdx = 0; unselectedIdx < length; unselectedIdx++) {
+            if (checked[unselectedIdx]) {
+                continue;
             }
 
-            selected.add(currSelectedIdx);
-            checked[currSelectedIdx] = true;
+            selected.add(unselectedIdx);
+            checked[unselectedIdx] = true;
             backTrack(selected, checked, depth + 1, length);
-            int lastIdx = selected.size() - 1;
-            selected.remove(lastIdx);
-            checked[currSelectedIdx] = false;
-
-            return;
-
-        } else {
-            int startSearchIdx = selected.get(selected.size() - 1) + 1;
-
-            for (int unselectedIdx = startSearchIdx; unselectedIdx < length; unselectedIdx++) {
-                if (checked[unselectedIdx]) {
-                    continue;
-                }
-
-                selected.add(unselectedIdx);
-                checked[unselectedIdx] = true;
-                backTrack(selected, checked, depth + 1, length);
-                selected.remove(selected.size() - 1);
-                checked[unselectedIdx] = false;
-            }
+            selected.remove(selected.size() - 1);
+            checked[unselectedIdx] = false;
         }
-
-
     }
 
     private static int getDiff(List<Integer> selected) {
         int sum = 0;
 
-        for (int selectedIdx = 0; selectedIdx < selected.size(); selectedIdx += 2) {
+        for (int selectedIdx = 0; selectedIdx < (selected.size() - 1); selectedIdx++) {
             int orderedNumberIdx1 = selected.get(selectedIdx);
             int orderedNumberIdx2 = selected.get(selectedIdx + 1);
             sum += Math.abs(sNumberArr[orderedNumberIdx1] - sNumberArr[orderedNumberIdx2]);
