@@ -9,23 +9,25 @@ import static org.junit.Assert.*;
 
 public class EscapeBall2MainTest {
 
-//    @Test
-//    public void main_1() throws IOException {
-//        for (int caseIdx = 1; caseIdx <= 7; caseIdx++) {
-//            String prefix = "src/main/java/probs/prob35/case0" + caseIdx;
-//
-//            System.setIn(new FileInputStream(prefix + ".in"));
-//
-//            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//            System.setOut(new PrintStream(byteArrayOutputStream));
-//
-//            EscapeBall2Main.main(null);
-//            String actual = byteArrayOutputStream.toString();
-//
-//            Scanner scanner = new Scanner(new FileInputStream(prefix + ".out"));
-//            String expected = scanner.nextLine();
-//        }
-//    }
+    @Test
+    public void main_1() throws IOException {
+        for (int caseIdx = 1; caseIdx <= 7; caseIdx++) {
+            String prefix = "src/main/java/probs/prob35/case0" + caseIdx;
+
+            System.setIn(new FileInputStream(prefix + ".in"));
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            System.setOut(new PrintStream(byteArrayOutputStream));
+
+            EscapeBall2Main.main(null);
+            String actual = byteArrayOutputStream.toString().trim();
+
+            Scanner scanner = new Scanner(new FileInputStream(prefix + ".out"));
+            String expected = scanner.nextLine();
+
+            assertEquals(String.format("caseIdx=%d", caseIdx), expected, actual);
+        }
+    }
 
     @Test
     public void main_2() throws IOException {

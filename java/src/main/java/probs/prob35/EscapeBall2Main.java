@@ -39,73 +39,54 @@ public class EscapeBall2Main {
             }
         }
 
-        getMimimumTrials();
-        System.out.println(-1);
+        System.out.println(getMimimumTrials());
     }
 
-    private static void getMimimumTrials() {
-        for (int trialIdx = 1; trialIdx <= MAXIMUM_TRIALS; trialIdx++) {
-            backTrack(new ArrayList<>(), 0, trialIdx);
-        }
+    private static int getMimimumTrials() {
+        return bfs(MAXIMUM_TRIALS);
     }
 
-    private static void backTrack(List<Integer> directionArr, int depth, int length) {
-        if (depth == length) {
-            executeTrials(directionArr);
-
-            return;
-        }
-
-        for (int directionIdx = 0; directionIdx < DIRECTION_COUNT; directionIdx++) {
-            int prevIdx = directionArr.size() - 1;
-            if (prevIdx >= 0 && directionArr.get(prevIdx) == directionIdx) {
-                continue;
-            }
-
-            int twostepPrevIdx = directionArr.size() - 2;
-            if (twostepPrevIdx >= 0 && directionArr.get(twostepPrevIdx) == directionIdx
-                    && directionArr.get(prevIdx) == rotate180(directionIdx)) {
-                continue;
-            }
-
-
-            directionArr.add(directionIdx);
-            backTrack(directionArr, depth + 1, length);
-            directionArr.remove(directionArr.size() - 1);
-        }
-    }
-
-    private static int rotate180(int directionIdx) {
-        return (directionIdx + 2) % DIRECTION_COUNT;
-    }
-
-    private static void executeTrials(List<Integer> directionArr) {
-//        System.out.println(directionArr.toString());
+    private static int bfs(int maximumTrials) {
+        Set<State> uniquePreviousStates = new HashSet();
+        List<State> currStates = new ArrayList<>();
 
         State state = getState(sMap);
+        uniquePreviousStates.add(state);
+        currStates.add(state);
 
-        for (int directionIdx = 0; directionIdx < directionArr.size(); directionIdx++) {
-            int[] direction = DIRECTIONS[directionArr.get(directionIdx)];
+        for (int trials = 1; trials <= maximumTrials; trials++) {
+            List<State> prevStates = currStates;
+            currStates = new ArrayList<>();
+            for (int prevStateIdx = 0; prevStateIdx < prevStates.size(); prevStateIdx++) {
+                State eachPrevState = prevStates.get(prevStateIdx);
+                for (int[] direction :
+                        DIRECTIONS) {
+                    State currEachState = executeTilt(eachPrevState, direction);
+                    if (uniquePreviousStates.contains(currEachState)) {
+                        continue;
+                    }
 
-            executeTilt(state, direction);
-            if (isGameOver(state)) {
-                return;
+                    uniquePreviousStates.add(currEachState);
+                    if (isGameClear(currEachState)) {
+                        return trials;
+                    }
+
+                    if (isGameOver(currEachState)) {
+                        continue;
+                    }
+
+                    currStates.add(currEachState);
+                }
             }
+
         }
 
-//        System.out.println(state);
-
-        if (isGameClear(state)) {
-            System.out.println(directionArr.size());
-            System.exit(0);
-        }
+        return -1;
     }
 
-    private static boolean isGameOver(State state) {
-        return sMap[state.blue.row][state.blue.col] == HOLE;
-    }
+    private static State executeTilt(State state, int[] direction) {
+        State resultState = state.copy();
 
-    private static void executeTilt(State state, int[] direction) {
         int mainDirection = ROW;
         int subDirection = COL;
         if (direction[ROW] == 0) {
@@ -157,12 +138,18 @@ public class EscapeBall2Main {
         }
 
         if (isRedFirst) {
-            state.red = outputBallQueue.poll();
-            state.blue = outputBallQueue.poll();
+            resultState.red = outputBallQueue.poll();
+            resultState.blue = outputBallQueue.poll();
         } else {
-            state.blue = outputBallQueue.poll();
-            state.red = outputBallQueue.poll();
+            resultState.blue = outputBallQueue.poll();
+            resultState.red = outputBallQueue.poll();
         }
+
+        return resultState;
+    }
+
+    private static boolean isGameOver(State state) {
+        return sMap[state.blue.row][state.blue.col] == HOLE;
     }
 
     private static boolean isGameClear(State state) {
@@ -209,6 +196,14 @@ public class EscapeBall2Main {
             this.hole = hole;
         }
 
+        State copy() {
+            return new State(red, blue, hole);
+        }
+
+        State deepCopy() {
+            return new State(red.copy(), blue.copy(), hole);
+        }
+
         @Override
         public String toString() {
             return "State{" +
@@ -216,6 +211,21 @@ public class EscapeBall2Main {
                     ", blue=" + blue +
                     ", hole=" + hole +
                     '}';
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            State state = (State) o;
+            return Objects.equals(red, state.red) &&
+                    Objects.equals(blue, state.blue);
+        }
+
+        @Override
+        public int hashCode() {
+
+            return Objects.hash(red, blue);
         }
     }
 
@@ -254,11 +264,30 @@ public class EscapeBall2Main {
         }
 
         @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Location location = (Location) o;
+            return row == location.row &&
+                    col == location.col;
+        }
+
+        @Override
+        public int hashCode() {
+
+            return Objects.hash(row, col);
+        }
+
+        @Override
         public String toString() {
             return "Location{" +
                     "row=" + row +
                     ", col=" + col +
                     '}';
+        }
+
+        public Location copy() {
+            return new Location(row, col);
         }
     }
 }
