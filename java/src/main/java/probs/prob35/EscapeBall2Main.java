@@ -9,10 +9,11 @@ public class EscapeBall2Main {
     private static final int DIRECTION_COUNT = 4;
     private static final int[][] DIRECTIONS = new int[][] {
             {-1, 0},
+            {0, 1},
             {1, 0},
-            {0, -1},
-            {0, 1}
+            {0, -1}
     };
+
     private static final int ROW = 0;
     private static final int COL = 1;
     private static int[][] sMap;
@@ -56,10 +57,26 @@ public class EscapeBall2Main {
         }
 
         for (int directionIdx = 0; directionIdx < DIRECTION_COUNT; directionIdx++) {
+            int prevIdx = directionArr.size() - 1;
+            if (prevIdx >= 0 && directionArr.get(prevIdx) == directionIdx) {
+                continue;
+            }
+
+            int twostepPrevIdx = directionArr.size() - 2;
+            if (twostepPrevIdx >= 0 && directionArr.get(twostepPrevIdx) == directionIdx
+                    && directionArr.get(prevIdx) == rotate180(directionIdx)) {
+                continue;
+            }
+
+
             directionArr.add(directionIdx);
             backTrack(directionArr, depth + 1, length);
             directionArr.remove(directionArr.size() - 1);
         }
+    }
+
+    private static int rotate180(int directionIdx) {
+        return (directionIdx + 2) % DIRECTION_COUNT;
     }
 
     private static void executeTrials(List<Integer> directionArr) {

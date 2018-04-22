@@ -29,7 +29,7 @@ public class EscapeBall2MainTest {
 
     @Test
     public void main_2() throws IOException {
-        String prefix = "src/main/java/probs/prob35/case01";
+        String prefix = "src/main/java/probs/prob35/case07";
 
         System.setIn(new FileInputStream(prefix + ".in"));
 
