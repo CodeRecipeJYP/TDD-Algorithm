@@ -60,3 +60,6 @@ https://www.acmicpc.net/problem/14889
 
 22. 2048(Easy) <br/>
 https://www.acmicpc.net/problem/12100
+
+31 Statistics <br/>
+https://www.acmicpc.net/problem/2108
