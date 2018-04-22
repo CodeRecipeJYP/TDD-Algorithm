@@ -63,3 +63,6 @@ https://www.acmicpc.net/problem/12100
 
 31 Statistics <br/>
 https://www.acmicpc.net/problem/2108
+
+32 Generate Password <br/>
+https://www.acmicpc.net/problem/1759

@@ -3,22 +3,22 @@ package probs.samsung.day02.prob22;
 import java.util.*;
 
 public class Game2048 {
-    public static final int[][] DIRECTIONS = new int[][]{
+    static final int[][] DIRECTIONS = new int[][]{
             {-1, 0},
             {1, 0},
             {0, -1},
             {0, 1}
     };
 
-    public static final int UP = 0;
-    public static final int DOWN = 1;
-    public static final int LEFT = 2;
-    public static final int RIGHT = 3;
+    static final int UP = 0;
+    static final int DOWN = 1;
+    static final int LEFT = 2;
+    static final int RIGHT = 3;
 
-    public static final int ROW = 0;
-    public static final int COL = 1;
+    static final int ROW = 0;
+    static final int COL = 1;
 
-    public static final int EMPTY = 0;
+    static final int EMPTY = 0;
 
     public static void main(String[] args) {
         int[][] board = getInput(new Scanner(System.in));
