@@ -67,6 +67,9 @@ https://www.acmicpc.net/problem/6603
 29 Permutation <br/>
 https://www.acmicpc.net/problem/10974
 
+30 Hello World! <br/>
+https://www.acmicpc.net/problem/13140
+
 31 Statistics <br/>
 https://www.acmicpc.net/problem/2108
 
