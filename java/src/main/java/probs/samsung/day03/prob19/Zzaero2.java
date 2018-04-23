@@ -4,34 +4,34 @@ package probs.samsung.day03.prob19;
 import java.util.*;
 
 public class Zzaero2 {
-    public static final int[][] DIRECTIONS = new int[][] {
+    static final int[][] DIRECTIONS = new int[][] {
             {-1, 0},
             {1, 0},
             {0, -1},
             {0, 1}
     };
 
-    public static final int UP = 0;
-    public static final int DOWN = 1;
-    public static final int LEFT = 2;
-    public static final int RIGHT = 3;
+    static final int UP = 0;
+    static final int DOWN = 1;
+    static final int LEFT = 2;
+    static final int RIGHT = 3;
 
-    public static final int ROW = 0;
-    public static final int COL = 1;
+    static final int ROW = 0;
+    static final int COL = 1;
 
-    public static final char EMPTY = '.';
-    public static final char RED = 'R';
-    public static final char BLUE = 'B';
-    public static final char HOLE = 'O';
-    public static final char WALL = '#';
+    static final char EMPTY = '.';
+    static final char RED = 'R';
+    static final char BLUE = 'B';
+    static final char HOLE = 'O';
+    static final char WALL = '#';
 
-    public static final int IMPOSSIBLE = -1;
+    static final int IMPOSSIBLE = -1;
 
-    public static final int GAMENOTEND = 0;
-    public static final int GAMECLEAR = 1;
-    public static final int GAMEOVER = 2;
+    static final int GAMENOTEND = 0;
+    static final int GAMECLEAR = 1;
+    static final int GAMEOVER = 2;
 
-    public static final int SIZE_MAX = 10;
+    static final int SIZE_MAX = 10;
 
     public static void main(String[] args) {
         char[][] map = getInput(new Scanner(System.in));
