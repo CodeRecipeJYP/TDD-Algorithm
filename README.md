@@ -60,3 +60,6 @@ https://www.acmicpc.net/problem/14889
 
 22. 2048(Easy) <br/>
 https://www.acmicpc.net/problem/12100
+
+30 Hello World! <br/>
+https://www.acmicpc.net/problem/13140
