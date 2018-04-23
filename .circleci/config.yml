@@ -41,30 +41,21 @@ jobs:
     steps:
       - checkout
       - run:
-          name: install junit
+          name: install maven
           command: |
-            sudo apt-get install junit4 -y
-
-      - run:
-          name: download cpsuite
-          command: |
-            cd java
-            sudo mkdir lib
-            sudo wget -O lib/cpsuite-1.2.6.jar https://www.dropbox.com/s/fvi9v0t287vgsnq/cpsuite-1.2.6.jar\?dl\=1
+            sudo apt-get install maven -y
 
       - run:
           name: compile
           command: |
             cd java
-            sudo javac -cp src src/probs/**/*.java
-            sudo javac -cp .:/usr/share/java/junit4.jar:lib/cpsuite-1.2.6.jar:src test/probs/**/*.java
-            sudo javac -cp .:/usr/share/java/junit4.jar:lib/cpsuite-1.2.6.jar:src test/probs/*.java
+            mvn compile
 
       - run:
           name: run tests
           command: |
             cd java
-            sudo java -cp .:/usr/share/java/junit4.jar:lib/cpsuite-1.2.6.jar:test:src probs.RunAllSuite
+            mvn test
 
 workflows:
   version: 2
