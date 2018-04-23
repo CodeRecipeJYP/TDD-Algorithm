@@ -87,3 +87,12 @@ https://www.acmicpc.net/problem/9663
 
 37 Wardrobe Door <br/>
 https://www.acmicpc.net/problem/2666
+
+38 Start And Link <br/>
+https://www.acmicpc.net/problem/14889
+
+39 Insert Operator <br/>
+https://www.acmicpc.net/problem/14888
+
+40 CCTV <br/>
+https://www.acmicpc.net/problem/15683
