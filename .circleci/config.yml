@@ -40,6 +40,10 @@ jobs:
 
     steps:
       - checkout
+      - restore_cache:
+          key: maven-{{ checksum "java/pom.xml" }}
+          key: maven
+
       - run:
           name: install maven
           command: |
@@ -50,6 +54,12 @@ jobs:
           command: |
             cd java
             mvn compile
+
+      - save_cache:
+          key: maven-{{ checksum "java/pom.xml" }}
+
+          paths:
+          - ~/.m2
 
       - run:
           name: run tests
