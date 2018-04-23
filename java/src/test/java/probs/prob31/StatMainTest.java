@@ -1,6 +1,7 @@
 package probs.prob31;
 
 import org.junit.Test;
+import probs.utils.FileioUtils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,40 +14,11 @@ public class StatMainTest {
 
     @Test
     public void case01() {
-        String filepath;
-        filepath = TEST_PROJECT_ROOT + "/prob31/" + "case01.in";
-
-        try {
-            System.setIn(new FileInputStream(filepath));
-        } catch (FileNotFoundException ignore) {
+        for (int caseIdx = 1; caseIdx <= 3; caseIdx++) {
+            String prefix = TEST_PROJECT_ROOT + "/prob31/" + "case0" + caseIdx;
+            FileioUtils.checkWith(() -> StatMain.main(null),
+                    prefix + ".in", prefix + ".out",
+                    String.format("caseIdx = %d", caseIdx));
         }
-
-        StatMain.main(null);
-    }
-
-    @Test
-    public void case02() {
-        String filepath;
-        filepath = TEST_PROJECT_ROOT + "/prob31/" + "case02.in";
-
-        try {
-            System.setIn(new FileInputStream(filepath));
-        } catch (FileNotFoundException ignore) {
-        }
-
-        StatMain.main(null);
-    }
-
-    @Test
-    public void case03() {
-        String filepath;
-        filepath = TEST_PROJECT_ROOT + "/prob31/" + "case03.in";
-
-        try {
-            System.setIn(new FileInputStream(filepath));
-        } catch (FileNotFoundException ignore) {
-        }
-
-        StatMain.main(null);
     }
 }
