@@ -34,37 +34,38 @@ jobs:
 
   java-test:
     docker:
-      - image: circleci/openjdk:9-node-browsers
+      - image: circleci/openjdk:8
 
     working_directory: ~/repo
 
     steps:
       - checkout
-      - run:
-          name: install junit
-          command: |
-            sudo apt-get install junit4 -y
+      - restore_cache:
+          key: maven-{{ checksum "java/pom.xml" }}
+          key: maven
 
       - run:
-          name: download cpsuite
+          name: install maven
           command: |
-            cd java
-            sudo mkdir lib
-            sudo wget -O lib/cpsuite-1.2.6.jar https://www.dropbox.com/s/fvi9v0t287vgsnq/cpsuite-1.2.6.jar\?dl\=1
+            sudo apt-get install maven -y
 
       - run:
           name: compile
           command: |
             cd java
-            sudo javac -cp src src/probs/**/*.java
-            sudo javac -cp .:/usr/share/java/junit4.jar:lib/cpsuite-1.2.6.jar:src test/probs/**/*.java
-            sudo javac -cp .:/usr/share/java/junit4.jar:lib/cpsuite-1.2.6.jar:src test/probs/*.java
+            mvn compile
+
+      - save_cache:
+          key: maven-{{ checksum "java/pom.xml" }}
+
+          paths:
+          - ~/.m2
 
       - run:
           name: run tests
           command: |
             cd java
-            sudo java -cp .:/usr/share/java/junit4.jar:lib/cpsuite-1.2.6.jar:test:src probs.RunAllSuite
+            mvn test
 
 workflows:
   version: 2
