@@ -34,7 +34,7 @@ jobs:
 
   java-test:
     docker:
-      - image: circleci/openjdk:9-node-browsers
+      - image: circleci/openjdk:8
 
     working_directory: ~/repo
 
