@@ -61,8 +61,26 @@ https://www.acmicpc.net/problem/14889
 22. 2048(Easy) <br/>
 https://www.acmicpc.net/problem/12100
 
+28 Lotto <br/>
+https://www.acmicpc.net/problem/6603
+
+29 Permutation <br/>
+https://www.acmicpc.net/problem/10974
+
 31 Statistics <br/>
 https://www.acmicpc.net/problem/2108
 
 32 Generate Password <br/>
 https://www.acmicpc.net/problem/1759
+
+33 Subset Summation <br/>
+https://www.acmicpc.net/problem/1182
+
+34 Maximize Difference <br/>
+https://www.acmicpc.net/problem/10819
+
+35 Escape Ball2 <br/>
+https://www.acmicpc.net/problem/13460
+
+36 Nqueen <br/>
+https://www.acmicpc.net/problem/9663
