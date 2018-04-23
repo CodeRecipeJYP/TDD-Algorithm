@@ -6,11 +6,35 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
 
 public class FileioUtils {
+    public static void checkWith(Class clazz, String filepath) {
+        String prefix = "src/test/java/probs/" + filepath;
+        Action action = () -> {};
+        Method methods[] = clazz.getDeclaredMethods();
+        for (Method method:
+                methods) {
+            if ("main".equals(method.getName())) {
+                action = () -> {
+                    try {
+                        method.invoke(null, (Object) null);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                };
+                break;
+            }
+        }
+
+        checkWith(action, prefix + ".in", prefix + ".out");
+    }
 
     public static void checkWith(Action executable, String inputFilepath, String outputFilepath, String message) {
         PrintStream stdout = System.out;
@@ -42,7 +66,7 @@ public class FileioUtils {
 
         String[] splittedExpected = s.split("\n");
         for (String eachLine:
-             splittedExpected) {
+                splittedExpected) {
             result.append(eachLine.trim());
             result.append("\n");
         }
