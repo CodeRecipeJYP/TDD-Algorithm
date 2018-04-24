@@ -13,6 +13,10 @@ import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
 
 public class FileioUtils {
+    public static void checkWith(Class clazz, String packageName, String casefileName) {
+        checkWith(clazz, packageName + "/" + casefileName);
+    }
+
     public static void checkWith(Class clazz, String filepath) {
         String prefix = "src/test/java/probs/" + filepath;
         Action action = () -> {};
