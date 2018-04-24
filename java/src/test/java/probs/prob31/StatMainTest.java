@@ -15,9 +15,9 @@ public class StatMainTest {
     @Test
     public void case01() {
         for (int caseIdx = 1; caseIdx <= 3; caseIdx++) {
-            String prefix = TEST_PROJECT_ROOT + "/prob31/" + "case0" + caseIdx;
-            FileioUtils.checkWith(() -> StatMain.main(null),
-                    prefix + ".in", prefix + ".out",
+            FileioUtils.checkWith(StatMain.class,
+                    "prob31",
+                    "case0" + caseIdx,
                     String.format("caseIdx = %d", caseIdx));
         }
     }

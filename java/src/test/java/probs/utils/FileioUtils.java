@@ -13,11 +13,20 @@ import java.util.Scanner;
 import static org.junit.Assert.assertEquals;
 
 public class FileioUtils {
-    public static void checkWith(Class clazz, String packageName, String casefileName) {
-        checkWith(clazz, packageName + "/" + casefileName);
+    public static void checkWith(Class clazz, String packageName, String casefileName, boolean shortly) {
+        checkWith(clazz, packageName, casefileName, "", shortly);
     }
 
-    public static void checkWith(Class clazz, String filepath) {
+    public static void checkWith(Class clazz, String packageName, String casefileName, String message) {
+        checkWith(clazz, packageName, casefileName, message, true);
+    }
+
+    public static void checkWith(Class clazz, String packageName, String casefileName) {
+        checkWith(clazz, packageName, casefileName, "", true);
+    }
+
+    public static void checkWith(Class clazz, String packageName, String casefileName, String message, boolean shortly) {
+        String filepath = packageName + "/" + casefileName;
         String prefix = "src/test/java/probs/" + filepath;
         Action action = () -> {};
         Method methods[] = clazz.getDeclaredMethods();
@@ -37,10 +46,10 @@ public class FileioUtils {
             }
         }
 
-        checkWith(action, prefix + ".in", prefix + ".out");
+        checkWith(action, prefix + ".in", prefix + ".out", message, shortly);
     }
 
-    public static void checkWith(Action executable, String inputFilepath, String outputFilepath, String message) {
+    private static void checkWith(Action executable, String inputFilepath, String outputFilepath, String message, boolean shortly) {
         PrintStream stdout = System.out;
         try {
             System.setIn(new FileInputStream(inputFilepath));
@@ -54,8 +63,7 @@ public class FileioUtils {
             assertEquals(expected, actual);
 
             System.setOut(stdout);
-//            printLog(expected, actual, message);
-            printLogShortly(expected, actual, message);
+            printLog(expected, actual, message, shortly);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -78,13 +86,9 @@ public class FileioUtils {
         return result.toString().trim();
     }
 
-    private static void printLog(String expected, String actual, String message) {
-        printLog(expected, actual, message, false);
-    }
-
     private static void printLog(String expected, String actual, String message, boolean shortly) {
         String headMessage = "";
-        if (message != null) {
+        if (message != null && !message.equals("")) {
             headMessage += "[" + message + "] ";
         }
 
@@ -147,10 +151,5 @@ public class FileioUtils {
         }
 
         return expectedBuilder.toString();
-    }
-
-    public static void checkWith(Action executable, String inputFilepath, String outputFilepath) {
-
-        checkWith(executable, inputFilepath, outputFilepath, null);
     }
 }

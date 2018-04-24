@@ -8,12 +8,11 @@ import java.io.*;
 public class EscapeBall2MainTest {
 
     @Test
-    public void main_1() throws IOException {
+    public void main_1() {
         for (int caseIdx = 1; caseIdx <= 7; caseIdx++) {
-            String prefix = "src/main/java/probs/prob35/case0" + caseIdx;
-
-            FileioUtils.checkWith(() -> EscapeBall2Main.main(null),
-                    prefix + ".in", prefix + ".out",
+            FileioUtils.checkWith(EscapeBall2Main.class,
+                    "prob35",
+                    "case0" + caseIdx,
                     String.format("caseIdx = %d", caseIdx));
         }
     }
