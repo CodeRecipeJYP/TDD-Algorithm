@@ -1,8 +1,6 @@
 package probs.prob45;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class BipartiteGraphMain {
     private static final int NOT_VISITED = 0;
@@ -36,41 +34,33 @@ public class BipartiteGraphMain {
         }
     }
 
-
-
-
     private static boolean isBipartiteGraph(boolean[][] connectTable, int vertexCountV) {
-        int[] vertexTypeArr = new int[vertexCountV];
-
-        List<Integer> currDepthVertexes = new ArrayList<>();
-        int currType = GROUP_A;
-
         int highestDegreeVertexIdx = getHighestDegreeVertexIdx(connectTable);
-        currDepthVertexes.add(highestDegreeVertexIdx);
-        vertexTypeArr[highestDegreeVertexIdx] = currType;
+        Map<Integer, Set<Integer>> groupList = new HashMap<>();
+        groupList.put(GROUP_A, new HashSet<>());
+        groupList.put(GROUP_B, new HashSet<>());
+        groupList.get(GROUP_A).add(highestDegreeVertexIdx);
+        return dfs(highestDegreeVertexIdx, GROUP_A, connectTable, groupList);
+    }
 
-        while (!currDepthVertexes.isEmpty()) {
-            List<Integer> nextDepthVertex = new ArrayList<>();
-            for (int currDepthVertex :
-                    currDepthVertexes) {
+    private static boolean dfs(int currIdx, int currType,
+                               boolean[][] connectTable,
+                               Map<Integer, Set<Integer>> groupList) {
+        for (int colIdx = 0; colIdx < connectTable[0].length; colIdx++) {
+            if (connectTable[currIdx][colIdx]) {
+                int oppositeType = oppositeType(currType);
+                if (groupList.get(currType).contains(colIdx)) {
+                    return false;
+                } else if (!groupList.get(oppositeType).contains(colIdx)) {
+                    groupList.get(oppositeType).add(colIdx);
+                    connectTable[currIdx][colIdx] = false;
+                    connectTable[colIdx][currIdx] = false;
 
-                for (int colIdx = 0; colIdx < connectTable[0].length; colIdx++) {
-                    if (connectTable[currDepthVertex][colIdx]) {
-                        int oppositeType = oppositeType(currType);
-                        if (vertexTypeArr[colIdx] == NOT_VISITED) {
-                            vertexTypeArr[colIdx] = oppositeType;
-                            nextDepthVertex.add(colIdx);
-                        }
-
-                        if (vertexTypeArr[colIdx] == currType) {
-                            return false;
-                        }
+                    if (!dfs(colIdx, oppositeType, connectTable, groupList)) {
+                        return false;
                     }
                 }
             }
-
-            currType = oppositeType(currType);
-            currDepthVertexes = nextDepthVertex;
         }
 
         return true;
