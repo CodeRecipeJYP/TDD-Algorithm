@@ -17,18 +17,17 @@ public class BipartiteGraphMain {
             int edgeCountE = scanner.nextInt();
             scanner.nextLine();
 
-            Map<Integer, List<Integer>> edgeList = new HashMap<>();
+            Map<Integer, Set<Integer>> adjacencyMap = new HashMap<>();
             for (int edgeIdx = 0; edgeIdx < edgeCountE; edgeIdx++) {
                 int edgeAidx = scanner.nextInt() - 1;
                 int edgeBidx = scanner.nextInt() - 1;
-                int stIdx = Math.min(edgeAidx, edgeBidx);
-                int edIdx = Math.max(edgeAidx, edgeBidx);
 
-                safePut(edgeList, stIdx, edIdx);
+                safePut(adjacencyMap, edgeAidx, edgeBidx);
+                safePut(adjacencyMap, edgeBidx, edgeAidx);
                 scanner.nextLine();
             }
 
-            if (isBipartiteGraph(edgeList, vertexCountV)) {
+            if (isBipartiteGraph(adjacencyMap, vertexCountV)) {
                 System.out.println("YES");
             } else {
                 System.out.println("NO");
@@ -36,32 +35,45 @@ public class BipartiteGraphMain {
         }
     }
 
-    private static void safePut(Map<Integer, List<Integer>> edgeList, int stIdx, int edIdx) {
+    private static void safePut(Map<Integer, Set<Integer>> edgeList, int stIdx, int edIdx) {
         if (!edgeList.containsKey(stIdx)) {
-            edgeList.put(stIdx, new ArrayList<>());
+            edgeList.put(stIdx, new HashSet<>());
         }
 
         edgeList.get(stIdx).add(edIdx);
     }
 
-    private static boolean isBipartiteGraph(Map<Integer, List<Integer>> connectTable, int vertexCountV) {
-        int highestDegreeVertexIdx = getHighestDegreeVertexIdx(connectTable);
+    private static boolean isBipartiteGraph(Map<Integer, Set<Integer>> adjacencyMap, int vertexCountV) {
         Map<Integer, Set<Integer>> groupList = new HashMap<>();
         groupList.put(GROUP_A, new HashSet<>());
         groupList.put(GROUP_B, new HashSet<>());
 
-        groupList.get(GROUP_A).add(highestDegreeVertexIdx);
-        return dfs(highestDegreeVertexIdx, GROUP_A, connectTable, groupList);
+        while (true) {
+
+            int highestDegreeVertexIdx = getHighestDegreeVertexIdx(adjacencyMap);
+            if (highestDegreeVertexIdx == -1) {
+                break;
+            }
+
+            groupList.get(GROUP_A).add(highestDegreeVertexIdx);
+
+            if (!dfs(highestDegreeVertexIdx, GROUP_A, adjacencyMap, groupList)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private static boolean dfs(int currIdx, int currType,
-                               Map<Integer, List<Integer>> connectTable,
+                               Map<Integer, Set<Integer>> adjacencyMap,
                                Map<Integer, Set<Integer>> groupList) {
-        if (!connectTable.containsKey(currIdx)) {
+        if (!adjacencyMap.containsKey(currIdx)) {
             return true;
         }
 
-        List<Integer> adjacencies = connectTable.get(currIdx);
+        Set<Integer> adjacencies = adjacencyMap.get(currIdx);
+        adjacencyMap.remove(currIdx);
         int oppositeType = oppositeType(currType);
 
         for (int adjacency:
@@ -71,7 +83,7 @@ public class BipartiteGraphMain {
             } else if (!groupList.get(oppositeType).contains(adjacency)) {
                 groupList.get(oppositeType).add(adjacency);
 
-                if (!dfs(adjacency, oppositeType, connectTable, groupList)) {
+                if (!dfs(adjacency, oppositeType, adjacencyMap, groupList)) {
                     return false;
                 }
             }
@@ -93,12 +105,12 @@ public class BipartiteGraphMain {
         return NOT_VISITED;
     }
 
-    private static int getHighestDegreeVertexIdx(Map<Integer, List<Integer>> connectTable) {
+    private static int getHighestDegreeVertexIdx(Map<Integer, Set<Integer>> connectTable) {
         Optional<Integer> maxIdx = connectTable.entrySet()
                 .stream()
                 .reduce(((entry1, entry2) -> {
-                    List<Integer> value1 = entry1.getValue();
-                    List<Integer> value2 = entry2.getValue();
+                    Set<Integer> value1 = entry1.getValue();
+                    Set<Integer> value2 = entry2.getValue();
                     if (value1.size() < value2.size()) {
                         return entry2;
                     } else {
@@ -107,8 +119,9 @@ public class BipartiteGraphMain {
                 }))
                 .map(Map.Entry::getKey);
 
-
-        assert(maxIdx.isPresent());
+        if (!maxIdx.isPresent()) {
+            return -1;
+        }
 
         return maxIdx.get();
     }
