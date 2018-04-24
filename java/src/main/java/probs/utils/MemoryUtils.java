@@ -3,6 +3,7 @@ package probs.utils;
 import java.text.DecimalFormat;
 
 public class MemoryUtils {
+    private static long sMaxUsageMb = 0;
     public static void showMemoryUsage() {
         DecimalFormat format = new DecimalFormat("###,###,###.##");
 
@@ -16,7 +17,13 @@ public class MemoryUtils {
 
         //JVM이 현재 시스템에 청구하여 사용중인 최대 메모리(total)중에서 사용 가능한 메모리
         long freeMb = runtime.freeMemory() / 1024 / 1024;
+        long usedMb = totalMb - freeMb;
+        sMaxUsageMb = Math.max(sMaxUsageMb, usedMb);
 
-        System.out.println("Max:" + format.format(maxMb) + ", Total:" + format.format(totalMb) + ", Used:"+format.format(totalMb - freeMb));
+        System.out.println("Max:" + format.format(maxMb) + ", Total:" + format.format(totalMb) + ", Used:"+format.format(usedMb));
+    }
+
+    public static void showMaximumUsage() {
+        System.out.println("MaxUsage:" + sMaxUsageMb);
     }
 }

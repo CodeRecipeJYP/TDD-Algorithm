@@ -3,6 +3,7 @@ package probs.prob42;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import static probs.utils.MemoryUtils.showMaximumUsage;
 import static probs.utils.MemoryUtils.showMemoryUsage;
 
 public class FriendfriendMain {
@@ -20,9 +21,12 @@ public class FriendfriendMain {
             friendCounts[friendAidx]++;
             friendCounts[friendBidx]++;
             scanner.nextLine();
+            if (relationIdx % 1000 == 0) {
+                showMemoryUsage();
+            }
         }
 
-//        showMemoryUsage();
-        Arrays.stream(friendCounts).forEach(System.out::println);
+        showMaximumUsage();
+//        Arrays.stream(friendCounts).forEach(System.out::println);
     }
 }

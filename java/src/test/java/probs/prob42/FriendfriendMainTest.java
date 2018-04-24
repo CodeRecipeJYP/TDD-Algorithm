@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class FriendfriendMainTest {
 
-    @Test
+//    @Test
     public void main() {
         try {
             System.setIn(new FileInputStream("src/test/java/probs/prob42/case01.in"));
