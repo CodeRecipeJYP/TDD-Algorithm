@@ -9,7 +9,7 @@ public class EscapeBall2MainTest {
 
     @Test
     public void main_1() {
-        FileioUtils.check();
+        FileioUtils.check(true);
     }
 
 //    @Test

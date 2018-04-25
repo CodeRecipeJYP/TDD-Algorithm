@@ -14,10 +14,6 @@ import static org.junit.Assert.assertEquals;
 public class FileioUtils {
     private static final String PROJECT_TEST_ROOT = "src/test/java";
 
-    public static void check() {
-        check(true);
-    }
-
     public static void check(boolean shortly) {
         String testClassName = new Throwable().getStackTrace()[1].getClassName();
         String[] splittedClassName = testClassName.split(Pattern.quote("."));

@@ -7,6 +7,6 @@ public class PermutationMainTest {
 
     @Test
     public void getInputAndPrintSolution() {
-        FileioUtils.check();
+        FileioUtils.check(true);
     }
 }

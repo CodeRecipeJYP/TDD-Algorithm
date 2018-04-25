@@ -8,6 +8,6 @@ public class WardrobedoorMainTest {
 
     @Test
     public void main() {
-        FileioUtils.check();
+        FileioUtils.check(true);
     }
 }

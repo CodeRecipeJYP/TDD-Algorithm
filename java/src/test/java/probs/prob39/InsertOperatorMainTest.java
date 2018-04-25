@@ -9,7 +9,7 @@ public class InsertOperatorMainTest {
 
     @Test
     public void main() {
-        FileioUtils.check();
+        FileioUtils.check(true);
     }
 
     @Test

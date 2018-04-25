@@ -1,6 +1,7 @@
 package probs.prob49;
 
 import org.junit.Test;
+import probs.utils.FileioUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ public class RobotMainTest {
 
     @Test
     public void main() {
+        FileioUtils.check(true);
     }
 
     @Test

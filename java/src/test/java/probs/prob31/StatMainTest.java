@@ -14,6 +14,6 @@ public class StatMainTest {
 
     @Test
     public void case01() {
-        FileioUtils.check();
+        FileioUtils.check(true);
     }
 }

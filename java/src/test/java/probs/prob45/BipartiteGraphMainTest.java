@@ -9,6 +9,6 @@ public class BipartiteGraphMainTest {
 
     @Test
     public void main() {
-        FileioUtils.check();
+        FileioUtils.check(true);
     }
 }

@@ -8,6 +8,6 @@ public class LottoMainTest {
 
     @Test
     public void getInputAndPrintOutput() {
-        FileioUtils.check();
+        FileioUtils.check(true);
     }
 }
