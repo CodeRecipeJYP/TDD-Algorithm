@@ -1,7 +1,5 @@
 package probs.prob48;
 
-import probs.utils.PrintUtils;
-
 import java.util.*;
 
 public class CheeseMain {
@@ -41,7 +39,7 @@ public class CheeseMain {
         int size = 0;
 
         while (true) {
-            printMap(map, "passedHours=" + passedHours);
+            probs.utils.PrintUtils.printMap(map, "passedHours=" + passedHours);
 
             Set<Location> exposedCheeses = getExposedCheeses(map);
             if (exposedCheeses.isEmpty()) {
@@ -99,20 +97,6 @@ public class CheeseMain {
         }
 
         return exposedCheeses;
-    }
-
-    private static void printMap(int[][] map, String tag) {
-        PrintUtils.println(tag);
-
-        Arrays.stream(map).forEach(
-                eachRow -> {
-                    Arrays.stream(eachRow)
-                            .forEach(it -> PrintUtils.print(it + " "));
-                    PrintUtils.println();
-                }
-        );
-
-        PrintUtils.println();
     }
 
     private static int safeGet(int[][] map, Location moved) {
