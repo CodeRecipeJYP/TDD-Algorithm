@@ -9,12 +9,7 @@ public class EscapeBall2MainTest {
 
     @Test
     public void main_1() {
-        for (int caseIdx = 1; caseIdx <= 7; caseIdx++) {
-            FileioUtils.checkWith(EscapeBall2Main.class,
-                    "prob35",
-                    "case0" + caseIdx,
-                    String.format("caseIdx = %d", caseIdx));
-        }
+        FileioUtils.check();
     }
 
 //    @Test

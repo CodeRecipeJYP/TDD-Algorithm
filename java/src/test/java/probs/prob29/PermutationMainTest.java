@@ -7,6 +7,6 @@ public class PermutationMainTest {
 
     @Test
     public void getInputAndPrintSolution() {
-        FileioUtils.checkWith(PermutationMain.class, "prob29", "case01");
+        FileioUtils.check();
     }
 }

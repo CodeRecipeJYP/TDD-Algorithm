@@ -9,9 +9,7 @@ public class InsertOperatorMainTest {
 
     @Test
     public void main() {
-        FileioUtils.checkWith(InsertOperatorMain.class, "prob39", "case01");
-        FileioUtils.checkWith(InsertOperatorMain.class, "prob39", "case02");
-        FileioUtils.checkWith(InsertOperatorMain.class, "prob39", "case03");
+        FileioUtils.check();
     }
 
     @Test

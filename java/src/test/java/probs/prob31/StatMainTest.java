@@ -14,11 +14,6 @@ public class StatMainTest {
 
     @Test
     public void case01() {
-        for (int caseIdx = 1; caseIdx <= 3; caseIdx++) {
-            FileioUtils.checkWith(StatMain.class,
-                    "prob31",
-                    "case0" + caseIdx,
-                    String.format("caseIdx = %d", caseIdx));
-        }
+        FileioUtils.check();
     }
 }

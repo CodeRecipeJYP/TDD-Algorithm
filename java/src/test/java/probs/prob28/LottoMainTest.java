@@ -8,8 +8,6 @@ public class LottoMainTest {
 
     @Test
     public void getInputAndPrintOutput() {
-        FileioUtils.checkWith(LottoMain.class,
-                "prob28",
-                "case01");
+        FileioUtils.check();
     }
 }
