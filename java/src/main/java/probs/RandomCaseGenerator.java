@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class RandomCaseGenerator {
 
@@ -21,12 +23,49 @@ public class RandomCaseGenerator {
 //        linebyline(n, 0, 10);
 //        relation(11, 1, 5);
 
+//        prob42();
+        prob48();
+//        square();
+    }
+
+    private static void prob48() {
+        squareWithWall(100, 0, 1, 0);
+    }
+
+    private static void squareWithWall(int n, int rangeMin, int rangeMax, int wall) {
+        int limit = Math.abs(rangeMax - rangeMin);
+
+        IntStream.range(0, n)
+                .map(it -> wall)
+                .forEach(it -> System.out.print(it + " "));
+        System.out.println();
+
+        new Random().ints(n - 2)
+                .forEach(
+                        unused -> {
+                            System.out.print(wall + " ");
+                            new Random().ints(n - 2)
+                                    .map(it -> Math.abs(it))
+                                    .map(it -> it % (limit + 1))
+                                    .map(it -> it + rangeMin)
+                                    .forEach(it -> System.out.print(it + " "));
+                            System.out.print(wall);
+                            System.out.println();
+                        }
+                );
+
+        IntStream.range(0, n)
+                .map(it -> wall)
+                .forEach(it -> System.out.print(it + " "));
+        System.out.println();
+    }
+
+    private static void prob42() {
         fileWrite("src/test/java/probs/prob42/case01.in");
         int relationCountM = 1000000;
         int studentCountN = 100000;
         System.out.println("" + studentCountN + " " + relationCountM);
         relation(relationCountM, 1, studentCountN);
-//        square();
     }
 
     private static void fileWrite(String filepath) {

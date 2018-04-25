@@ -1,18 +1,19 @@
 package probs.utils;
 
-import probs.prob35.EscapeBall2Main;
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
 public class FileioUtils {
+    private static final String PROJECT_TEST_ROOT = "src/test/java";
+
     public static void checkWith(Class clazz, String packageName, String casefileName, boolean shortly) {
         checkWith(clazz, packageName, casefileName, "", shortly);
     }
@@ -50,7 +51,9 @@ public class FileioUtils {
     }
 
     private static void checkWith(Action executable, String inputFilepath, String outputFilepath, String message, boolean shortly) {
+        PrintUtils.init();
         PrintStream stdout = System.out;
+
         try {
             System.setIn(new FileInputStream(inputFilepath));
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -151,5 +154,56 @@ public class FileioUtils {
         }
 
         return expectedBuilder.toString();
+    }
+
+    public static void check(boolean shortly) {
+        String testClassName = new Throwable().getStackTrace()[1].getClassName();
+        String[] splittedClassName = testClassName.split(Pattern.quote("."));
+        String path = PROJECT_TEST_ROOT;
+
+        for (int idx = 0; idx < splittedClassName.length - 1; idx++) {
+            String directoryName = splittedClassName[idx];
+            path += "/" + directoryName;
+        }
+
+        List<String> inputFiles = Arrays.stream(new File(path).list())
+                .filter(it -> it.matches(".*" + Pattern.quote(".") + "in"))
+                .map(it -> it.replace(".in", ""))
+                .collect(Collectors.toList());
+
+        try {
+            String className = testClassName.replace("Test", "");
+            Class clazz = Class.forName(className);
+
+            for (String inputFile :
+                    inputFiles) {
+                checkWith(clazz, path + "/" + inputFile, shortly);
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void checkWith(Class clazz, String inputFile, boolean shortly) {
+        Action action = () -> {};
+        Method methods[] = clazz.getDeclaredMethods();
+        for (Method method:
+                methods) {
+            if ("main".equals(method.getName())) {
+                action = () -> {
+                    try {
+                        method.invoke(null, (Object) null);
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    }
+                };
+                break;
+            }
+        }
+
+        checkWith(action, inputFile + ".in", inputFile + ".out", "", shortly);
     }
 }
