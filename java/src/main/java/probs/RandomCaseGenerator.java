@@ -24,7 +24,7 @@ public class RandomCaseGenerator {
 //        relation(11, 1, 5);
 
 //        prob42();
-        prob48();
+//        prob48();
 //        square();
     }
 
