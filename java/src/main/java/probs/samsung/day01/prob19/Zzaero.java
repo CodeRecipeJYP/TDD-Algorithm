@@ -3,23 +3,23 @@ package probs.samsung.day01.prob19;
 import java.util.*;
 
 public class Zzaero {
-    public static final int X = 1;
-    public static final int Y = 0;
-    public static final int[][] DIRECTIONS = new int[][]{
+    static final int X = 1;
+    static final int Y = 0;
+    static final int[][] DIRECTIONS = new int[][]{
             {-1, 0},
             {1, 0},
             {0, -1},
             {0, 1}
     };
 
-    public static final int UP = 0;
-    public static final int DOWN = 1;
-    public static final int LEFT = 2;
-    public static final int RIGHT = 3;
+    static final int UP = 0;
+    static final int DOWN = 1;
+    static final int LEFT = 2;
+    static final int RIGHT = 3;
 
-    public static final int GAME_NOT_ENDED = 0;
-    public static final int GAME_CLEAR = 1;
-    public static final int GAME_OVER = 2;
+    static final int GAME_NOT_ENDED = 0;
+    static final int GAME_CLEAR = 1;
+    static final int GAME_OVER = 2;
 
 
     public static void main(String[] args) {

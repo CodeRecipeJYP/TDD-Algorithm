@@ -1,20 +1,49 @@
 package probs.utils;
 
-import probs.prob35.EscapeBall2Main;
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.PrintStream;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
 public class FileioUtils {
-    public static void checkWith(Class clazz, String filepath) {
-        String prefix = "src/test/java/probs/" + filepath;
+    private static final String PROJECT_TEST_ROOT = "src/test/java";
+
+    public static void check(boolean shortly) {
+        String testClassName = new Throwable().getStackTrace()[1].getClassName();
+        String[] splittedClassName = testClassName.split(Pattern.quote("."));
+        String path = PROJECT_TEST_ROOT;
+
+        for (int idx = 0; idx < splittedClassName.length - 1; idx++) {
+            String directoryName = splittedClassName[idx];
+            path += "/" + directoryName;
+        }
+
+        List<String> inputFiles = Arrays.stream(new File(path).list())
+                .filter(it -> it.matches(".*" + Pattern.quote(".") + "in"))
+                .map(it -> it.replace(".in", ""))
+                .collect(Collectors.toList());
+
+        try {
+            String className = testClassName.replace("Test", "");
+            Class clazz = Class.forName(className);
+
+            for (String inputFile :
+                    inputFiles) {
+                checkWithPath(clazz, path, inputFile, shortly);
+            }
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void checkWithPath(Class clazz, String path, String inputFile, boolean shortly) {
         Action action = () -> {};
         Method methods[] = clazz.getDeclaredMethods();
         for (Method method:
@@ -33,11 +62,14 @@ public class FileioUtils {
             }
         }
 
-        checkWith(action, prefix + ".in", prefix + ".out");
+        String prefix = path + "/" + inputFile;
+        checkWith(action, prefix + ".in", prefix + ".out", inputFile, shortly);
     }
 
-    public static void checkWith(Action executable, String inputFilepath, String outputFilepath, String message) {
+    private static void checkWith(Action executable, String inputFilepath, String outputFilepath, String message, boolean shortly) {
+        PrintUtils.init();
         PrintStream stdout = System.out;
+
         try {
             System.setIn(new FileInputStream(inputFilepath));
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -50,15 +82,10 @@ public class FileioUtils {
             assertEquals(expected, actual);
 
             System.setOut(stdout);
-//            printLog(expected, actual, message);
-            printLogShortly(expected, actual, message);
+            printLog(expected, actual, message, shortly);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    private static void printLogShortly(String expected, String actual, String message) {
-        printLog(expected, actual, message, true);
     }
 
     private static String trimEachLine(String s) {
@@ -74,13 +101,9 @@ public class FileioUtils {
         return result.toString().trim();
     }
 
-    private static void printLog(String expected, String actual, String message) {
-        printLog(expected, actual, message, false);
-    }
-
     private static void printLog(String expected, String actual, String message, boolean shortly) {
         String headMessage = "";
-        if (message != null) {
+        if (message != null && !message.equals("")) {
             headMessage += "[" + message + "] ";
         }
 
@@ -143,10 +166,5 @@ public class FileioUtils {
         }
 
         return expectedBuilder.toString();
-    }
-
-    public static void checkWith(Action executable, String inputFilepath, String outputFilepath) {
-
-        checkWith(executable, inputFilepath, outputFilepath, null);
     }
 }

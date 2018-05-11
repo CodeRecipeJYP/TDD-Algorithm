@@ -8,7 +8,6 @@ public class WardrobedoorMainTest {
 
     @Test
     public void main() {
-        String prefix = "src/test/java/probs/prob37/case01";
-        FileioUtils.checkWith(() -> WardrobedoorMain.main(null), prefix + ".in", prefix + ".out");
+        FileioUtils.check(true);
     }
 }
