@@ -39,7 +39,7 @@ public class CheeseMain {
         int size = 0;
 
         while (true) {
-            probs.utils.PrintUtils.printMap(map, "passedHours=" + passedHours);
+//            probs.utils.PrintUtils.printMap(map, "passedHours=" + passedHours);
 
             Set<Location> exposedCheeses = getExposedCheeses(map);
             if (exposedCheeses.isEmpty()) {
